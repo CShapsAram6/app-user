@@ -1,2 +1,61 @@
+<!-- nav -->
+<header class="flex items-center border-b-2">
+    <div class="flex items-center justify-between max-w-[1200px] container mx-auto py-[37px] max-lg:pb-[20px]">
+        <!-- logo -->
+        <div class="w-[141px]">
+            <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6371d7efa81428f277b0deec_logo.png"
+                alt="" class="w-full max-lg:w-[8rem] max-sm:w-[5rem]">
+        </div>
+        <!-- logo -->
+
+        <!-- item nav -->
+        <div class="flex gap-[30px] max-lg:absolute max-lg:bg-white top-0 left-0 max-lg:h-[100vh] max-lg:flex-col max-lg:p-7 max-lg:w-[100vw] max-lg:shadow-1 md:visible max-lg:pt-[3rem] max-sm:pt-[1rem]"
+            [class.max-lg:hidden]="!isNav">
+
+            <div class="lg:hidden flex justify-between items-center w-full">
+                <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6371d7efa81428f277b0deec_logo.png"
+                    alt="" class="w-full max-lg:w-[8rem] max-sm:w-[5rem]">
+
+                <button (click)="isNav = !isNav">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+
+            <a class=" text-[15px] font-[500] uppercase hover:text-[#79a206] cursor-pointer">Trang chủ</a>
+            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]">Của hàng</a>
+            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]">Bài viết</a>
+            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]">Liên hệ</a>
+
+            <div class="hidden max-sm:block">
+                <div class="flex items-center justify-between mt-5">
+                    <button
+                        class="bg-[#79a206] border-gray-1 rounded-md  py-2 px-4 transition-all font-[500] text-white hover:bg-black uppercase text-[14px] w-full">
+                        Đăng nhập
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- item nav -->
+
+        <div class="flex gap-8">
+            <button class="hover:text-[#79a206]">
+                <i class="fa-solid fa-magnifying-glass text-[20px]"></i>
+            </button>
+            <button class="hover:text-[#79a206]">
+                <i class="fa-solid fa-cart-shopping text-[20px]"></i>
+            </button>
+            <button
+                class="bg-[#79a206] border-gray-1 rounded-md  py-2 px-4 transition-all font-[500] text-white hover:bg-black uppercase text-[14px] max-sm:hidden">
+                Đăng nhập
+            </button>
+            <button class="hover:text-[#79a206] uppercase text-[14px] font-[500] max-sm:hidden">
+                Đăng kí
+            </button>
+            <button (click)="isNav = !isNav">
+                <i class="fa-solid fa-bars text-[20px] lg:hidden"></i>
+            </button>
+        </div>
+    </div>
+</header>
+<!-- nav -->
 <router-outlet></router-outlet>
-Kiên
