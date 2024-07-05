@@ -1,0 +1,15 @@
+.scroll--item {
+    overflow-y: auto;
+    height: calc(100vh - 200px);
+    &::-webkit-scrollbar {
+        width: 1px;
+    }
+}
+.hidden--cart {
+    opacity: 0;
+    visibility: hidden;
+}
+.visibility--cart {
+    opacity: 1;
+    visibility: visible;
+}

@@ -7,5 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
   isNav: boolean = false;
+  items: any[] = [1, 2, 3, 4, 1, 1, 1, 1];
+  isCart: boolean = false;
   ngOnInit(): void {}
 }
