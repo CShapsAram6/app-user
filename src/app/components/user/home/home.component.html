@@ -2,7 +2,7 @@
 <section class="w-full h-[700px]">
     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active h-[700px]" data-bs-interval="10000">
+            <div class="carousel-item active h-[700px] max-sm:h-[500px]" data-bs-interval="10000">
                 <div class="w-full h-full relative">
                     <img src="https://assets.website-files.com/63708df071bc73798fae96ee/637857ec9e2f61a73e29596c_slider1-2.jpg"
                         alt="" class="w-full h-full object-cover">
@@ -11,10 +11,10 @@
                         max-lg:max-w-[670px]">
                             <div class="w-[650px] max-lg:w-full">
                                 <h1
-                                    class="text-[60px] font-[600] leading-[70px] text-[#296253] font-serif max-lg:text-[50px] max-lg:w-[500px]">
+                                    class="text-[60px] font-[600] leading-[70px] text-[#296253] font-serif max-lg:text-[50px] max-lg:w-[500px] max-sm:text-[30px] max-sm:w-[300px] max-sm:leading-9 animation">
                                     Khu Vườn Từ Trái Tim Chúng Ta
                                 </h1>
-                                <p class="mt-4 text-2 leading-7 text-[#474747] text-justify w-[500px] max-lg:w-[400px]"
+                                <p class="mt-4 text-2 leading-7 text-[#474747] text-justify w-[500px] max-lg:w-[400px] max-sm:w-[200px] max-sm:line-clamp-3 animation"
                                     style="text-shadow: 0px 0px 1px white;">
                                     Sự phát triển của cây bao gồm nhiều giai đoạn. Nhanh chóng, một lô đất được chọn.
                                     Tiếp
@@ -22,14 +22,14 @@
                                     được đào tốt với sự trợ giúp của thuổng.
                                 </p>
                                 <button
-                                    class="mt-[40px] bg-[#79a206] border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px]">Cửa
+                                    class="mt-[40px] bg-[#79a206] border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px] animation">Cửa
                                     hàng</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item h-[700px]" data-bs-interval="2000">
+            <div class="carousel-item h-[700px] max-sm:h-[500px]" data-bs-interval="2000">
                 <div class="w-full h-full relative">
                     <img src="https://assets.website-files.com/63708df071bc73798fae96ee/63721741b862d54621ac058c_slider-1.jpg"
                         alt="" class="w-full h-full object-cover">
@@ -37,17 +37,18 @@
                         <div class="container max-w-[1200px] max-lg:max-w-[670px]">
                             <div class="w-[500px] max-lg:w-full">
                                 <h1
-                                    class="text-[#296253] text-[53px] font-[600] leading-[70px] font-serif w-[400px] max-lg:text-[50px] max-lg:w-[400px]">
+                                    class="text-[#296253] text-[53px] font-[600] leading-[70px] font-serif w-[400px] max-lg:text-[50px] max-lg:w-[400px] max-sm:text-[30px] max-sm:w-[270px] max-sm:leading-9 animation">
                                     Tặng Quà Cây Xanh <span class="text-[#79a206] font-serif">Pinaf</span>
                                 </h1>
-                                <p class="mt-4 text-2 leading-7 text-[#474747] text-justify w-[500px] max-lg:w-[400px]">
+                                <p
+                                    class="mt-4 text-2 leading-7 text-[#474747] text-justify w-[500px] max-lg:w-[400px] max-sm:w-[200px] max-sm:line-clamp-3 animation">
                                     Sự phát triển của cây bao gồm nhiều giai đoạn. Nhanh chóng, một lô đất được chọn.
                                     Tiếp
                                     theo, đất
                                     được đào tốt với sự trợ giúp của thuổng.
                                 </p>
                                 <button
-                                    class="mt-[40px] bg-[#79a206] border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px]">Cửa
+                                    class="mt-[40px] bg-[#79a206] border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px] animation">Cửa
                                     hàng</button>
                             </div>
                         </div>
@@ -57,17 +58,224 @@
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev  h-12 top-[50%] translate-y-[-50%]" type="button"
-            data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <button class="carousel-control-prev h-12 max-sm:top-[90%] 
+        max-sm:left-[30%] top-[50%] translate-y-[-50%]" type="button" data-bs-target="#carouselExampleInterval"
+            data-bs-slide="prev">
             <span class="carousel-control-prev-icon bg-black rounded-full" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next h-12 top-[50%] translate-y-[-50%]" type="button"
-            data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <button class="carousel-control-next h-12 max-sm:top-[90%] max-sm:right-[30%] top-[50%] translate-y-[-50%]"
+            type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
             <span class="carousel-control-next-icon bg-black rounded-full" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
 </section>
-
 <!-- slider -->
+
+<!-- about services -->
+<section class="container max-w-[1200px] mt-[120px]">
+    <h1 class="text-[40px] font-serif text-center">
+        Dịch vụ chăm sóc khách hàng
+    </h1>
+    <p class="text-center mt-[40px] leading-9 text-[#51544f]">
+        Pinaf là một mẫu Thương mại điện tử về thực vật có thiết kế hiện đại và gọn gàng. Nó được tạo ra để giúp bạn xây
+        dựng cửa hàng trực tuyến mơ ước của mình. Với Pinaf, bạn có thể bắt đầu lập kế hoạch cho ngày mai ngay hôm nay
+        để thực hiện bước đầu tiên hướng tới lối sống trong mơ của mình
+    </p>
+    <p class="text-center mt-[30px] text-[#51544f]">
+        Một thực tế đã được chứng minh từ lâu là người đọc sẽ bị phân tâm bởi
+    </p>
+    <div class="flex justify-between mt-[120px]">
+        <div class="flex flex-col items-center">
+            <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6374b7eb7602dc0e623f007b_icon-2.svg"
+                alt="">
+            <div class="flex items-center h-[69px]">
+                <h1 class="mt-[10px] text-[18px] font-serif ">
+                    Miễn phí vẫn chuyển
+                </h1>
+            </div>
+            <p class="text-[15px] w-[292px] text-center text-[#51544f] leading-6 max-lg:w-[250px]">
+                Mua sản phẩm trên 20.000đ và nhận ưu đãi giao hàng tận nhà miễn phí
+            </p>
+        </div>
+        <div class="flex flex-col items-center">
+            <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6374b7eafb7e46ab6f2a4301_icon-3.svg"
+                alt="">
+            <div class="flex items-center h-[69px]">
+                <h1 class="mt-[10px] text-[18px] font-serif ">
+                    Hoàn trả
+                </h1>
+            </div>
+            <p class="text-[15px] w-[292px] text-center text-[#51544f] leading-6 max-lg:w-[250px]">
+                Hoàn tiền trong vòng 30 ngày nếu sản phẩm không đúng như mô tả
+            </p>
+        </div>
+        <div class="flex flex-col items-center">
+            <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6374b29d1cf7095d71fdf7c5_icon.svg"
+                alt="">
+            <div class="flex items-center h-[69px]">
+                <h1 class="mt-[10px] text-[18px] font-serif ">
+                    Thanh toán an toàn
+                </h1>
+            </div>
+            <p class="text-[15px] w-[292px] text-center text-[#51544f] leading-6 max-lg:w-[250px]">
+                Chúng tôi đảm bảo với bạn rằng hệ thống thanh toán hoàn toàn an toàn
+            </p>
+        </div>
+    </div>
+</section>
+<!-- about services -->
+
+<!-- best seller -->
+<section class="w-full  bg-[#f8f8f8] mt-[120px] 
+py-[120px]">
+    <h1 class="text-[40px] text-center font-serif">Sản phẩm nổi bật</h1>
+    <!-- button tab -->
+    <div class="flex items-center justify-center mt-[70px] gap-[50px]">
+        <button class="text-[20px] py-2 uppercase px-3  rounded-sm font-[500] hover:text-[#79a206] btn--active">Bán chạy
+            nhất</button>
+        <button class="text-[20px] py-2 uppercase px-3 rounded-sm font-[500] hover:text-[#79a206]">Sản phẩm mới</button>
+        <button class="text-[20px] py-2 uppercase px-3 rounded-sm font-[500] hover:text-[#79a206]">Ưu đãi</button>
+    </div>
+    <!-- button tab -->
+
+    <!-- products -->
+
+    <div class="container max-w-[1200px] flex justify-between mt-[70px] flex-wrap">
+        <div class="border w-[270px] rounded-sm cart--item bg-white" *ngFor="let item of list">
+            <div class="w-full h-[340px] overflow-hidden relative">
+                <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/637315062bd81e4589147fe3_image-1.jpg"
+                    alt="" class="w-full h-full object-cover ">
+                <div class="absolute z-20 bottom-[-50px] left-0 w-full px-9 btn--add transition-all">
+                    <button
+                        class="bg-[#79a206] text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-black hover:text-white">
+                        <i class="fa-solid fa-cart-plus mr-[5px]"></i>
+                        Thêm vào giỏ hàng
+                    </button>
+                </div>
+            </div>
+            <div class="">
+                <h2
+                    class="text-[#296253] text-[17px] font-serif text-center mt-[24px] font-[500] line-clamp-1 uppercase">
+                    <a href="">Mini Olive Tree</a>
+                </h2>
+                <p class="text-[#79a206] text-[17x] text-center mb-[24px] mt-3 font-[500]">40.000đ</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- products -->
+</section>
+<!-- best seller -->
+
+<!-- products -->
+<section class="py-[120px] container max-w-[1200px]">
+    <div class="flex justify-between items-center">
+        <h1 class="text-[40px] font-serif">Sản phẩm</h1>
+        <button
+            style="background: url('https://assets.website-files.com/63708df071bc73798fae96ee/637350306cba12253228b101_bg.svg') no-repeat;"
+            class="h-[51px] uppercase text-[#79a206] text-[15px] font-[700] 
+            px-[30px] hover:text-[black]">
+            Của hàng
+        </button>
+    </div>
+    <!-- products -->
+    <div class="flex justify-between mt-[70px] flex-wrap gap-[26px]">
+        <div class="border w-[270px] rounded-sm cart--item bg-white" *ngFor="let item of items">
+            <div class="w-full h-[340px] overflow-hidden relative">
+                <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/637315062bd81e4589147fe3_image-1.jpg"
+                    alt="" class="w-full h-full object-cover ">
+                <div class="absolute z-20 bottom-[-50px] left-0 w-full px-9 btn--add transition-all">
+                    <button
+                        class="bg-[#79a206] text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-black hover:text-white">
+                        <i class="fa-solid fa-cart-plus mr-[5px]"></i>
+                        Thêm vào giỏ hàng
+                    </button>
+                </div>
+            </div>
+            <div class="">
+                <h2
+                    class="text-[#296253] text-[17px] font-serif text-center mt-[24px] font-[500] line-clamp-1 uppercase">
+                    <a href="">Mini Olive Tree</a>
+                </h2>
+                <p class="text-[#79a206] text-[17x] text-center mb-[24px] mt-3 font-[500]">40.000đ</p>
+            </div>
+        </div>
+    </div>
+    <!-- products -->
+    <div class="mt-[50px] flex justify-center">
+        <button
+            class="mt-[40px] bg-[#79a206] border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px] animation">Xem
+            thêm</button>
+    </div>
+</section>
+<!-- products -->
+
+<!-- voucher -->
+
+<section
+    style="background: url('https://assets.website-files.com/63708df071bc73798fae96ee/637461370f3a390db30dcbf5_video-bg-image.jpg') no-repeat;"
+    class="w-full h-[500px]">
+    <div class="container max-w-[1200px] relative h-full">
+        <div class="absolute top-[50%] left-0 translate-y-[-50%] w-[410px]">
+            <h1 class="text-[40px] font-serif">Chúng tôi tin vào sức mạnh của thực vật.</h1>
+            <p class="mt-[17px] text-[#9e9e9e] font-[500] text-[24px] mb-[40px] line-clamp-1">Nhận tới 20% giảm giá cho
+                hàng mới về
+            </p>
+            <button
+                style="background: url('https://assets.website-files.com/63708df071bc73798fae96ee/637350306cba12253228b101_bg.svg') no-repeat;"
+                class="h-[51px] uppercase text-[#79a206] text-[15px] font-[700] 
+        px-[30px] hover:text-[black]">
+                Của hàng
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- voucher -->
+
+<!-- blog -->
+<section class="py-[120px] container max-w-[1200px]">
+    <h1 class="text-center text-[40px] font-serif">Tin tức & Blog</h1>
+    <p
+        class="w-[615px] mx-auto text-justify line-clamp-2 text-[#51544f] text-[15px] leading-[28px] font-[400] mt-[25px]">
+        Chào
+        mừng bạn đến
+        với phần Tin tức
+        & Blog mới nhất của chúng
+        tôi. Tại đây,
+        bạn sẽ tìm
+        thấy tất cả các tin tức và
+        cập nhật mới nhất từ ​​nhóm của chúng tôi cũng như các bài đăng blog thú vị từ các tác giả khách mời.</p>
+    <div class="w-full mt-[66px] flex justify-between items-center">
+        <div class="w-[370px]" *ngFor="let item of blog">
+            <div class="w-[370px] h-[273px] overflow-hidden">
+                <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/637de6d0d934444ff7675f7c_7.jpg"
+                    alt="" class="w-full h-full object-cover">
+            </div>
+            <div class="flex justify-between items-center mt-[25px]">
+                <div class="flex items-center gap-2">
+                    <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/6385974f39e0d684a66a812a_003-man-1.png"
+                        alt="">
+                    <h4 class="text-[#8e8d8d] text-[15px] font-serif">Admin</h4>
+                </div>
+                <h4 class="flex items-center gap-2 text-[15px] text-[#8e8d8d] font-serif">
+                    <img src="	https://assets.website-files.com/63708df071bc73798fae96ee/6378997554cc50631be9cf63_calender.svg"
+                        alt="">
+                    Dec 25, 2022
+                </h4>
+            </div>
+            <div class="mt-[18px]">
+                <a href="" class="hover:text-[#79a206]">
+                    <h1 class="text-[24px] line-clamp-1 font-[500]">Làm vườn giúp cuộc sống tốt đẹp hơn</h1>
+                </a>
+                <p class="mt-[15px] line-clamp-2 leading-7 text-[#51544f]">Có rất nhiều biến thể của các đoạn có sẵn,
+                    nhưng phần lớn có Có rất nhiều biến thể của các đoạn có sẵn, nhưng phần lớn có
+                </p>
+                <button class="mt-[20px] text-[16px] hover:text-[#79a206] font-[500]">Xem thêm</button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- blog -->
