@@ -43,11 +43,18 @@
 
         <div class="flex gap-8">
             <button class="hover:text-[#79a206]">
-                <i class="fa-solid fa-magnifying-glass text-[20px]"></i>
+                <!-- <i class="fa-solid fa-magnifying-glass text-[20px]"></i> -->
+                <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6372028c131625449712a723_Search.svg"
+                    alt="">
             </button>
-            <button class="hover:text-[#79a206]" (click)="isCart = true">
-                <i class="fa-solid fa-cart-shopping text-[20px]"></i>
-            </button>
+            <div class="items-center flex relative">
+                <button class="hover:text-[#79a206]" (click)="isCart = true">
+                    <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6371fca3352e282d8446f624_icon.svg"
+                        alt="">
+                </button>
+                <span
+                    class="absolute bg-main text-white px-1 py-0.5 rounded-full text-[12px] top-[-5px] right-[-5px]">3</span>
+            </div>
             <button
                 class="bg-[#79a206] border-gray-1 rounded-md  py-2 px-4 transition-all font-[500] text-white hover:bg-black uppercase text-[14px] max-sm:hidden">
                 Đăng nhập

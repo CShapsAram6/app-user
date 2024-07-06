@@ -1,0 +1,15 @@
+.btn--active {
+    background: #79a206;
+    color: white !important;
+}
+.cart--item {
+    &:hover {
+        & .btn--add {
+            bottom: 20px;
+        }
+        & img {
+            transform: rotate(5deg) scale(1.1);
+            transition: all 0.25s linear;
+        }
+    }
+}

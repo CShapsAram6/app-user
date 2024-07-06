@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        main: "#79a206",
+        title : '#296253',
+      },
+    },
   },
   plugins: [require("tailgrids/plugin")],
 };
