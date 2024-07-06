@@ -21,10 +21,14 @@
                 </button>
             </div>
 
-            <a class=" text-[15px] font-[500] uppercase hover:text-[#79a206] cursor-pointer">Trang chủ</a>
-            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]">Của hàng</a>
-            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]">Bài viết</a>
-            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]">Liên hệ</a>
+            <a class=" text-[15px] font-[500] uppercase hover:text-[#79a206] cursor-pointer" [routerLink]="['']"
+                routerLinkActive="text-[#79a206]" [routerLinkActiveOptions]="{exact: true}">Trang chủ</a>
+            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]" [routerLink]="['/shop']"
+                routerLinkActive="text-[#79a206]">Của hàng</a>
+            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]"
+                routerLinkActive="text-[#79a206]">Bài viết</a>
+            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]"
+                routerLinkActive="text-[#79a206]">Liên hệ</a>
 
             <div class="hidden max-sm:block">
                 <div class="flex items-center justify-between mt-5">
