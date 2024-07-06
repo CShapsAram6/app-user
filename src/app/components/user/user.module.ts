@@ -21,7 +21,7 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [HomeComponent, ShopComponent],
+  declarations: [HomeComponent, ShopComponent ],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class UserModule {}

@@ -23,7 +23,7 @@
 
             <a class=" text-[15px] font-[500] uppercase hover:text-[#79a206] cursor-pointer" [routerLink]="['']"
                 routerLinkActive="text-[#79a206]" [routerLinkActiveOptions]="{exact: true}">Trang chủ</a>
-            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]" [routerLink]="['/shop']"
+            <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]" [routerLink]="['shop']"
                 routerLinkActive="text-[#79a206]">Của hàng</a>
             <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-[#79a206]"
                 routerLinkActive="text-[#79a206]">Bài viết</a>
@@ -34,6 +34,7 @@
                 <div class="flex items-center justify-between mt-5">
                     <button
                         class="bg-[#79a206] border-gray-1 rounded-md  py-2 px-4 transition-all font-[500] text-white hover:bg-black uppercase text-[14px] w-full">
+                        >
                         Đăng nhập
                     </button>
                 </div>
@@ -41,6 +42,7 @@
         </div>
         <!-- item nav -->
 
+        <!-- button -->
         <div class="flex gap-8">
             <button class="hover:text-[#79a206]">
                 <!-- <i class="fa-solid fa-magnifying-glass text-[20px]"></i> -->
@@ -55,7 +57,7 @@
                 <span
                     class="absolute bg-main text-white px-1 py-0.5 rounded-full text-[12px] top-[-5px] right-[-5px]">3</span>
             </div>
-            <button
+            <button (click)="isSignIn = true"
                 class="bg-[#79a206] border-gray-1 rounded-md  py-2 px-4 transition-all font-[500] text-white hover:bg-black uppercase text-[14px] max-sm:hidden">
                 Đăng nhập
             </button>
@@ -66,6 +68,7 @@
                 <i class="fa-solid fa-bars text-[20px] lg:hidden"></i>
             </button>
         </div>
+        <!-- button -->
     </div>
 </header>
 <!-- nav -->
@@ -344,3 +347,21 @@
 </section>
 
 <!-- your cart -->
+
+<!-- sign in -->
+<section
+    class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 flex justify-center pt-[76px] hidden--cart transition-all"
+    [class.visibility--cart]="isSignIn">
+    <section class="bg-white p-[25px] rounded-sm w-[450px] h-[550px] relative">
+        <div class="absolute top-1 right-2">
+            <button (click)="isSignIn = false">
+                <i class="fa-solid fa-xmark text-[22px]"></i>
+            </button>
+        </div>
+        <div class="mt-[42px]">
+            <app-sign-in></app-sign-in>
+        </div>
+    </section>
+
+</section>
+<!-- sign in -->

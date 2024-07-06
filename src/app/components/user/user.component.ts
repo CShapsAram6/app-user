@@ -9,5 +9,6 @@ export class UserComponent implements OnInit {
   isNav: boolean = false;
   isCart: boolean = false;
   items: any[] = [1, 2, 3, 4, 1, 1, 1, 1];
+  isSignIn: boolean = false;
   ngOnInit(): void {}
 }
