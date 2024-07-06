@@ -1,0 +1,147 @@
+<!-- ===== slider -->
+<section
+    style="background: url('https://assets-global.website-files.com/65c4b76bb683fe9b1f52106d/65c4b76bb683fe9b1f521177_sarah-dorweiler-x2Tmfd1-SgA-unsplash%201%20(1)%20(1).webp') no-repeat center;"
+    class="w-full h-[500px]">
+    <div class="container max-w-[1200px] flex items-center h-full">
+        <div class="">
+            <h1 class="text-title text-[60px] font-serif font-bold 
+            max-lg:text-[40px]">Thanh toán</h1>
+            <div class="mt-4 flex items-center gap-2 text-[17px] font-[500]">
+                <button class="hover:text-main" [routerLink]="['']">Trang chủ</button>
+                <span>-</span>
+                <span>Thanh toán</span>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ===== slider -->
+
+<!-- ===== content -->
+<section class="container max-w-[1200px] flex gap-4 py-[120px]">
+    <!-- ===== cart   -->
+    <div class="border p-4 rounded-sm w-[40%]">
+        <h1 class="text-[20px] font-serif font-[600]">Thông tin đơn hàng</h1>
+        <div class="flex justify-between h-full flex-col">
+            <div class="mt-4">
+                <!-- ===== products enter cart -->
+                <div class="scroll--item">
+                    <!-- ===== items -->
+                    <div class="py-[12px] flex justify-between 
+                    items-center">
+                        <div class="flex items-center gap-3">
+                            <div class="w-[60px] h-full">
+                                <img src="https://uploads-ssl.webflow.com/6371f9c50ce0bd588f4fa954/637325e30109ae3692650b4d_image-11.jpg"
+                                    alt="" class="w-full h-full object-cover">
+                            </div>
+                            <div class="">
+                                <strong class="text-[#296253] text-xl">
+                                    Lemon Cypress
+                                </strong> <br>
+                                <strong class="text-[#79a206] text-[17px] mt-[10px] block">
+                                    400.000đ
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="mt-[10px] flex items-center gap-3 
+                        h-[25px]">
+                            <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-[#79a206]">
+                                <i class="fa-solid fa-minus text-[15px]">
+                                </i>
+                            </button>
+                            <input type="text" value="1" class="text-center border-1 w-[60px] p-1 h-full" disabled>
+                            <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-[#79a206]">
+                                <i class="fa-solid fa-plus text-[15px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- ===== items -->
+                </div>
+                <!-- ===== products enter cart -->
+            </div>
+            <div class="pb-4 grid grid-rows-4 gap-4">
+                <hr>
+                <div class="flex justify-between items-center">
+                    <p class="uppercase text-[15px] font-[500]">
+                        Tạm tính:
+                    </p>
+                    <strong class="text-[#79a206] text-[18px]">
+                        400.000đ
+                    </strong>
+                </div>
+                <div class="flex justify-between items-center">
+                    <p class="uppercase text-[15px] font-[500]">
+                        Tạm tính:
+                    </p>
+                    <strong class="text-[#79a206] text-[18px]">
+                        400.000đ
+                    </strong>
+                </div>
+                <hr>
+                <div class="flex justify-between items-center">
+                    <p class="uppercase text-[15px] font-[500]">
+                        Tạm tính:
+                    </p>
+                    <strong class="text-[#79a206] text-[18px]">
+                        400.000đ
+                    </strong>
+                </div>
+                <button class="bg-main uppercase text-[15px] py-[10px] 
+                font-[500] text-white rounded-sm hover:bg-black transition-colors">Đặt hàng</button>
+            </div>
+        </div>
+    </div>
+    <!-- ===== cart   -->
+
+    <!-- ===== form -->
+    <div class="w-[60%]">
+        <div class="border p-4 rounded-sm">
+            <h1 class="text-[20px] font-serif font-[600]">Thông tin nhận hàng</h1>
+            <form action="" class="mt-4">
+                <div class="row">
+                    <div class="flex flex-col items-start gap-2 col-6">
+                        <label for="" class="font-[500]">Họ tên</label>
+                        <input type="text" placeholder="Nhập họ tên"
+                            class="border-1 p-2 w-full rounded-sm focus:border-main">
+                        <p class="text-error">Bạn chưa nhập địa chỉ</p>
+                    </div>
+                    <div class="flex flex-col items-start gap-2 col-6">
+                        <label for="" class="font-[500]">Số điện thoại</label>
+                        <input type="text" placeholder="Nhập số điện thoại"
+                            class="border-1 p-2 w-full rounded-sm focus:border-main">
+                        <p class="text-error">Bạn chưa nhập địa chỉ</p>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="flex flex-col items-start gap-2 col-6">
+                        <label for="" class="font-[500]">Email</label>
+                        <input type="text" placeholder="Nhập họ tên"
+                            class="border-1 p-2 w-full rounded-sm focus:border-main">
+                        <p class="text-error">Bạn chưa nhập địa chỉ</p>
+                    </div>
+                    <div class="flex flex-col items-start gap-2 col-6">
+                        <label for="" class="font-[500]">Địa chỉ</label>
+                        <input type="text" placeholder="Nhập số điện thoại"
+                            class="border-1 p-2 w-full rounded-sm focus:border-main">
+                        <p class="text-error">Bạn chưa nhập địa chỉ</p>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="flex flex-col items-start gap-2 col-12">
+                        <label for="" class="font-[500]">Ghi chú</label>
+                        <textarea type="text" placeholder="Nhập số điện thoại"
+                            class="border-1 p-2 w-full rounded-sm focus:border-main h-[10rem]"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- === payment -->
+        <div class="border p-4 rounded-sm mt-4">
+            <h1 class="text-[20px] font-serif font-[600]">
+                Phương thức thanh toán
+            </h1>
+        </div>
+        <!-- === payment -->
+    </div>
+    <!-- ===== form -->
+</section>
+<!-- ===== content -->

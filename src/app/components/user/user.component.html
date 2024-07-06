@@ -339,8 +339,10 @@
                 <strong class="text-[17px]">Tổng tiền:</strong>
                 <p class="text-[#79a206] font-serif text-[17px]">400.000đ</p>
             </div>
-            <button class="w-full font-[600] py-[14px] mt-3 bg-[#79a206] text-white rounded-sm hover:bg-black ">Đặt
-                hàng</button>
+            <button class="w-full font-[600] py-[14px] mt-3 bg-[#79a206] text-white rounded-sm hover:bg-black"
+                [routerLink]="['check-out']" (click)="isCart = false">
+                Đặt hàng
+            </button>
         </div>
         <!-- button checkout -->
     </div>
@@ -349,11 +351,10 @@
 <!-- your cart -->
 
 <!-- sign in -->
-<section
-    class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 flex justify-center pt-[76px] hidden--cart transition-all"
+<section class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 pt-[76px] hidden--cart transition-all"
     [class.visibility--cart]="isSignIn">
-    <section class="bg-white p-[25px] rounded-sm w-[450px] h-[550px] relative">
-        <div class="absolute top-1 right-2">
+    <section class="bg-white p-[25px] rounded-sm w-[400px] absolute left-[50%] translate-x-[-50%]">
+        <div class="absolute top-2 right-2">
             <button (click)="isSignIn = false">
                 <i class="fa-solid fa-xmark text-[22px]"></i>
             </button>

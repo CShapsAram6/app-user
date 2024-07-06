@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ShopComponent } from './shop/shop.component';
 import { UserComponent } from './user.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -17,11 +18,12 @@ const routes: Routes = [
         title: 'Trang chủ',
       },
       { path: 'shop', component: ShopComponent, title: 'Cửa hàng' },
+      { path: 'check-out', component: CheckoutComponent, title: 'Thanh toán' },
     ],
   },
 ];
 @NgModule({
-  declarations: [HomeComponent, ShopComponent ],
+  declarations: [HomeComponent, ShopComponent, CheckoutComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class UserModule {}

@@ -21,7 +21,7 @@ export class SignInComponent implements OnInit {
       theme: 'outline',
       size: 'large',
       shape: 'rectangular',
-      width: 400,
+      width: 350,
       height: 200,
       logo_alignment: 'center',
       longtitle: true,
