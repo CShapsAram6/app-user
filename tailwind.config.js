@@ -7,6 +7,7 @@ module.exports = {
         main: "#79a206",
         title: "#296253",
         error: "#cc0000",
+        backgroup: "#f6f7fb",
       },
     },
   },

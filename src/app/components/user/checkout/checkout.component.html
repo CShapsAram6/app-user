@@ -1,7 +1,7 @@
 <!-- ===== slider -->
 <section
     style="background: url('https://assets-global.website-files.com/65c4b76bb683fe9b1f52106d/65c4b76bb683fe9b1f521177_sarah-dorweiler-x2Tmfd1-SgA-unsplash%201%20(1)%20(1).webp') no-repeat center;"
-    class="w-full h-[500px]">
+    class="w-full h-[244px]">
     <div class="container max-w-[1200px] flex items-center h-full">
         <div class="">
             <h1 class="text-title text-[60px] font-serif font-bold 
@@ -17,35 +17,51 @@
 <!-- ===== slider -->
 
 <!-- ===== content -->
-<section class="container max-w-[1200px] flex gap-4 py-[120px]">
-    <!-- ===== cart   -->
-    <div class="border p-4 rounded-sm w-[40%]">
-        <h1 class="text-[20px] font-serif font-[600]">Thông tin đơn hàng</h1>
-        <div class="flex justify-between h-full flex-col">
+<section class="py-[120px] bg-backgroup ">
+    <div class="container max-w-[1200px]">
+        <!-- information delivery -->
+        <div class="bg-white px-[30px] py-[24px] rounded-sm">
+            <h1 class="text-[18px] text-title font-[500]">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                Thông tin giao hàng
+            </h1>
+
+            <div class="mt-3 flex items-center gap-3">
+                <h1 class="font-[500] text-[16px]">Le Van A - 0123456789</h1>
+                <h1 class="text-[16px]">
+                    515/20/5 hà huy tập, Phường Tân Lợi, Thành Phố Buôn Ma Thuột, Đắk Lắk
+                </h1>
+                <button class="uppercase ml-5 font-[500] text-title hover:text-main">Thay đổi</button>
+            </div>
+        </div>
+        <!-- information delivery -->
+
+        <!-- products -->
+        <div class=" rounded-sm mt-4">
+            <h1 class="text-[18px] px-[30px] py-[24px] font-[600] bg-white">
+                Sản phẩm
+            </h1>
+            <!-- === scroll -->
             <div class="mt-4">
-                <!-- ===== products enter cart -->
-                <div class="scroll--item">
-                    <!-- ===== items -->
-                    <div class="py-[12px] flex justify-between 
-                    items-center">
-                        <div class="flex items-center gap-3">
-                            <div class="w-[60px] h-full">
-                                <img src="https://uploads-ssl.webflow.com/6371f9c50ce0bd588f4fa954/637325e30109ae3692650b4d_image-11.jpg"
-                                    alt="" class="w-full h-full object-cover">
-                            </div>
-                            <div class="">
-                                <strong class="text-[#296253] text-xl">
-                                    Lemon Cypress
-                                </strong> <br>
-                                <strong class="text-[#79a206] text-[17px] mt-[10px] block">
-                                    400.000đ
-                                </strong>
-                            </div>
-                        </div>
-                        <div class="mt-[10px] flex items-center gap-3 
-                        h-[25px]">
+                <!-- === item -->
+                <div class="flex items-center justify-between border-b-2
+                px-[30px] py-[20px] bg-white mt-4
+                " *ngFor="let item of items">
+                    <div class="h-[60px] w-[70px]">
+                        <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/637315062bd81e4589147fe3_image-1.jpg"
+                            alt="" class="h-full w-full object-cover">
+                    </div>
+                    <div class="w-[10rem] line-clamp-2 text-wrap text-center">
+                        <h1 class="text-title font-[500]">Lemon Cypress Lemon Cypress Lemon Cypress</h1>
+                    </div>
+                    <div class="w-[10rem] line-clamp-2 text-wrap text-center">
+                        <h1 class="font-[500]">300000.000d</h1>
+                    </div>
+                    <div class="w-[10rem] line-clamp-2 text-wrap text-center">
+                        <div class="flex items-center gap-3 h-[25px]">
                             <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-[#79a206]">
                                 <i class="fa-solid fa-minus text-[15px]">
+
                                 </i>
                             </button>
                             <input type="text" value="1" class="text-center border-1 w-[60px] p-1 h-full" disabled>
@@ -54,94 +70,105 @@
                             </button>
                         </div>
                     </div>
-                    <!-- ===== items -->
+                    <div class="w-[10rem] line-clamp-2 text-wrap text-right">
+                        <h1 class="font-[500]">30000.000d</h1>
+                    </div>
+                    <div class="w-[10rem] line-clamp-2 text-wrap text-right">
+                        <button class="text-error">
+                            <i class="fa-solid fa-xmark text-[22px]"></i>
+                        </button>
+                    </div>
                 </div>
-                <!-- ===== products enter cart -->
+                <!-- === item -->
             </div>
-            <div class="pb-4 grid grid-rows-4 gap-4">
-                <hr>
-                <div class="flex justify-between items-center">
-                    <p class="uppercase text-[15px] font-[500]">
-                        Tạm tính:
-                    </p>
-                    <strong class="text-[#79a206] text-[18px]">
-                        400.000đ
-                    </strong>
-                </div>
-                <div class="flex justify-between items-center">
-                    <p class="uppercase text-[15px] font-[500]">
-                        Tạm tính:
-                    </p>
-                    <strong class="text-[#79a206] text-[18px]">
-                        400.000đ
-                    </strong>
-                </div>
-                <hr>
-                <div class="flex justify-between items-center">
-                    <p class="uppercase text-[15px] font-[500]">
-                        Tạm tính:
-                    </p>
-                    <strong class="text-[#79a206] text-[18px]">
-                        400.000đ
-                    </strong>
-                </div>
-                <button class="bg-main uppercase text-[15px] py-[10px] 
-                font-[500] text-white rounded-sm hover:bg-black transition-colors">Đặt hàng</button>
-            </div>
-        </div>
-    </div>
-    <!-- ===== cart   -->
+            <!-- === scroll -->
 
-    <!-- ===== form -->
-    <div class="w-[60%]">
-        <div class="border p-4 rounded-sm">
-            <h1 class="text-[20px] font-serif font-[600]">Thông tin nhận hàng</h1>
-            <form action="" class="mt-4">
-                <div class="row">
-                    <div class="flex flex-col items-start gap-2 col-6">
-                        <label for="" class="font-[500]">Họ tên</label>
-                        <input type="text" placeholder="Nhập họ tên"
-                            class="border-1 p-2 w-full rounded-sm focus:border-main">
-                        <p class="text-error">Bạn chưa nhập địa chỉ</p>
-                    </div>
-                    <div class="flex flex-col items-start gap-2 col-6">
-                        <label for="" class="font-[500]">Số điện thoại</label>
-                        <input type="text" placeholder="Nhập số điện thoại"
-                            class="border-1 p-2 w-full rounded-sm focus:border-main">
-                        <p class="text-error">Bạn chưa nhập địa chỉ</p>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="flex flex-col items-start gap-2 col-6">
-                        <label for="" class="font-[500]">Email</label>
-                        <input type="text" placeholder="Nhập họ tên"
-                            class="border-1 p-2 w-full rounded-sm focus:border-main">
-                        <p class="text-error">Bạn chưa nhập địa chỉ</p>
-                    </div>
-                    <div class="flex flex-col items-start gap-2 col-6">
-                        <label for="" class="font-[500]">Địa chỉ</label>
-                        <input type="text" placeholder="Nhập số điện thoại"
-                            class="border-1 p-2 w-full rounded-sm focus:border-main">
-                        <p class="text-error">Bạn chưa nhập địa chỉ</p>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="flex flex-col items-start gap-2 col-12">
-                        <label for="" class="font-[500]">Ghi chú</label>
-                        <textarea type="text" placeholder="Nhập số điện thoại"
-                            class="border-1 p-2 w-full rounded-sm focus:border-main h-[10rem]"></textarea>
-                    </div>
-                </div>
-            </form>
         </div>
-        <!-- === payment -->
-        <div class="border p-4 rounded-sm mt-4">
-            <h1 class="text-[20px] font-serif font-[600]">
-                Phương thức thanh toán
-            </h1>
+        <!-- products -->
+
+        <!-- ==== payment -->
+        <div class="bg-white mt-4 rounded-sm">
+            <!-- === vouchers -->
+            <div class="px-[30px] py-[24px] flex items-center justify-between border-b-2">
+                <h1 class="text-title font-[500]">
+                    <i class="fa-solid fa-ticket mr-2"></i> Voucher của cửa hàng
+                </h1>
+                <div class="flex items-center gap-5">
+                    <div class="rounded-sm px-3 py-1 border-title border-1">
+                        <p class="text-title font-[500]">-10k</p>
+                    </div>
+                    <button class="text-title font-[500]
+                    hover:text-main">
+                        Chọn Voucher
+                    </button>
+                </div>
+            </div>
+            <!-- === vouchers -->
+
+            <!-- ==== method payment -->
+            <div class="px-[30px] py-[24px] flex items-center justify-between border-b-2">
+                <h1 class="text-title font-[500]">
+                    Phương thức thanh toán
+                </h1>
+                <div class="flex items-center gap-5">
+                    <button class="px-3 py-1 rounded-sm btn--voucher active">
+                        Ví ZaloPay
+                    </button>
+                    <button class="px-3 py-1 rounded-sm btn--voucher">
+                        Ví VnPay
+                    </button>
+                    <button class="px-3 py-1 rounded-sm btn--voucher">
+                        Thanh toán khi nhận hàng
+                    </button>
+                </div>
+            </div>
+            <!-- ==== method payment -->
+
+            <!-- ==== order -->
+            <div class="flex items-top justify-between border-b-2 gap-4">
+                <!-- === note -->
+                <div class="w-[70%] border-r-2 pr-6 flex flex-col justify-between px-[30px] py-[24px]">
+                    <div class="flex flex-col gap-3 ">
+                        <label class="font-[500]">
+                            Ghi chú
+                        </label>
+                        <textarea cols="30" class="border-2 px-3 py-2 h-[110px] rounded-sm"
+                            placeholder="Ghi chú đơn hàng"></textarea>
+                    </div>
+                    <h1 class="text-gray-500 text-[14px]">
+                        <i class="fa-solid fa-circle-exclamation mr-3"></i>
+                        Kiểm tra lại đơn hàng của bạn trước khi thành toán
+                    </h1>
+                </div>
+
+                <!-- === note -->
+
+                <!-- === total -->
+                <div class="w-[30%] flex flex-col gap-4 pr-[30px] py-[24px]">
+                    <div class="flex items-center justify-between">
+                        <p>Tổng tiền hàng:</p>
+                        <p class="font-[500]">200.000đ</p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <p>Phí vận chuyển:</p>
+                        <p class="font-[500]">200.000đ</p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <p>Tổng cộng voucher giảm giá:</p>
+                        <p class="font-[500]">200.000đ</p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <p>Tổng thanh toán:</p>
+                        <p class="text-2xl font-[500] text-title">200.000đ</p>
+                    </div>
+                    <button class="w-full bg-main hover:bg-black text-white 
+                    py-[10px] rounded-sm uppercase font-[500] text-[15px] transition-colors">Thanh toán</button>
+                </div>
+                <!-- === total -->
+            </div>
+            <!-- ==== order -->
         </div>
-        <!-- === payment -->
+        <!-- ==== payment -->
     </div>
-    <!-- ===== form -->
 </section>
 <!-- ===== content -->
