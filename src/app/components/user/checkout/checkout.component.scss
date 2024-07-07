@@ -1,9 +1,18 @@
 .btn--voucher {
+    color: rgb(163, 163, 163);
     border: 1px solid;
     &:hover {
-        color: #79a206;
+        color: #296253;
     }
 }
 .active {
-    color: #79a206;
+    color: #296253;
+}
+.hidden--cart {
+    opacity: 0;
+    visibility: hidden;
+}
+.visibility--cart {
+    opacity: 1;
+    visibility: visible;
 }

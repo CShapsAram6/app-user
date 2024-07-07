@@ -5,6 +5,9 @@ import { HomeComponent } from './home/home.component';
 import { ShopComponent } from './shop/shop.component';
 import { UserComponent } from './user.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { AddressComponent } from './address/address.component';
+import { VoucherComponent } from './voucher/voucher.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -23,7 +26,13 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [HomeComponent, ShopComponent, CheckoutComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  declarations: [
+    HomeComponent,
+    ShopComponent,
+    CheckoutComponent,
+    AddressComponent,
+    VoucherComponent,
+  ],
+  imports: [CommonModule, RouterModule.forChild(routes), HttpClientModule],
 })
 export class UserModule {}
