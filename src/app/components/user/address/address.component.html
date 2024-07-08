@@ -14,10 +14,57 @@
                 <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
             </div>
         </div>
-        <div class="w-full mt-3">
+        <!-- <div class="w-full mt-3 relative">
             <input type="text" class="w-full border-1 px-3 py-2 rounded-sm border-error focus:border-main"
                 placeholder="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã">
             <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
+
+            <div class="absolute top-10 left-0 w-full bg-white border-1 rounded-sm">
+                <div class="flex items-center justify-between border--bottom px-3">
+                    <div class="py-3 cursor-pointer" [class.active]="isActive == 0" [class.text-main]="isActive === 0"
+                        (click)="LoadCity()">
+                        Tỉnh/Thành phố
+                    </div>
+                    <div class="py-3 cursor-pointer" [class.active]="isActive == 1" [class.text-main]="isActive === 1"
+                        (click)="ChangeCity(idCity, idCity, 0)">
+                        Quận/Huyện
+                    </div>
+                    <div class="py-3 cursor-pointer" [class.active]="isActive == 2" [class.text-main]="isActive === 2">
+                        Phường/Xã
+                    </div>
+                </div>
+                <div class="w-full bg-white h-[15rem] overflow-y-auto">
+                    <div class="py-3 px-3 hover:bg-gray-2 w-full text-left transition-colors cursor-pointer "
+                        (click)="ChangeCity(idCity, item.Code, isActive)" *ngFor="let item of city">
+                        {{ item.FullName}}
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="flex items-center gap-3">
+            <div class="w-full mt-3">
+                <select name="" id="" class="border-1 w-full px-3 py-2 focus:border-main">
+                    <option value="{{item.Code}}" *ngFor="let item of city">
+                        {{item.FullName}}
+                    </option>
+                </select>
+            </div>
+            <div class="w-full mt-3">
+                <select name="" id="" class="border-1 w-full px-3 py-2 focus:border-main">
+                    <option value="{{item.Code}}" *ngFor="let item of city">
+                        {{item.FullName}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="w-full mt-3">
+            <div class="w-full mt-3">
+                <select name="" id="" class="border-1 w-full px-3 py-2 focus:border-main">
+                    <option value="{{item.Code}}" *ngFor="let item of city">
+                        {{item.FullName}}
+                    </option>
+                </select>
+            </div>
         </div>
         <div class="w-full mt-3">
             <input type="text" class="w-full border-1 px-3 py-2 rounded-sm border-error focus:border-main"
@@ -31,5 +78,6 @@
                 class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500]">Hoàn
                 thành</button>
         </div>
+
     </form>
 </div>

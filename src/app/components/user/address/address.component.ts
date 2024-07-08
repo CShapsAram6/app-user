@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AddressService } from '../../../services/address.service';
+import { vietNameseDtos } from '../../../model/address.model';
 
 @Component({
   selector: 'app-address',
@@ -9,9 +10,13 @@ import { AddressService } from '../../../services/address.service';
 export class AddressComponent implements OnInit {
   constructor(private addressService: AddressService) {}
   ngOnInit(): void {
-    this.addressService.getData().subscribe((response) => {
-      const newItem: any = response.find((a) => a.Code == '01');
-      console.log(newItem.District);
+    this.LoadCity();
+  }
+  // get values City form assets/.json
+  city: vietNameseDtos[] = [];
+  LoadCity() {
+    this.addressService.getCity().subscribe((data) => {
+      this.city = data;
     });
   }
 }
