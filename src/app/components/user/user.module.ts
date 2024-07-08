@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ShopComponent } from './shop/shop.component';
 import { UserComponent } from './user.component';
@@ -8,6 +8,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AddressComponent } from './address/address.component';
 import { VoucherComponent } from './voucher/voucher.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -33,6 +35,13 @@ const routes: Routes = [
     AddressComponent,
     VoucherComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), HttpClientModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    HttpClientModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class UserModule {}
