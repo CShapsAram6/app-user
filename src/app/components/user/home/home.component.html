@@ -22,7 +22,7 @@
                                     được đào tốt với sự trợ giúp của thuổng.
                                 </p>
                                 <button
-                                    class="mt-[40px] bg-[#79a206] border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px] animation">Cửa
+                                    class="mt-[40px] bg-main border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px] animation">Cửa
                                     hàng</button>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             <div class="w-[500px] max-lg:w-full">
                                 <h1
                                     class="text-[#296253] text-[53px] font-[600] leading-[70px] font-serif w-[400px] max-lg:text-[50px] max-lg:w-[400px] max-sm:text-[30px] max-sm:w-[270px] max-sm:leading-9 animation">
-                                    Tặng Quà Cây Xanh <span class="text-[#79a206] font-serif">Pinaf</span>
+                                    Tặng Quà Cây Xanh <span class="text-main font-serif">Pinaf</span>
                                 </h1>
                                 <p
                                     class="mt-4 text-2 leading-7 text-[#474747] text-justify w-[500px] max-lg:w-[400px] max-sm:w-[200px] max-sm:line-clamp-3 animation">
@@ -48,7 +48,7 @@
                                     được đào tốt với sự trợ giúp của thuổng.
                                 </p>
                                 <button
-                                    class="mt-[40px] bg-[#79a206] border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px] animation">Cửa
+                                    class="mt-[40px] bg-main border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px] animation">Cửa
                                     hàng</button>
                             </div>
                         </div>
@@ -133,10 +133,10 @@ py-[120px]">
     <h1 class="text-[40px] text-center font-serif">Sản phẩm nổi bật</h1>
     <!-- button tab -->
     <div class="flex items-center justify-center mt-[70px] gap-[50px] flex-wrap">
-        <button class="text-[20px] py-2 uppercase px-3  rounded-sm font-[500] hover:text-[#79a206] btn--active">Bán chạy
+        <button class="text-[20px] py-2 uppercase px-3  rounded-sm font-[500] hover:text-main btn--active">Bán chạy
             nhất</button>
-        <button class="text-[20px] py-2 uppercase px-3 rounded-sm font-[500] hover:text-[#79a206]">Sản phẩm mới</button>
-        <button class="text-[20px] py-2 uppercase px-3 rounded-sm font-[500] hover:text-[#79a206]">Ưu đãi</button>
+        <button class="text-[20px] py-2 uppercase px-3 rounded-sm font-[500] hover:text-main">Sản phẩm mới</button>
+        <button class="text-[20px] py-2 uppercase px-3 rounded-sm font-[500] hover:text-main">Ưu đãi</button>
     </div>
     <!-- button tab -->
 
@@ -149,7 +149,7 @@ py-[120px]">
                     alt="" class="w-full h-full object-cover ">
                 <div class="absolute z-20 bottom-[-50px] left-0 w-full px-9 btn--add transition-all">
                     <button
-                        class="bg-[#79a206] text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-black hover:text-white">
+                        class="bg-main text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-black hover:text-white">
                         <i class="fa-solid fa-cart-plus mr-[5px]"></i>
                         Thêm vào giỏ hàng
                     </button>
@@ -160,7 +160,7 @@ py-[120px]">
                     class="text-[#296253] text-[17px] font-serif text-center mt-[24px] font-[500] line-clamp-1 uppercase">
                     <a href="">Mini Olive Tree</a>
                 </h2>
-                <p class="text-[#79a206] text-[17x] text-center mb-[24px] mt-3 font-[500]">40.000đ</p>
+                <p class="text-main text-[17x] text-center mb-[24px] mt-3 font-[500]"> {{item.price}} .000đ</p>
             </div>
         </div>
     </div>
@@ -175,20 +175,19 @@ py-[120px]">
         <h1 class="text-[40px] font-serif">Sản phẩm</h1>
         <button
             style="background: url('https://assets.website-files.com/63708df071bc73798fae96ee/637350306cba12253228b101_bg.svg') no-repeat;"
-            class="h-[51px] uppercase text-[#79a206] text-[15px] font-[700] 
+            class="h-[51px] uppercase text-main text-[15px] font-[700] 
             px-[30px] hover:text-[black]">
-            Của hàng
+            Cửa hàng
         </button>
     </div>
     <!-- products -->
     <div class="mt-[70px] grid grid-cols-4 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
-        <div class="border rounded-sm cart--item bg-white" *ngFor="let item of items">
+        <div class="border rounded-sm cart--item bg-white" *ngFor="let item of products">
             <div class="w-full h-[340px] overflow-hidden relative">
-                <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/637315062bd81e4589147fe3_image-1.jpg"
-                    alt="" class="w-full h-full object-cover ">
+                <img [src]="item.image" alt="" class="w-full h-full object-cover ">
                 <div class="absolute z-20 bottom-[-50px] left-0 w-full px-9 btn--add transition-all">
-                    <button
-                        class="bg-[#79a206] text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-black hover:text-white">
+                    <button (click)="AddToCart(item)"
+                        class="bg-main text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-black hover:text-white">
                         <i class="fa-solid fa-cart-plus mr-[5px]"></i>
                         Thêm vào giỏ hàng
                     </button>
@@ -197,17 +196,21 @@ py-[120px]">
             <div class="">
                 <h2
                     class="text-[#296253] text-[17px] font-serif text-center mt-[24px] font-[500] line-clamp-1 uppercase">
-                    <a href="">Mini Olive Tree</a>
+                    <a href="">
+                        {{ item.name }}
+                    </a>
                 </h2>
-                <p class="text-[#79a206] text-[17x] text-center mb-[24px] mt-3 font-[500]">40.000đ</p>
+                <p class="text-main text-[17x] text-center mb-[24px] mt-3 font-[500]">{{item.price}}.000đ</p>
             </div>
         </div>
     </div>
     <!-- products -->
     <div class="mt-[50px] flex justify-center">
         <button
-            class="mt-[40px] bg-[#79a206] border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px] animation">Xem
-            thêm</button>
+            class="mt-[40px] bg-main border-gray-1 rounded-md  py-[14px] px-[42px] transition-all font-[500] text-white hover:bg-black uppercase text-[14px] animation"
+            (click)="SeeMoreProducts(page)">
+            Xem thêm
+        </button>
     </div>
 </section>
 <!-- products -->
@@ -232,9 +235,9 @@ py-[120px]">
             </p>
             <button
                 style="background: url('https://assets.website-files.com/63708df071bc73798fae96ee/637350306cba12253228b101_bg.svg') no-repeat;"
-                class="h-[51px] uppercase text-[#79a206] text-[15px] font-[700] 
+                class="h-[51px] uppercase text-main text-[15px] font-[700] 
         px-[30px] hover:text-[black]">
-                Của hàng
+                Cửa hàng
             </button>
         </div>
     </div>
@@ -274,13 +277,13 @@ py-[120px]">
                 </h4>
             </div>
             <div class="mt-[18px]">
-                <a href="" class="hover:text-[#79a206]">
+                <a href="" class="hover:text-main">
                     <h1 class="text-[24px] line-clamp-1 font-[500]">Làm vườn giúp cuộc sống tốt đẹp hơn</h1>
                 </a>
                 <p class="mt-[15px] line-clamp-2 leading-7 text-[#51544f]">Có rất nhiều biến thể của các đoạn có sẵn,
                     nhưng phần lớn có Có rất nhiều biến thể của các đoạn có sẵn, nhưng phần lớn có
                 </p>
-                <button class="mt-[20px] text-[16px] hover:text-[#79a206] font-[500]">Xem thêm</button>
+                <button class="mt-[20px] text-[16px] hover:text-main font-[500]">Xem thêm</button>
             </div>
         </div>
     </div>

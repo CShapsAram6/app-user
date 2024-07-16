@@ -6,4 +6,10 @@ interface vietNameseDtos {
   Name: string;
   NameEn: string;
 }
-export { vietNameseDtos };
+
+type addressModel = {
+  address: string;
+  fullName: string;
+  phone: string;
+};
+export { vietNameseDtos, addressModel };

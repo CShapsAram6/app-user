@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AddressService } from '../../../services/address.service';
 import { vietNameseDtos } from '../../../model/address.model';
 import { FormBuilder } from '@angular/forms';
+import { IAddressRepository } from '../../../interface/address.interfaces';
 
 @Component({
   selector: 'app-address',
@@ -11,7 +12,8 @@ import { FormBuilder } from '@angular/forms';
 export class AddressComponent implements OnInit {
   constructor(
     private addressService: AddressService,
-    private form: FormBuilder
+    private form: FormBuilder,
+    @Inject('IAddressRepository') private iaddressRepository: IAddressRepository
   ) {}
   ngOnInit(): void {
     this.LoadCity();
@@ -20,6 +22,10 @@ export class AddressComponent implements OnInit {
     address: [''],
     fullName: [''],
     phone: [''],
+    city: [''],
+    district: [''],
+    wrad: [''],
+    detail: [''],
   });
   // get values City form assets/.json
   city: vietNameseDtos[] = [];
@@ -39,7 +45,12 @@ export class AddressComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     const selectedValue: string = selectElement.value;
     this.idCity = selectedValue;
-    this.OnSelectCity(selectedValue);
+    const nameCity: string =
+      selectElement.options[selectElement.selectedIndex].text;
+    this.addressForm.patchValue({
+      city: nameCity,
+      address: nameCity,
+    });
     this.addressService.getDistrict(selectedValue).subscribe((response) => {
       this.district = response;
     });
@@ -49,6 +60,12 @@ export class AddressComponent implements OnInit {
   onDistrictChange(event: Event, idCity: string) {
     const selectElement = event.target as HTMLSelectElement;
     const selectedValue: string = selectElement.value;
+    const nameDistrict: string =
+      selectElement.options[selectElement.selectedIndex].text;
+    this.addressForm.patchValue({
+      district: nameDistrict,
+      address: `${nameDistrict}, ${this.addressForm.value.city}`,
+    });
     this.addressService.GetWard(selectedValue, idCity).subscribe((response) => {
       this.ward = response;
     });
@@ -56,15 +73,24 @@ export class AddressComponent implements OnInit {
 
   onWradChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
-    const selectedValue: string = selectElement.value;
-    console.log(selectedValue);
+    const nameWrad: string =
+      selectElement.options[selectElement.selectedIndex].text;
+    this.addressForm.patchValue({
+      wrad: nameWrad,
+      address: `${nameWrad}, ${this.addressForm.value.district}, ${this.addressForm.value.city}`,
+    });
   }
 
-  OnSelectCity(id: string) {
-    this.addressService.getCity().subscribe((data) => {
+  SumbitFormm() {
+    let address: string = this.addressForm.value.address as string;
+    this.iaddressRepository.setAddressComplate(address);
+  }
+
+  ChangeDetailAddress() {
+    setTimeout(() => {
       this.addressForm.patchValue({
-        address: data.filter((item) => item.Code === id)[0].FullName,
+        address: `${this.addressForm.value.detail}, ${this.addressForm.value.wrad}, ${this.addressForm.value.district}, ${this.addressForm.value.city}`,
       });
-    });
+    }, 200);
   }
 }

@@ -54,8 +54,8 @@
                     <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6371fca3352e282d8446f624_icon.svg"
                         alt="">
                 </button>
-                <span
-                    class="absolute bg-main text-white px-1 py-0.5 rounded-full text-[12px] top-[-5px] right-[-5px]">3</span>
+                <span class="absolute bg-main text-white px-1 py-0.5 rounded-full text-[12px] top-[-5px] right-[-5px]">
+                    {{countNumberLoacal}} </span>
             </div>
             <button (click)="isSignIn = true"
                 class="bg-[#79a206] border-gray-1 rounded-md  py-2 px-4 transition-all font-[500] text-white hover:bg-black uppercase text-[14px] max-sm:hidden">
@@ -295,18 +295,18 @@
             scroll--item">
                 <!-- items -->
                 <div class="py-[12px] flex justify-between 
-                items-center" *ngFor="let item of items">
+                items-center" *ngFor="let item of arrayProduct">
                     <div class="flex items-center gap-5">
                         <div class="w-[60px] h-full">
-                            <img src="https://uploads-ssl.webflow.com/6371f9c50ce0bd588f4fa954/637325e30109ae3692650b4d_image-11.jpg"
-                                alt="" class="w-full h-full object-cover">
+                            <img [src]="item.image" alt="" class="w-full h-full object-cover">
                         </div>
                         <div class="">
-                            <strong class="text-[#296253] text-xl">
-                                Lemon Cypress
-                            </strong> <br>
+                            <strong class="text-[#296253] text-xl w-[10rem]
+                            line-clamp-1 block h-7">
+                                {{item.name}}
+                            </strong>
                             <strong class="text-[#79a206] text-[17px] mt-[10px] block">
-                                400.000đ
+                                {{item.price}}.000đ
                             </strong>
                             <div class="mt-[10px] flex items-center gap-3 
                             h-[25px]">
@@ -315,7 +315,8 @@
 
                                     </i>
                                 </button>
-                                <input type="text" value="1" class="text-center border-1 w-[60px] p-1 h-full" disabled>
+                                <input type="text" value="{{item.quantity}}"
+                                    class="text-center border-1 w-[60px] p-1 h-full" disabled>
                                 <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-[#79a206]">
                                     <i class="fa-solid fa-plus text-[15px]"></i>
                                 </button>

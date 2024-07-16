@@ -31,7 +31,8 @@
                 <h1 class="text-[16px]">
                     515/20/5 hà huy tập, Phường Tân Lợi, Thành Phố Buôn Ma Thuột, Đắk Lắk
                 </h1>
-                <button class="uppercase ml-5 font-[500] text-title hover:text-main">Thay đổi</button>
+                <button class="uppercase ml-5 font-[500] text-title hover:text-main" (click)="isPopup = true">Thay
+                    đổi</button>
             </div>
         </div>
         <!-- information delivery -->
@@ -46,16 +47,17 @@
                 <!-- === item -->
                 <div class="flex items-center justify-between border-b-2
                 px-[30px] py-[20px] bg-white mt-4
-                " *ngFor="let item of items">
+                " *ngFor="let item of arrCart">
                     <div class="h-[60px] w-[70px]">
-                        <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/637315062bd81e4589147fe3_image-1.jpg"
-                            alt="" class="h-full w-full object-cover">
+                        <img [src]="item.image" alt="" class="h-full w-full object-cover">
                     </div>
                     <div class="w-[10rem] line-clamp-2 text-wrap text-center">
-                        <h1 class="text-title font-[500]">Lemon Cypress Lemon Cypress Lemon Cypress</h1>
+                        <h1 class="text-title font-[500]">
+                            {{item.name}}
+                        </h1>
                     </div>
                     <div class="w-[10rem] line-clamp-2 text-wrap text-center">
-                        <h1 class="font-[500]">300000.000d</h1>
+                        <h1 class="font-[500]"> {{item.price}}.000d</h1>
                     </div>
                     <div class="w-[10rem] line-clamp-2 text-wrap text-center">
                         <div class="flex items-center gap-3 h-[25px]">
@@ -174,10 +176,10 @@
 <!-- ===== content -->
 
 <!-- popup -->
-<section class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 pt-[10rem] transition-all">
+<section class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 pt-[10rem] transition-all" [class.hidden]="isPopup">
     <section class="bg-white p-[25px] rounded-sm w-[480px] absolute left-[50%] translate-x-[-50%]">
         <div class="absolute top-2 right-2">
-            <button>
+            <button (click)="isPopup = false">
                 <i class="fa-solid fa-xmark text-[22px]"></i>
             </button>
         </div>

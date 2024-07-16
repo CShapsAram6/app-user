@@ -75,24 +75,26 @@
                 </select>
             </div>
         </div>
-        <!-- === complete address -->
-        <div class="w-full mt-3">
-            <div class="w-full mt-3">
-                <input type="text" class="border-1 px-3 py-2 rounded-sm focus:border-main w-full" placeholder="Địa chỉ"
-                    formControlName="address">
-            </div>
-        </div>
         <div class="w-full mt-3">
             <input type="text" class="w-full border-1 px-3 py-2 rounded-sm border-error focus:border-main"
-                placeholder="Địa chỉ cụ thể">
+                formControlName="detail" (keyup)="ChangeDetailAddress()" placeholder="Địa chỉ cụ thể">
             <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
+        </div>
+
+        <!-- === complete address -->
+        <div class="w-full mt-3">
+            <p class="py-2 leading-6 m-0">
+                {{addressForm.value.address}}
+            </p>
         </div>
         <div class="flex mt-5 justify-end gap-1">
             <button class="uppercase text-sm px-5 py-2 rounded-sm 
                 hover:bg-gray/100 transition-colors font-[500]">Hủy</button>
             <button
-                class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500]">Hoàn
-                thành</button>
+                class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500]"
+                (click)="SumbitFormm()">
+                Hoàn thành
+            </button>
         </div>
 
     </form>
