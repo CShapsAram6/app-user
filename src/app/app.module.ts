@@ -11,10 +11,18 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UserComponent } from './components/user/user.component';
 import { UserModule } from './components/user/user.module';
 import { appProviders } from './context/appProviders.context';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, SignInComponent, SignUpComponent, UserComponent],
-  imports: [UserModule, BrowserModule, AppRoutingModule],
+  imports: [
+    UserModule,
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [provideClientHydration(), ...appProviders],
   bootstrap: [AppComponent],
 })

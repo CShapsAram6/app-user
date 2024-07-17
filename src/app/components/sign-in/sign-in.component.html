@@ -7,17 +7,19 @@
 
 <!-- login with google -->
 <!-- form -->
-<form class="mt-4">
+<form class="mt-4" [formGroup]="loginForm">
     <div class="w-full">
         <input type="text" placeholder="Nhập email"
-            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]">
+            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+            formControlName="userName">
         <p class="mt-2 text-[15px] text-error">
             Bạn chưa nhập email
         </p>
     </div>
     <div class="w-full mt-3">
         <input type="password" placeholder="Nhập mật khẩu"
-            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]">
+            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+            formControlName="password">
         <p class="mt-2 text-[15px] text-error">
             Bạn chưa nhập mật khẩu
         </p>
@@ -28,7 +30,8 @@
         </button>
     </div>
     <button
-        class="w-full mt-4 bg-main text-white py-[10px] rounded-sm hover:bg-black transition-colors font-[500] uppercase text-[15px]">
+        class="w-full mt-4 bg-main text-white py-[10px] rounded-sm hover:bg-black transition-colors font-[500] uppercase text-[15px]"
+        (click)="SumbitForm()">
         Đăng nhập
     </button>
 </form>
