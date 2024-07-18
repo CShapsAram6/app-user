@@ -1,0 +1,75 @@
+<section class="w-full h-full fixed bg-[#000c] top-0 left-0 z-50 hidden--cart" [class.visibility--cart]="isPopup">
+    <div class="flex items-center justify-center h-full">
+        <section class="w-[60rem] bg-white rounded-sm relative animation-popup">
+            <div class="flex justify-end pt-6 pr-6 absolute top-0 left-0 w-full">
+                <button (click)="isPopup = false; data = 0; closePopup()">
+                    <i class="fa-solid fa-xmark text-[25px]"></i>
+                </button>
+            </div>
+            <div class="px-10 py-[40px] flex gap-4">
+                <div class="flex gap-4">
+                    <div class="flex flex-col gap-3">
+                        @for (item of singleProduct.images; track $index) {
+                        <div class="h-[80px] w-[80px]" (mouseover)="link = item.link">
+                            <img [src]="item.link + '=s100'" class="w-full h-full object-cover rounded-sm">
+                        </div>
+                        }
+                    </div>
+                    <div class="w-[400px] h-[560px]">
+                        <img [src]="link" alt="main-image" class="w-full h-full object-cover rounded-sm">
+                    </div>
+                </div>
+                <div class="pt-4">
+                    <!-- name -->
+                    <div class="">
+                        <h1 class="text-[32px] font-[500]"> {{singleProduct.name}} </h1>
+                        <h2 class="text-main mt-2 text-[24px] font-serif">
+                            {{price}}.000đ
+                        </h2>
+                        <h3 class="text-[16px] font-serif mt-3">
+                            Thông tin sản phẩm
+                        </h3>
+                        <p class="mt-2 leading-6 line-clamp-4 text-secondColor text-[15px] text-justify">
+                            {{singleProduct.description}}
+                        </p>
+                    </div>
+                    <!-- name -->
+                    <!-- size -->
+                    <div class="mt-2">
+                        <div class="mt-3 flex items-center justify-between">
+                            <p class="text-[16px] text-secondColor">Loại sản phẩm:</p>
+                            <p class="text-[16px] font-[500]"> {{category.name}} </p>
+                        </div>
+                        <div class="mt-4 flex items-center gap-4 flex-wrap">
+                            <button *ngFor="let item of singleProduct.variant"
+                                class="text-[13px] font-[500] border p-2 border-secondColor text-[#e3e3e3] hover:text-main hover:border-main rounded-sm"
+                                [class.active]="item.id == isVariant" (click)="isVariant = item.id; price = item.price">
+                                SIZE {{item.size}}</button>
+                        </div>
+                    </div>
+                    <!-- size -->
+                    <!-- quantity -->
+                    <div class="mt-4">
+                        <h1 class="text-[16px] text-secondColor">Số lượng:</h1>
+                        <div class="mt-2 flex justify-center items-center gap-2">
+                            <button class="hover:bg-[#e3e3e3] px-4 py-1 rounded-sm border border-main"><i
+                                    class="fa-solid fa-minus"></i></button>
+                            <input type="text" class="w-[13rem] text-center border py-1 rounded-sm" value="1">
+                            <button class="hover:bg-[#e3e3e3] px-4 py-1 rounded-sm border border-main">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- quantity -->
+                    <div class="flex flex-col mt-4 gap-3">
+                        <button
+                            class="py-[9px] h-[43px] rounded-sm hover:bg-black transition-all px-[15px] bg-main text-white text-[14px] font-[500] uppercase">Mua
+                            ngay</button>
+                        <button class="py-[9px] h-[43px] rounded-sm px-[15px] text-secondColor hover:bg-[#e3e3e3] transition-all text-[14px]
+                        uppercase font-[500]">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

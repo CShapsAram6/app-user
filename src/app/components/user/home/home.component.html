@@ -186,7 +186,7 @@ py-[120px]">
             <div class="w-full h-[340px] overflow-hidden relative">
                 <img [src]="item.image" alt="" class="w-full h-full object-cover ">
                 <div class="absolute z-20 bottom-[-50px] left-0 w-full px-9 btn--add transition-all">
-                    <button (click)="AddToCart(item)"
+                    <button (click)="isPopup = true; GetProducts(item.id);"
                         class="bg-main text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-black hover:text-white">
                         <i class="fa-solid fa-cart-plus mr-[5px]"></i>
                         Thêm vào giỏ hàng
@@ -289,3 +289,7 @@ py-[120px]">
     </div>
 </section>
 <!-- blog -->
+
+<!-- select item cart -->
+<app-select-product></app-select-product>
+<!-- select item cart -->

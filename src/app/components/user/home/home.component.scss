@@ -33,6 +33,28 @@
         transform: translateY(0);
     }
 }
+@keyframes popup {
+    0% {
+        opacity: 0;
+        transform: translateY(-20%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .animation {
     animation: identifier 1s linear;
+}
+.animation-popup {
+    animation: popup 0.5s linear;
+}
+.hidden--cart {
+    opacity: 0;
+    display: none;
+}
+.visibility--cart {
+    opacity: 1;
+    display: block;
 }

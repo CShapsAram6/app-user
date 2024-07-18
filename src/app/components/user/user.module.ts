@@ -10,6 +10,7 @@ import { VoucherComponent } from './voucher/voucher.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectProductComponent } from './select-product/select-product.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
     CheckoutComponent,
     AddressComponent,
     VoucherComponent,
+    SelectProductComponent,
   ],
   imports: [
     CommonModule,
