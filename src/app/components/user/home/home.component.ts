@@ -2,7 +2,6 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { singleResponse } from '../../../model/response.model';
 import { productsDtos } from '../../../model/product.model';
-import { CartRepository } from '../../../repository/cart.repository';
 import { ICartRepository } from '../../../interface/cart.interface';
 import { SelectProductComponent } from '../select-product/select-product.component';
 
@@ -44,10 +43,6 @@ export class HomeComponent implements OnInit {
   SeeMoreProducts(page: number) {
     this.page = page + 1;
     this.LoadProduct(this.page);
-  }
-
-  AddToCart(item: productsDtos) {
-    this.cartRepository.setCart(item);
   }
 
   GetProducts(id: number) {

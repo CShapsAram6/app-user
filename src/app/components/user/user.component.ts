@@ -1,10 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { CartRepository } from '../../repository/cart.repository';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ICartRepository } from '../../interface/cart.interface';
-import { ICartLocal } from '../../model/cart.model';
-import { auth } from '../../model/user.model';
 import { forkJoin, Observable, of, tap } from 'rxjs';
 import { singleResponse } from '../../model/response.model';
+import { CartComponent } from './cart/cart.component';
+import { IAuth } from '../../interface/auth.interface';
 
 @Component({
   selector: 'app-user',
@@ -12,18 +11,17 @@ import { singleResponse } from '../../model/response.model';
   styleUrl: './user.component.scss',
 })
 export class UserComponent implements OnInit {
+  @ViewChild(CartComponent) cartComponent!: CartComponent;
+
   constructor(
-    @Inject('ICartRepository') private cartRepository: ICartRepository
+    @Inject('ICartRepository') private cartRepository: ICartRepository,
+    @Inject('IAuth') private auth: IAuth
   ) {}
   isNav: boolean = false;
   isCart: boolean = false;
-  items: any[] = [1, 2, 3, 4, 1, 1, 1, 1];
   isSignIn: boolean = false;
   countNumberLoacal: number = 0;
   isGroupBtn: boolean = false;
-
-  // list products in local
-  arrayProduct: ICartLocal[] = [];
   ngOnInit(): void {
     forkJoin([this.LoadProduct(), this.LoadUser()]).subscribe({
       next: (res) => {
@@ -36,10 +34,9 @@ export class UserComponent implements OnInit {
   }
 
   LoadProduct() {
-    return this.cartRepository.getCart().pipe(
+    return this.cartRepository.getData().pipe(
       tap((res) => {
         if (res.sussess) {
-          this.arrayProduct = res.data;
           this.countNumberLoacal = res.data.length;
           if (res.data.length == 0) {
             this.countNumberLoacal = 0;
@@ -50,10 +47,16 @@ export class UserComponent implements OnInit {
     );
   }
   LoadUser(): Observable<singleResponse<any>> {
-    let token = auth.get('TokenUser');
+    let token = this.auth.getCookie('TokenUser');
     if (token) {
       this.isGroupBtn = true;
     }
     return of({ data: token, sussess: true, message: 'ok' });
+  }
+
+  OpenPopupCart() {
+    this.cartComponent.isCart = true;
+    document.body.style.overflow = 'hidden';
+    this.cartComponent.ngOnInit();
   }
 }

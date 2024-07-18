@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 import { ICartRepository } from '../interface/cart.interface';
-import { ICartLocal } from '../model/cart.model';
-import { productsDtos } from '../model/product.model';
+import { ICart, ICartLocal } from '../model/cart.model';
+import {
+  productsDtos,
+  singleProductDto,
+  variantDtos,
+} from '../model/product.model';
 import { Observable, of } from 'rxjs';
 import { singleResponse } from '../model/response.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartRepository implements ICartRepository {
   constructor() {}
-  setCart(cart: productsDtos): void {
-    let item: ICartLocal = this.mapperToCartLocal(cart);
+
+  async setData(
+    variant: variantDtos,
+    singleProduct: singleProductDto
+  ): Promise<void> {
+    let item: ICart = await this.mapToCartProduct(variant, singleProduct);
     let local = localStorage.getItem('cart');
     if (local) {
       this.localExist(item, 'cart', local);
@@ -17,42 +25,55 @@ export class CartRepository implements ICartRepository {
     }
     this.localNotExist(item, 'cart');
   }
-  mapperToCartLocal(item: productsDtos): ICartLocal {
-    return {
-      id: item.id,
-      name: item.name,
-      image: item.image,
-      price: item.price,
-      quantity: 1,
-      size: item.size,
-      amount: item.price * 1,
-    };
+  getData(): Observable<singleResponse<ICart[]>> {
+    let local = localStorage.getItem('cart');
+    if (!local) {
+      return of({ data: [], sussess: false, message: 'not ok' });
+    }
+    let list: ICart[] = JSON.parse(local);
+    return of({ data: list, sussess: true, message: 'ok' });
   }
+
   // if local have key == 'key' not exist
-  localNotExist(item: ICartLocal, key: string) {
+  localNotExist(item: ICart, key: string) {
     let arrCart = [];
     arrCart.push(item);
     localStorage.setItem(key, JSON.stringify(arrCart));
   }
   // if local have key == 'key' exist
-  localExist(item: ICartLocal, key: string, local: any) {
-    let list: ICartLocal[] = JSON.parse(local);
+  localExist(item: ICart, key: string, local: any) {
+    let list: ICart[] = JSON.parse(local);
     let index = list.findIndex((x) => x.id == item.id);
     if (index == -1) {
       list.push(item);
     } else {
       list[index].quantity += 1;
-      list[index].amount += item.price;
+      list[index].total += item.price;
     }
     localStorage.setItem('cart', JSON.stringify(list));
   }
 
-  getCart(): Observable<singleResponse<ICartLocal[]>> {
+  async mapToCartProduct(
+    vari: variantDtos,
+    pro: singleProductDto
+  ): Promise<ICart> {
+    return {
+      id: pro.id,
+      name: pro.name,
+      quantity: 1,
+      size: vari.size,
+      price: vari.price,
+      image: pro.images.find((a) => a.isActive == true)?.link as string,
+      total: vari.price * 1,
+    };
+  }
+
+  countNumberCart(): number {
     let local = localStorage.getItem('cart');
     if (!local) {
-      return of({ data: [], sussess: false, message: 'not ok' });
+      return 0;
     }
-    let list: ICartLocal[] = JSON.parse(local);
-    return of({ data: list, sussess: true, message: 'ok' });
+    let list: ICart[] = JSON.parse(local);
+    return list.length;
   }
 }

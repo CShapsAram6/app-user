@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectProductComponent } from './select-product/select-product.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   {

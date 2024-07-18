@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { auth, ISignInRequest } from '../model/user.model';
+import { Inject, Injectable } from '@angular/core';
+import { ISignInRequest } from '../model/user.model';
 import { catchError, map, Observable } from 'rxjs';
 import { singleResponse } from '../model/response.model';
 import { environment } from '../environment/environment.bassic';
+import { IAuth } from '../interface/auth.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, @Inject('IAuth') private auth: IAuth) {}
 
   signIn(request: ISignInRequest): Observable<singleResponse<string>> {
     return this.http
@@ -19,7 +20,14 @@ export class AuthService {
       )
       .pipe(
         map((response) => {
-          auth.set('TokenUser', response.data, new Date(), '/', '', '');
+          this.auth.setCookie(
+            'TokenUser',
+            response.data,
+            new Date(),
+            '/',
+            '',
+            ''
+          );
           return response;
         }),
         catchError((err) => {

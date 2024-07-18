@@ -1,11 +1,10 @@
 declare var google: any;
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { clientId } from '../../environment/environment.bassic';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { auth, ISignInRequest } from '../../model/user.model';
-import { PaymentService } from '../../services/payment.service';
-import e from 'express';
+import { ISignInRequest } from '../../model/user.model';
+import { IAuth } from '../../interface/auth.interface';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +15,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private authService: AuthService,
-    private payMentServices: PaymentService
+    @Inject('IAuth') private auth: IAuth
   ) {}
 
   loginForm = this.form.group({
@@ -29,12 +28,7 @@ export class SignInComponent implements OnInit {
     this.LoadPage();
   }
 
-  LoadPage() {
-    let token: string = auth.get('TokenUser') as string;
-    this.payMentServices.getData(token).subscribe((res) => {
-      console.log(res);
-    });
-  }
+  LoadPage() {}
 
   LoginByGoogle() {
     google.accounts.id.initialize({
@@ -62,7 +56,7 @@ export class SignInComponent implements OnInit {
   }
 
   SumbitForm() {
-    let date: ISignInRequest = auth.handleLogin(this.loginForm.value);
+    let date: ISignInRequest = this.auth.handleLogin(this.loginForm.value);
     this.authService.signIn(date).subscribe((res) => {
       if (res.data) {
         alert('ok');

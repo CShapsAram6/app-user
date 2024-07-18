@@ -30,4 +30,4 @@ interface variantDtos {
   status: boolean;
 }
 
-export { productsDtos, singleProductDto };
+export { productsDtos, singleProductDto, variantDtos };

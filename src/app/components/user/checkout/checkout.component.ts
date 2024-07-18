@@ -17,9 +17,5 @@ export class CheckoutComponent implements OnInit {
     this.LoadCart();
   }
 
-  LoadCart() {
-    this.cartRepostory.getCart().subscribe((response) => {
-      this.arrCart = response.data;
-    });
-  }
+  LoadCart() {}
 }

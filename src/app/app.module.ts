@@ -13,9 +13,16 @@ import { UserModule } from './components/user/user.module';
 import { appProviders } from './context/appProviders.context';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CartComponent } from './components/user/cart/cart.component';
 
 @NgModule({
-  declarations: [AppComponent, SignInComponent, SignUpComponent, UserComponent],
+  declarations: [
+    AppComponent,
+    SignInComponent,
+    SignUpComponent,
+    UserComponent,
+    CartComponent,
+  ],
   imports: [
     UserModule,
     BrowserModule,

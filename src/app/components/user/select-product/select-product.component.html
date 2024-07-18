@@ -43,7 +43,8 @@
                         <div class="mt-4 flex items-center gap-4 flex-wrap">
                             <button *ngFor="let item of singleProduct.variant"
                                 class="text-[13px] font-[500] border p-2 border-secondColor text-[#e3e3e3] hover:text-main hover:border-main rounded-sm"
-                                [class.active]="item.id == isVariant" (click)="isVariant = item.id; price = item.price">
+                                [class.active]="item.id == isVariant"
+                                (click)="isVariant = item.id; price = item.price; variant = item">
                                 SIZE {{item.size}}</button>
                         </div>
                     </div>
@@ -66,7 +67,7 @@
                             class="py-[9px] h-[43px] rounded-sm hover:bg-black transition-all px-[15px] bg-main text-white text-[14px] font-[500] uppercase">Mua
                             ngay</button>
                         <button class="py-[9px] h-[43px] rounded-sm px-[15px] text-secondColor hover:bg-[#e3e3e3] transition-all text-[14px]
-                        uppercase font-[500]">Thêm vào giỏ hàng</button>
+                        uppercase font-[500]" (click)="AddToCart()">Thêm vào giỏ hàng</button>
                     </div>
                 </div>
             </div>

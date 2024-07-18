@@ -8,4 +8,23 @@ interface ICartLocal {
   amount: number;
 }
 
-export { ICartLocal };
+interface ICart {
+  id: number;
+  name: string;
+  quantity: number;
+  size: number;
+  price: number;
+  image: string;
+  total: number;
+}
+interface ICartRedis {
+  accountId: number;
+  itemCarts: ICart;
+}
+
+interface ICartRedisAfterLogin {
+  accountId: number;
+  itemCarts: ICart[];
+}
+
+export { ICartLocal, ICart, ICartRedis, ICartRedisAfterLogin };
