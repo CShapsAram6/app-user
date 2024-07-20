@@ -4,3 +4,8 @@
 .border--bottom {
     border-bottom: 2px solid #e5e7eb;
 }
+.grid-item {
+    display: grid;
+    grid-template-columns: 100% 100% 100%;
+    transition: all 0.25s linear;
+}

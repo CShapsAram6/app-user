@@ -1,113 +1,170 @@
 <!-- popup -->
 <section class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 pt-[10rem] transition-all" [class.hidden]="!isPopup">
-    <section class="bg-white p-[25px] rounded-sm w-[480px] absolute left-[50%] translate-x-[-50%]">
-        <div class="absolute top-2 right-2">
+    <section class="bg-white rounded-sm w-[450px] absolute left-[50%] translate-x-[-50%]">
+        <div class="absolute top-2 right-2 z-10">
             <button (click)="isPopup = false; closePopup()">
                 <i class="fa-solid fa-xmark text-[22px]"></i>
             </button>
         </div>
-        <div class="">
-            <h1 class="text-xl">Cập nhật địa chỉ</h1>
-
-            <div class="mt-4">
-                <form [formGroup]="addressForm">
-                    <div class="flex items-center gap-3">
-                        <div class="">
-                            <input type="text"
-                                class="border-1 px-3 py-2 rounded-sm border-error focus:border-main w-full"
-                                placeholder="Họ tên" formControlName="fullName">
-                            <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
-                        </div>
-                        <div class="">
-                            <input type="text" class="border-1 px-3 py-2 rounded-sm focus:border-main w-full"
-                                placeholder="Số điện thoại" formControlName="phone">
-                            <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
-                        </div>
-                    </div>
-                    <!-- <div class="w-full mt-3 relative">
-                        <input type="text" class="w-full border-1 px-3 py-2 rounded-sm border-error focus:border-main"
-                            placeholder="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã">
-                        <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
-            
-                        <div class="absolute top-10 left-0 w-full bg-white border-1 rounded-sm">
-                            <div class="flex items-center justify-between border--bottom px-3">
-                                <div class="py-3 cursor-pointer" [class.active]="isActive == 0" [class.text-main]="isActive === 0"
-                                    (click)="LoadCity()">
-                                    Tỉnh/Thành phố
+        <div class="w-full overflow-hidden">
+            <div class="grid-item" [ngStyle]="{'transform': transForm}">
+                <!-- list address -->
+                <div class="">
+                    <h1 class="text-xl pt-[25px] px-[25px]">Địa chỉ của tôi</h1>
+                    <div class="mt-2 h-[456px] overflow-y-auto transition-all pr-[15px]"
+                        [ngStyle]="{'height': isHeight}">
+                        <div class="py-3 flex items-center border-t-2 justify-between px-[25px] relative"
+                            *ngFor="let item of arrAddress">
+                            <div class="">
+                                <div class="flex items-center gap-2">
+                                    <h1 class="text-[19px] m-0"> {{item.fullName}} </h1>
+                                    <p>-</p>
+                                    <p class="text-[16px] m-0 text-secondColor">
+                                        {{item.phone}}
+                                    </p>
                                 </div>
-                                <div class="py-3 cursor-pointer" [class.active]="isActive == 1" [class.text-main]="isActive === 1"
-                                    (click)="ChangeCity(idCity, idCity, 0)">
-                                    Quận/Huyện
-                                </div>
-                                <div class="py-3 cursor-pointer" [class.active]="isActive == 2" [class.text-main]="isActive === 2">
-                                    Phường/Xã
+                                <div class="mt-1 text-secondColor">
+                                    <p class="text-[15px] w-[18rem] leading-5">
+                                        {{item.address}}
+                                    </p>
                                 </div>
                             </div>
-                            <div class="w-full bg-white h-[15rem] overflow-y-auto">
-                                <div class="py-3 px-3 hover:bg-gray-2 w-full text-left transition-colors cursor-pointer "
-                                    (click)="ChangeCity(idCity, item.Code, isActive)" *ngFor="let item of city">
-                                    {{ item.FullName}}
-                                </div>
+                            <div class="flex flex-col gap-3">
+                                <button class="text-secondColor text-[15px] font-[500] uppercase"
+                                    (click)="ChangeForm('create', item.id)">
+                                    Cập nhật
+                                </button>
+                                <button class="text-title font-[500] text-[15px] uppercase"
+                                    (click)="UsingAddress(item)">
+                                    Sử dụng
+                                </button>
+                            </div>
+
+                            <div class=" absolute top-1 right-1">
+                                <button class="text-secondColor hover:text-error" (click)="RemoveItem(item.id)">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
                             </div>
                         </div>
-                    </div> -->
-                    <div class="flex items-center gap-3">
-                        <!-- === city -->
-                        <div class="w-full mt-3">
-                            <select name="" id="" class="border-1 w-full px-3 py-2 focus:border-main"
-                                (change)="onSelectChange($event)">
-                                <option value="">=== Chọn Tỉnh/Thành phố ===</option>
-                                <option value="{{item.Code}}" *ngFor="let item of city">
-                                    {{item.FullName}}
-                                </option>
-                            </select>
-                        </div>
-                        <!-- === district -->
-                        <div class="w-full mt-3" *ngIf="district.length > 0">
-                            <select name="" id="" class="border-1 w-full px-3 py-2 focus:border-main"
-                                (change)="onDistrictChange($event, idCity)">
-                                <option value="">=== Chọn Quận/Huyện ===</option>
-                                <option [value]="item.Code" *ngFor="let item of district">
-                                    {{item.FullName}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- === ward -->
-                    <div class="w-full mt-3" *ngIf="ward.length > 0">
-                        <div class="w-full mt-3">
-                            <select name="" id="" class="border-1 w-full px-3 py-2 focus:border-main"
-                                (change)="onWradChange($event)">
-                                <option value="">=== Chọn Phường/Xã ===</option>
-                                <option value="{{item.Code}}" *ngFor="let item of ward">
-                                    {{item.FullName}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="w-full mt-3">
-                        <input type="text" class="w-full border-1 px-3 py-2 rounded-sm border-error focus:border-main"
-                            formControlName="detail" (keyup)="ChangeDetailAddress()" placeholder="Địa chỉ cụ thể">
-                        <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
                     </div>
 
-                    <!-- === complete address -->
-                    <div class="w-full mt-3">
-                        <p class="py-2 leading-6 m-0">
-                            {{addressForm.value.address}}
-                        </p>
-                    </div>
-                    <div class="flex mt-5 justify-end gap-1">
-                        <button class="uppercase text-sm px-5 py-2 rounded-sm 
-                            hover:bg-gray/100 transition-colors font-[500]">Hủy</button>
+                    <div class="px-[25px] flex justify-end mt-2 border-t-2 py-3">
                         <button
-                            class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500]"
-                            (click)="SumbitFormm()">
-                            Hoàn thành
+                            class="uppercase font-[500] text-secondColor p-[10px] w-[118px] rounded-sm hover:bg-secondColor/10 text-[15px]"
+                            (click)="ChangeForm('reload', '')">
+                            Hủy
+                        </button>
+                        <button
+                            class="uppercase font-[500] text-white p-[10px] rounded-sm bg-main text-[15px] hover:bg-main/90"
+                            (click)="ChangeForm('create', '')">
+                            <i class="fa-solid fa-plus mr-2"></i> Thêm địa chỉ mới
                         </button>
                     </div>
+                </div>
+                <!-- update address -->
+                <div class="">
 
-                </form>
+                    <h1 class="text-xl pt-[25px] px-[25px]" *ngIf="1 > 0">
+                        {{titleForm}}
+                    </h1>
+                    <div class="mt-4 px-[25px]">
+                        <form [formGroup]="addressForm">
+                            <div class="flex items-center gap-3">
+                                <div class="">
+                                    <input type="text"
+                                        class="border-1 px-3 py-2 rounded-sm border-error focus:border-main w-full"
+                                        placeholder="Họ tên" formControlName="fullName">
+                                    <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
+                                </div>
+                                <div class="">
+                                    <input type="text" class="border-1 px-3 py-2 rounded-sm focus:border-main w-full"
+                                        placeholder="Số điện thoại" formControlName="phone">
+                                    <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <!-- === city -->
+                                <div class="w-full mt-3">
+                                    <select name="" id="" class="border-1 w-full px-3 py-2 focus:border-main"
+                                        (change)="onSelectChange($event, 'city')">
+                                        <option [value]="item.ProvinceID" *ngFor="let item of province">
+                                            {{item.NameExtension[2]}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <!-- === district -->
+                                <div class="w-full mt-3" *ngIf="district.length > 0">
+                                    <select class="border-1 w-full px-3 py-2 focus:border-main"
+                                        (change)="onSelectChange($event, 'district')">
+                                        <option [value]="item.DistrictID" *ngFor="let item of district">
+                                            {{item.NameExtension[1]}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- === ward -->
+                            <div class="w-full mt-3">
+                                <div class="w-full mt-3">
+                                    <select class="border-1 w-full px-3 py-2 focus:border-title" *ngIf="ward.length > 0"
+                                        (change)="onSelectChange($event, 'ward')">
+                                        <option [value]="item.WardCode" *ngFor="let item of ward">
+                                            {{item.NameExtension[1]}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="w-full mt-3">
+                                <input type="text"
+                                    class="w-full border-1 px-3 py-2 rounded-sm border-error focus:border-main"
+                                    formControlName="detail" (keyup)="ChangeDetailAddress()"
+                                    placeholder="Địa chỉ cụ thể">
+                                <p class="mt-2 text-sm text-error">
+                                    Bạn chưa nhập họ tên
+                                </p>
+                            </div>
+
+                            <!-- === complete address -->
+                            <div class="w-full mt-3">
+                                <div class="border-t-2 pt-3">
+                                    <div class="flex items-center gap-2">
+                                        <h1 class="text-[19px] m-0">
+                                            {{addressForm.value.fullName}}
+                                        </h1>
+                                        <p>-</p>
+                                        <p class="text-[16px] m-0 text-secondColor">
+                                            {{addressForm.value.phone}}
+                                        </p>
+                                    </div>
+                                    <div class="mt-1 text-secondColor">
+                                        <p class="text-[15px] w-full leading-5">
+                                            {{addressForm.value.address}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex mt-5 justify-end gap-1 pb-[25px]">
+                                <button class="uppercase text-sm px-5 py-2 rounded-sm 
+                                hover:bg-gray/100 transition-colors font-[500]" (click)="ChangeForm('reload', '1')">
+                                    Quay lại
+                                </button>
+                                @if(titleForm == 'Thêm địa chỉ mới'){
+                                <button
+                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500]"
+                                    (click)="SumbitFormm()">
+                                    Thêm địa chỉ mới
+                                </button>
+                                }
+                                @else {
+                                <button
+                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500]"
+                                    (click)="Update()">
+                                    Cập nhật địa chỉ
+                                </button>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
