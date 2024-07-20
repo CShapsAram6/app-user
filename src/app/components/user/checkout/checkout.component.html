@@ -27,9 +27,9 @@
             </h1>
 
             <div class="mt-3 flex items-center gap-3">
-                <h1 class="font-[500] text-[16px]">Le Van A - 0123456789</h1>
+                <h1 class="font-[500] text-[16px]">{{address.fullName}} - {{address.phone}}</h1>
                 <h1 class="text-[16px]">
-                    515/20/5 hà huy tập, Phường Tân Lợi, Thành Phố Buôn Ma Thuột, Đắk Lắk
+                    {{address.address}}
                 </h1>
                 <button class="uppercase ml-5 font-[500] text-title hover:text-main" (click)="openPopup('address')">
                     Thay đổi
@@ -134,6 +134,20 @@
             </div>
             <!-- === vouchers -->
 
+            <!-- ==== method sercive -->
+            <div class="px-[30px] py-[24px] flex items-center justify-between border-b-2" *ngIf="arrService.length > 0">
+                <h1 class="text-title font-[500]">
+                    Dịch vụ vẩn chuyển
+                </h1>
+                <div class="flex items-center gap-5">
+                    <button class="px-3 py-1 rounded-sm btn--voucher font-[500]" *ngFor="let item of arrService"
+                        [class.active]="isService == item.service_type_id" (click)="isService = item.service_type_id">
+                        {{item.service_type_id == 2 ? "Vận chuyển truyền thống" : "Vẩn chuyển thương mại điện tử"}}
+                    </button>
+                </div>
+            </div>
+            <!-- ==== method sercive -->
+
             <!-- ==== method payment -->
             <div class="px-[30px] py-[24px] flex items-center justify-between border-b-2">
                 <h1 class="text-title font-[500]">
@@ -198,6 +212,6 @@
 <!-- ===== content -->
 
 <!-- popup -->
-<app-address></app-address>
+<app-address (dataEvent)="LoadAddress($event)"></app-address>
 <app-voucher (dataEvent)="LoadDataByVoucherComponent($event)"></app-voucher>
 <!-- popup -->

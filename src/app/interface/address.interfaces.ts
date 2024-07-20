@@ -1,3 +1,6 @@
+import { addressModel, addressRequest } from "../model/address.model";
+
 export interface IAddressRepository {
-  setAddressComplate(address : string): void;
+  generateRandomString(length: number): string;
+  generateRequest(model : addressModel) : addressRequest;
 }
