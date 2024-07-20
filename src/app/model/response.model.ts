@@ -1,5 +1,5 @@
 export interface singleResponse<T> {
-  sussess: boolean;
+  success: boolean;
   message: string;
   data: T;
 }

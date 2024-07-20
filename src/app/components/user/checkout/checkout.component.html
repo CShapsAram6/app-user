@@ -31,8 +31,9 @@
                 <h1 class="text-[16px]">
                     515/20/5 hà huy tập, Phường Tân Lợi, Thành Phố Buôn Ma Thuột, Đắk Lắk
                 </h1>
-                <button class="uppercase ml-5 font-[500] text-title hover:text-main" (click)="isPopup = true">Thay
-                    đổi</button>
+                <button class="uppercase ml-5 font-[500] text-title hover:text-main" (click)="openPopup('address')">
+                    Thay đổi
+                </button>
             </div>
         </div>
         <!-- information delivery -->
@@ -51,10 +52,11 @@
                     <div class="h-[60px] w-[70px]">
                         <img [src]="item.image" alt="" class="h-full w-full object-cover">
                     </div>
-                    <div class="w-[10rem] line-clamp-2 text-wrap text-center">
+                    <div class="w-[10rem] line-clamp-2 text-wrap text-left">
                         <h1 class="text-title font-[500]">
                             {{item.name}}
                         </h1>
+                        <p class="mt-1 text-[12px] font-[500] text-gray-400"> SIZE {{item.size}} </p>
                     </div>
                     <div class="w-[10rem] line-clamp-2 text-wrap text-center">
                         <h1 class="font-[500]"> {{item.price}}.000d</h1>
@@ -73,7 +75,7 @@
                         </div>
                     </div>
                     <div class="w-[10rem] line-clamp-2 text-wrap text-right">
-                        <h1 class="font-[500]">30000.000d</h1>
+                        <h1 class="font-[500]">{{item.total}}.000d</h1>
                     </div>
                     <div class="w-[10rem] line-clamp-2 text-wrap text-right">
                         <button class="text-error">
@@ -96,11 +98,36 @@
                     <i class="fa-solid fa-ticket mr-2"></i> Voucher của cửa hàng
                 </h1>
                 <div class="flex items-center gap-5">
-                    <div class="rounded-sm px-3 py-1 border-title border-1">
-                        <p class="text-title font-[500]">-10k</p>
+                    <!-- item -->
+                    <div class="flex items-center border justify-between rounded-sm relative" *ngIf="voucher.id">
+                        <div class="h-full flex items-center gap-4">
+                            <div class="border-r-2 py-2 px-3">
+                                <div class="size-[40px] rounded-full overflow-hidden">
+                                    <img src="https://down-vn.img.susercontent.com/file/vn-11134004-7r98o-lnsgkt98pujx04"
+                                        alt="" class="size-full object-cover">
+                                </div>
+                            </div>
+                            <div class="pr-4">
+                                <h2 class="font-[500]"> {{voucher.name}} </h2>
+                                @if(voucher.discountType == "phần trăm"){
+                                <h2 class="text-[13px] text-[#00000042]">
+                                    Giảm {{voucher.discount}}% giá trị đơn hàng
+                                </h2>
+                                }
+                                @else {
+                                <h2 class="text-[13px] text-[#00000042]">
+                                    Giảm -{{voucher.discount}} 000đ
+                                </h2>
+                                }
+                            </div>
+                        </div>
+                        <button class="absolute top-1 right-1 text-error" (click)="RemoveVoucher()">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
                     </div>
+                    <!-- item -->
                     <button class="text-title font-[500]
-                    hover:text-main">
+                    hover:text-main" (click)="openPopup('voucher')" *ngIf="!voucher.id">
                         Chọn Voucher
                     </button>
                 </div>
@@ -113,14 +140,9 @@
                     Phương thức thanh toán
                 </h1>
                 <div class="flex items-center gap-5">
-                    <button class="px-3 py-1 rounded-sm btn--voucher active">
-                        Ví ZaloPay
-                    </button>
-                    <button class="px-3 py-1 rounded-sm btn--voucher">
-                        Ví VnPay
-                    </button>
-                    <button class="px-3 py-1 rounded-sm btn--voucher">
-                        Thanh toán khi nhận hàng
+                    <button class="px-3 py-1 rounded-sm btn--voucher font-[500]" [class.active]="isActive == item.id"
+                        (click)="isActive = item.id" *ngFor="let item of arrPayMent">
+                        {{item.name}}
                     </button>
                 </div>
             </div>
@@ -176,18 +198,6 @@
 <!-- ===== content -->
 
 <!-- popup -->
-<section class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 pt-[10rem] transition-all" [class.hidden]="isPopup">
-    <section class="bg-white p-[25px] rounded-sm w-[480px] absolute left-[50%] translate-x-[-50%]">
-        <div class="absolute top-2 right-2">
-            <button (click)="isPopup = false">
-                <i class="fa-solid fa-xmark text-[22px]"></i>
-            </button>
-        </div>
-        <div class="">
-            <app-address>
-
-            </app-address>
-        </div>
-    </section>
-</section>
+<app-address></app-address>
+<app-voucher (dataEvent)="LoadDataByVoucherComponent($event)"></app-voucher>
 <!-- popup -->

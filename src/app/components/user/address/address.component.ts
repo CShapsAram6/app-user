@@ -17,6 +17,7 @@ export class AddressComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.LoadCity();
+    this.Getprovince();
   }
   addressForm = this.form.group({
     address: [''],
@@ -33,6 +34,7 @@ export class AddressComponent implements OnInit {
   ward: vietNameseDtos[] = [];
   idCity: string = '';
   address: string = '';
+  isPopup: boolean = false;
   LoadCity() {
     this.addressService.getCity().subscribe((data) => {
       this.city = data;
@@ -92,5 +94,14 @@ export class AddressComponent implements OnInit {
         address: `${this.addressForm.value.detail}, ${this.addressForm.value.wrad}, ${this.addressForm.value.district}, ${this.addressForm.value.city}`,
       });
     }, 200);
+  }
+
+  Getprovince() {
+    this.addressService.getprovince().subscribe((res) => {
+      console.log(res);
+    });
+  }
+  closePopup() {
+    document.body.style.overflow = 'auto';
   }
 }
