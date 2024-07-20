@@ -41,4 +41,8 @@ export class AuthService {
   signUp(data:ISignUp):Observable<any>{
     return this.http.post<any>(`${environment.api}/User/create-user`,data);
   }
+
+  CheckUserSignUp(username:string,phone:string,email:String):Observable<any>{
+    return this.http.get<any>(`${environment.api}/User/check-user-signup?userName=${username}&phone=${phone}&email=${email}`)
+  }
 }

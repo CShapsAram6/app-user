@@ -41,14 +41,40 @@ export class SignUpComponent implements OnInit {
       console.log(this.registerform.errors?.['passwordMismatch'] + "????");
       this.registerform.markAllAsTouched();
       return;
+    }else{
+  //check tk email sdt
+  const{userName , phone,email} = this.registerform.value;
+    if(userName != null && phone != null && email != null){
+      this.user.CheckUserSignUp(userName, phone,email).subscribe(
+        (res) => {
+          console.log("API response:", res);
+
+          if (res.userNameEx) {
+            this.registerform.get('userName')?.setErrors({ UserNameEx: true });
+            return;
+          }else
+          if (res.emailEx) {
+            this.registerform.get('email')?.setErrors({ EmailEx: true });
+            return;
+          }else
+          if (res.phoneEx) {
+            this.registerform.get('phone')?.setErrors({ PhoneEx: true });
+            return;
+          }else{
+            console.log("qua if")
+            let request:ISignUp = this.registerform.value as ISignUp;
+            // this.user.signUp(request).subscribe(
+            //   (da) =>{
+            //     console.log(da)
+            //   },
+            //   (error) => {console.log(error)}
+            // )
+            }
+          },
+          (error) => (console.log(error))
+        )}
     }
-    console.log("qua if")
-    let request:ISignUp = this.registerform.value as ISignUp;
-    this.user.signUp(request).subscribe(
-      (da) =>{
-        console.log(da)
-      },
-      (error) => {console.log(error)}
-    )
+
+
   }
 }
