@@ -78,7 +78,8 @@
                 class="bg-main border-gray-1 rounded-md  py-2 px-4 transition-all font-[500] text-white hover:bg-black uppercase text-[14px] max-sm:hidden">
                 Đăng nhập
             </button>
-            <button class="hover:text-main uppercase text-[14px] font-[500] max-sm:hidden">
+
+            <button (click)="SignIn()" class="hover:text-[#79a206] uppercase text-[14px] font-[500] max-sm:hidden">
                 Đăng kí
             </button>
             }
@@ -290,7 +291,38 @@
         </div>
         <div class="mt-[42px]">
             <app-sign-in></app-sign-in>
+            <div class="mt-4 gap-1 text-gray-500 flex items-center justify-center">
+                <h1 class="leading-7 text-[17px] text-justify">
+                    Bạn chưa có tài khoản?
+                </h1>
+                <button (click)="DNDK()" class="text-title hover:text-main/65 font-[500] text-[17px]">
+                    Đăng kí
+                </button>
+            </div>
         </div>
     </section>
 </section>
 <!-- sign in -->
+ <!--SignUp-->
+ <section class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 pt-[76px] hidden--cart transition-all"
+    [class.visibility--cart]="isSignUp">
+    <section class="bg-white p-[25px] rounded-sm w-[400px] absolute left-[50%] translate-x-[-50%]">
+        <div class="absolute top-2 right-2">
+            <button (click)="isSignUp = false">
+                <i class="fa-solid fa-xmark text-[22px]"></i>
+            </button>
+        </div>
+        <div class="mt-[15px]">
+            <app-sign-up></app-sign-up>
+            <div class="mt-4 gap-1 text-gray-500 flex items-center justify-center">
+                <h1 class="leading-7 text-[17px] text-justify">
+                    Bạn đã có tài khoản?
+                </h1>
+                <button (click)="DKDN()" class="text-title hover:text-main/65 font-[500] text-[17px]">
+                    Đăng Nhập
+                </button>
+            </div>
+        </div>
+    </section>
+</section>
+ <!--End SignUp-->

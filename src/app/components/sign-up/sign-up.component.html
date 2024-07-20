@@ -1,1 +1,88 @@
-<p>sign-up works!</p>
+<div class="hearder d-flex justify-center">
+    <h2 class="text-[35px] font-[500] text-[#79a206]">Đăng ký</h2>
+</div>
+<!-- form -->
+<form class="mt-4"  [formGroup]="registerform">
+    <div class="w-full">
+        <input type="text" placeholder="Nhập tên tài khoản"
+            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+            formControlName="userName">
+        <div *ngIf="registerform.controls['userName'].invalid && (registerform.controls['userName'].dirty || registerform.controls['userName'].touched)" class="mt-2 text-[15px] text-error">
+            <span *ngIf="registerform.controls['userName'].errors?.['required']">
+                Vui lòng nhập tên tài khoản
+            </span>
+        </div>
+    </div>
+    <div class="w-full mt-3">
+        <input type="text" placeholder="Nhập họ và tên người dùng"
+            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+            formControlName="name">
+        <div *ngIf="registerform.controls['name'].invalid && (registerform.controls['name'].dirty || registerform.controls['name'].touched)" class="mt-2 text-[15px] text-error">
+            <span *ngIf="registerform.controls['name'].errors?.['required']">
+                Họ và tên không được để trống
+            </span>
+            <span *ngIf="registerform.controls['name'].errors?.['maxlength']">
+                Họ và tên không quá 35 ký tự
+            </span>
+        </div>
+    </div>
+    <div class="w-full mt-3">
+        <input type="email" placeholder="Nhập email"
+            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+            formControlName="email">
+        <div *ngIf="registerform.controls['email'].invalid && (registerform.controls['email'].dirty || registerform.controls['email'].touched)" class="mt-2 text-[15px] text-error">
+            <span *ngIf="registerform.controls['email'].errors?.['required']">
+                Bạn chưa nhập email
+            </span>
+            <span *ngIf="registerform.controls['email'].errors?.['email']">
+                vui lòng nhập đúng định dạng email
+            </span>
+        </div>
+    </div>
+    <div class="w-full mt-3">
+        <input type="phone" placeholder="Nhập số điện thoại"
+            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+            formControlName="phone">
+            <div *ngIf="registerform.controls['phone'].invalid && (registerform.controls['phone'].dirty || registerform.controls['phone'].touched)" class="mt-2 text-[15px] text-error">
+                <span *ngIf="registerform.controls['phone'].errors?.['required']">
+                    Bạn chưa nhập số điện thoại
+                </span>
+                <span *ngIf="(registerform.controls['phone'].errors?.['maxlength']||registerform.controls['phone'].errors?.['minlength'] )">
+                    số điện thoại gồm 10 số
+                </span>
+            </div>
+    </div>
+    <div class="w-full mt-3">
+        <input type="password" placeholder="Nhập mật khẩu"
+            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+            formControlName="password">
+            <div *ngIf="registerform.controls['password'].invalid && (registerform.controls['password'].dirty || registerform.controls['password'].touched)" class="mt-2 text-[15px] text-error">
+                <span *ngIf="registerform.controls['password'].errors?.['required']">
+                    Bạn chưa nhập mật khẩu
+                </span>
+                <span *ngIf="registerform.controls['password'].errors?.['maxlength']">
+                    Mật khẩu không quá 30 ký tự
+                </span>
+            </div>
+    </div>
+    <div class="w-full mt-3">
+        <input type="password" placeholder="Xác nhận mật khẩu"
+      class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+       name="confirmPassword" formControlName="confirmPassword" >
+       <div class="mt-2 text-[15px] text-error" *ngIf=" (registerform.controls['confirmPassword'].dirty || registerform.controls['confirmPassword'].touched)">
+            <span *ngIf="registerform.controls['confirmPassword'].errors?.['required']">
+                Bạn chưa nhập mật khẩu xác nhận
+            </span>
+            <span *ngIf="registerform.errors?.['passwordMismatch'] && !registerform.controls['confirmPassword'].errors?.['required']">
+                Mật khẩu phải trùng với mật khẩu xác thực
+            </span>
+        </div>
+    </div>
+    <button
+        class="w-full mt-4 bg-main text-white py-[10px] rounded-sm hover:bg-black transition-colors font-[500] uppercase text-[15px]"
+        (click)="registersubmit()" >
+        Đăng ký
+    </button>
+</form>
+<!-- form -->
+

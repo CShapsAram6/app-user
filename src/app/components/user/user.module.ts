@@ -12,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectProductComponent } from './select-product/select-product.component';
 import { CartComponent } from './cart/cart.component';
+import { AppModule } from '../../app.module';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    FormsModule    
   ],
 })
 export class UserModule {}

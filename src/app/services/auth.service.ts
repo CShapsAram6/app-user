@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ISignInRequest } from '../model/user.model';
+import { ISignInRequest, ISignUp } from '../model/user.model';
 import { catchError, map, Observable } from 'rxjs';
 import { singleResponse } from '../model/response.model';
 import { environment } from '../environment/environment.bassic';
 import { IAuth } from '../interface/auth.interface';
+import { SignUpComponent } from '../components/sign-up/sign-up.component';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +36,9 @@ export class AuthService {
           throw err;
         })
       );
+  }
+
+  signUp(data:ISignUp):Observable<any>{
+    return this.http.post<any>(`${environment.api}/User/create-user`,data);
   }
 }

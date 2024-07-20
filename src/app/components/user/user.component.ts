@@ -23,6 +23,7 @@ export class UserComponent implements OnInit {
   countNumberLoacal: number = 0;
   isHeader: boolean = true;
   isGroupBtn: boolean = false;
+
   ngOnInit(): void {
     forkJoin([this.LoadProduct(), this.LoadUser()]).subscribe({
       next: (res) => {
@@ -60,4 +61,19 @@ export class UserComponent implements OnInit {
     document.body.style.overflow = 'hidden';
     this.cartComponent.ngOnInit();
   }
+
+  // signup
+  isSignUp: boolean = false;
+  SignIn(){
+    this.isSignUp = true
+  }
+  DKDN(){
+    this.isSignUp = false;
+    this.isSignIn = true;
+  }
+  DNDK(){
+    this.isSignIn = false;
+    this.isSignUp = true;
+  }
+  //end signup
 }
