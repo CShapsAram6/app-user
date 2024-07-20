@@ -6,5 +6,7 @@ import { ICart } from '../model/cart.model';
 export interface ICartRepository {
   setData(variant: variantDtos, singleProduct: singleProductDto): void;
   getData(): Observable<singleResponse<ICart[]>>;
-  countNumberCart() : number;
+  countNumberCart(): number;
+  addCartEnterRedis(token: any): boolean;
+  getDataByToken(): Observable<singleResponse<ICart[]>>;
 }

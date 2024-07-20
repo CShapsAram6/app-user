@@ -18,30 +18,30 @@
                             <img [src]="item.image" alt="" class="w-full h-full object-cover">
                         </div>
                         <div class="">
-                            <strong class="text-[#296253] text-xl w-[10rem]
+                            <strong class="text-title text-xl w-[10rem]
                             line-clamp-1 block h-7">
                                 {{item.name}}
                             </strong>
-                            <strong class="text-[#79a206] text-[17px] mt-[10px] block">
+                            <strong class="text-maintext-[17px] mt-[10px] block">
                                 {{item.price}}.000đ
                             </strong>
                             <div class="mt-[10px] flex items-center gap-3 
                             h-[25px]">
-                                <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-[#79a206]">
+                                <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-main">
                                     <i class="fa-solid fa-minus text-[15px]">
 
                                     </i>
                                 </button>
                                 <input type="text" value="{{item.quantity}}"
                                     class="text-center border-1 w-[60px] p-1 h-full" disabled>
-                                <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-[#79a206]">
+                                <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-main">
                                     <i class="fa-solid fa-plus text-[15px]"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="">
-                        <button class="text-[#942929] hover:text-[#79a206]">
+                        <button class="text-[#942929] hover:text-main">
                             <i class="fa-solid fa-trash text-[22px]"></i>
                         </button>
                     </div>
@@ -55,10 +55,10 @@
         <div class="py-[18px] px-[24px] border-t-2">
             <div class="flex justify-between items-center">
                 <strong class="text-[17px]">Tổng tiền:</strong>
-                <p class="text-[#79a206] font-serif text-[17px]">400.000đ</p>
+                <p class="text-mainfont-serif text-[17px]">400.000đ</p>
             </div>
-            <button class="w-full font-[600] py-[14px] mt-3 bg-[#79a206] text-white rounded-sm hover:bg-black"
-                [routerLink]="['check-out']" (click)="isCart = false">
+            <button class="w-full font-[600] py-[14px] mt-3 bg-main text-white rounded-sm hover:bg-black"
+                [routerLink]="['check-out']" (click)="isCart = false; closePopup()">
                 Đặt hàng
             </button>
         </div>
