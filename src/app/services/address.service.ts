@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { vietNameseDtos } from '../model/address.model';
+import { token } from '../environment/environment.bassic';
 
 @Injectable({
   providedIn: 'root',
@@ -57,5 +58,16 @@ export class AddressService {
           throw err;
         })
       );
+  }
+
+  headers = new HttpHeaders({
+    Token: `${token}`,
+  });
+
+  getprovince(): Observable<any[]> {
+    return this.http.get<any[]>(
+      'https://online-gateway.ghn.vn/shiip/public-api/master-data/province',
+      { headers: this.headers }
+    );
   }
 }

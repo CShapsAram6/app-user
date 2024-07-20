@@ -54,6 +54,6 @@ export class SelectProductComponent implements OnInit {
   AddToCart() {
     // console.log(this.variant, this.singleProduct);
     this.cartRepository.setData(this.variant, this.singleProduct);
-    this.userComponent.countNumberLoacal = 1;
+    // this.userComponent.countNumberLoacal = 1;
   }
 }

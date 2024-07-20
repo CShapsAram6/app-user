@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
   }
 
   LoadCart() {
-    this.cartRepository.getData().subscribe((res) => {
+    this.cartRepository.getDataByToken().subscribe((res) => {
       this.arrCartItem = res.data;
     });
   }

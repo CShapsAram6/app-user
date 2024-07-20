@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ISignInRequest } from '../../model/user.model';
 import { IAuth } from '../../interface/auth.interface';
+import { CartRepository } from '../../repository/cart.repository';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,6 +16,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private authService: AuthService,
+    @Inject('ICartRepository') private cart: CartRepository,
     @Inject('IAuth') private auth: IAuth
   ) {}
 
@@ -51,16 +53,20 @@ export class SignInComponent implements OnInit {
     const payLoad = this.decodeToken(response.credential);
     console.log(response);
   }
+  // hash token
   private decodeToken(token: any) {
     return JSON.parse(atob(token.split('.')[1]));
   }
 
   SumbitForm() {
     let date: ISignInRequest = this.auth.handleLogin(this.loginForm.value);
+    console.log(date);
+
     this.authService.signIn(date).subscribe((res) => {
       if (res.data) {
         alert('ok');
-        window.location.reload();
+        this.cart.addCartEnterRedis(res.data);
+        // window.location.reload();
         return;
       } else {
         alert('fail');

@@ -1,1 +1,76 @@
-<p>voucher works!</p>
+<!-- popup -->
+<section class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 flex items-center transition-all"
+    [class.hidden]="!isPopup">
+    <section class="bg-white p-[30px] rounded-sm w-[590px] absolute left-[50%] translate-x-[-50%]">
+        <div class="absolute top-2 right-2">
+            <button (click)="isPopup = false; closePopup()">
+                <i class="fa-solid fa-xmark text-[22px]"></i>
+            </button>
+        </div>
+        <div class="">
+            <h1 class="text-xl">Chọn voucher áp dụng</h1>
+            <div class="bg-[#f8f8f8] p-[15px] mt-[20px] flex items-center justify-between gap-3 rounded-sm">
+                <label for="" class="text-[#0000008a] text-[14px]">Mã voucher</label>
+                <input type="text" class="bg-white p-[10px] text-[14px] border rounded-sm flex-1 h-full"
+                    placeholder="Mã voucher">
+                <button
+                    class="uppercase hover:bg-[#e3e3e3] p-[10px] bg-white rounded-sm text-[14px] border-[#00000042] border h-full">
+                    Áp dụng
+                </button>
+            </div>
+            <div class="h-[374px] w-full mt-[20px] overflow-y-auto pr-[20px] pb-[45px] flex flex-col gap-y-[20px]">
+                <!-- item -->
+                <div class="" *ngFor="let item of arrVoucher">
+                    <div class="flex items-center border h-[116px] justify-between">
+                        <div class="h-full flex items-center gap-4">
+                            <div class="bg-[#00bfa5] h-full w-[118px] flex items-center justify-center">
+                                <div class="size-[56px] rounded-full overflow-hidden">
+                                    <img src="https://down-vn.img.susercontent.com/file/vn-11134004-7r98o-lnsgkt98pujx04"
+                                        alt="" class="size-full object-cover">
+                                </div>
+                            </div>
+                            <div class="">
+                                <h2 class=""> {{item.name}} </h2>
+                                <button class="text-[14px] px-2 py-1 border mt-2 text-[#00000042]">Voucher cửa
+                                    hàng</button>
+                                @if(item.discountType == "phần trăm"){
+                                <h2 class="mt-2 text-[15px] text-[#00000042]">
+                                    Giảm {{item.discount}}% giá trị đơn hàng
+                                </h2>
+                                }
+                                @else {
+                                <h2 class="mt-2 text-[15px] text-[#00000042]">
+                                    Giảm -{{item.discount}} 000đ
+                                </h2>
+                                }
+                                <p class="text-[12px] mt-2 text-[#00000042]">
+                                    HSD: {{item.timeEnd |
+                                    date:"dd/MM/yyyy"}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-[12px]">
+                            <button class="text-[14px] px-2 py-1 border" (click)="ApplyVoucher(item)">
+                                Áp dụng
+                            </button>
+                        </div>
+                    </div>
+                    <div class="h-[7px] px-[7px] flex items-center">
+                        <div class="w-[111px] h-full bg-[#00bfa654]"></div>
+                        <div class="flex-1 border h-full bg-[#e3e3e34b]">
+                        </div>
+                    </div>
+                </div>
+                <!-- item -->
+            </div>
+            <div class="mt-5 flex justify-end gap-3">
+                <button
+                    class="py-[12px] px-[42px] uppercase text-[#636363] hover:bg-[#e3e3e3] rounded-sm transition-all"
+                    (click)="isPopup = false; closePopup()">
+                    Hủy
+                </button>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- popup -->

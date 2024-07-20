@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { singleResponse } from '../model/response.model';
 import { environment } from '../environment/environment.bassic';
+import { IPayMentDtos } from '../model/payments.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +11,9 @@ import { environment } from '../environment/environment.bassic';
 export class PaymentService {
   constructor(private http: HttpClient) {}
 
-  getData(token: string): Observable<singleResponse<any>> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.get<singleResponse<any>>(
-      `${environment.api}/PayMent/get-all`,
-      { headers }
+  getData(): Observable<singleResponse<IPayMentDtos[]>> {
+    return this.http.get<singleResponse<IPayMentDtos[]>>(
+      `${environment.api}/PayMent/get-all`
     );
   }
 }

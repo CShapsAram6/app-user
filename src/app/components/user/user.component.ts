@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
   isCart: boolean = false;
   isSignIn: boolean = false;
   countNumberLoacal: number = 0;
+  isHeader: boolean = true;
   isGroupBtn: boolean = false;
   ngOnInit(): void {
     forkJoin([this.LoadProduct(), this.LoadUser()]).subscribe({
@@ -34,9 +35,9 @@ export class UserComponent implements OnInit {
   }
 
   LoadProduct() {
-    return this.cartRepository.getData().pipe(
+    return this.cartRepository.getDataByToken().pipe(
       tap((res) => {
-        if (res.sussess) {
+        if (res.success) {
           this.countNumberLoacal = res.data.length;
           if (res.data.length == 0) {
             this.countNumberLoacal = 0;
@@ -51,7 +52,7 @@ export class UserComponent implements OnInit {
     if (token) {
       this.isGroupBtn = true;
     }
-    return of({ data: token, sussess: true, message: 'ok' });
+    return of({ data: token, success: true, message: 'ok' });
   }
 
   OpenPopupCart() {

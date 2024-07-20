@@ -1,9 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { IAuth } from '../interface/auth.interface';
 import { ISignInRequest, IUserToken } from '../model/user.model';
+import { ICartRepository } from '../interface/cart.interface';
+import { ICart, ICartRedisAfterLogin } from '../model/cart.model';
+import { CartService } from '../services/cart.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthRepository implements IAuth {
+  constructor() {}
   decodeToken(token: any): IUserToken {
     return JSON.parse(atob(token.split('.')[1]));
   }
