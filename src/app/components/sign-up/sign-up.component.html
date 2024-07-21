@@ -11,6 +11,9 @@
             <span *ngIf="registerform.controls['userName'].errors?.['required']">
                 Vui lòng nhập tên tài khoản
             </span>
+            <span *ngIf="registerform.get('userName')?.hasError('UserNameEx')">
+                Tên tài khoản đã tồn tại
+            </span>
         </div>
     </div>
     <div class="w-full mt-3">
@@ -37,6 +40,9 @@
             <span *ngIf="registerform.controls['email'].errors?.['email']">
                 vui lòng nhập đúng định dạng email
             </span>
+            <span *ngIf="registerform.get('email')?.hasError('EmailEx')">
+                Email đã được đăng ký
+            </span>
         </div>
     </div>
     <div class="w-full mt-3">
@@ -48,7 +54,10 @@
                     Bạn chưa nhập số điện thoại
                 </span>
                 <span *ngIf="(registerform.controls['phone'].errors?.['maxlength']||registerform.controls['phone'].errors?.['minlength'] )">
-                    số điện thoại gồm 10 số
+                    Số điện thoại gồm 10 số
+                </span>
+                <span *ngIf="registerform.get('phone')?.hasError('PhoneEx')">
+                    Số điện thoại đã được đăng ký
                 </span>
             </div>
     </div>
