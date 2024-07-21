@@ -9,4 +9,5 @@ export interface ICartRepository {
   countNumberCart(): number;
   addCartEnterRedis(token: any): boolean;
   getDataByToken(): Observable<singleResponse<ICart[]>>;
+  calculationTotal(carts: ICart[]): number;
 }

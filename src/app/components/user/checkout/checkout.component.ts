@@ -9,10 +9,17 @@ import { voucherDtos } from '../../../model/vouchers.model';
 import { addressModel } from '../../../model/address.model';
 import { OrderService } from '../../../services/order.service';
 import {
+  RequestGHN,
   requestServiceDelivery,
+  responseGHN,
   responseServiceDelivery,
 } from '../../../model/serviceDelivery.model';
 import { IServiceOrder } from '../../../interface/serviceOrder.interface';
+import { singleResponse } from '../../../model/response.model';
+import { AddressService } from '../../../services/address.service';
+import { IAuth } from '../../../interface/auth.interface';
+import { IUserToken } from '../../../model/user.model';
+import { forkJoin, map, mergeMap, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -25,19 +32,39 @@ export class CheckoutComponent implements OnInit {
   constructor(
     @Inject('ICartRepository') private cartRepostory: ICartRepository,
     @Inject('IServiceOrder') private serviceRepostory: IServiceOrder,
+    @Inject('IAuth') private auth: IAuth,
     private paymentService: PaymentService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private addressService: AddressService
   ) {}
   arrCart: ICart[] = [];
   arrPayMent: IPayMentDtos[] = [];
+  methodPayment: IPayMentDtos = {} as IPayMentDtos;
   isActive: number = 0;
   isService: number = 0;
   voucher: voucherDtos = {} as voucherDtos;
   address: addressModel = {} as addressModel;
   arrService: responseServiceDelivery[] = [];
+  total: number = 0;
+  tipDelivery: number = 0;
+  disCount: number = 0;
+  note: string = '';
+  account: IUserToken = {} as IUserToken;
   ngOnInit(): void {
-    this.LoadCart();
-    this.LoadPayment();
+    this.LoadData();
+  }
+
+  LoadData() {
+    forkJoin({
+      cart: this.LoadCart(),
+      payment: this.LoadPayment(),
+      address: this.getAddress(),
+    }).subscribe({
+      next: (results) => {},
+      error: (err) => {
+        console.error('An error occurred:', err);
+      },
+    });
   }
 
   LoadService(to_id: number) {
@@ -50,18 +77,23 @@ export class CheckoutComponent implements OnInit {
   }
 
   LoadCart() {
-    this.cartRepostory.getDataByToken().subscribe((res) => {
-      this.arrCart = res.data;
-    });
+    return this.cartRepostory.getDataByToken().pipe(
+      tap((res) => {
+        this.arrCart = res.data;
+        this.total = this.cartRepostory.calculationTotal(res.data);
+      })
+    );
   }
 
   LoadPayment() {
-    this.paymentService.getData().subscribe((response) => {
-      this.arrPayMent = response.data;
-      this.isActive = response.data[0].id;
-    });
+    return this.paymentService.getData().pipe(
+      tap((response) => {
+        this.arrPayMent = response.data;
+        this.isActive = response.data[0].id;
+        this.methodPayment = response.data[0];
+      })
+    );
   }
-
   openPopup(type: string) {
     if (type == 'address') {
       this.addressComponent.isPopup = true;
@@ -76,13 +108,62 @@ export class CheckoutComponent implements OnInit {
 
   LoadDataByVoucherComponent(data: voucherDtos) {
     this.voucher = data;
+    this.calculationVoucher(data);
+  }
+  calculationVoucher(data: voucherDtos) {
+    if (data.discountType.trim() == 'phần trăm') {
+      this.disCount = Math.ceil((this.total * data.discount) / 100);
+    } else {
+      this.disCount = this.total - data.discount;
+    }
   }
 
+  getAddress() {
+    let token: string = this.auth.getCookie('TokenUser');
+    let user: IUserToken = this.auth.decodeToken(token);
+    this.account = user;
+    return this.addressService.getData(Number(user.Id)).pipe(
+      tap((response) => {
+        this.LoadAddress(response.data[0]);
+      })
+    );
+  }
   LoadAddress(data: addressModel) {
     this.address = data;
-    this.LoadService(Number(data.idDistrict));
+    // this.LoadService(Number(data.idDistrict));
+    this.LoadTipDelivery(Number(data.idDistrict), data.idWard);
   }
   RemoveVoucher() {
     this.voucher = {} as voucherDtos;
+    this.disCount = 0;
+  }
+
+  LoadTipDelivery(district_id: number, ward_id: string) {
+    this.serviceRepostory
+      .convertRequestGHN(district_id, ward_id)
+      .subscribe((res) => {
+        this.CalculationTipDelivery(res);
+      });
+  }
+
+  CalculationTipDelivery(request: RequestGHN) {
+    this.orderService
+      .getTipDelivery(request)
+      .subscribe((res: singleResponse<responseGHN>) => {
+        let fee = res.data.service_fee.toString().substring(0, 2);
+        this.tipDelivery = Number(fee);
+      });
+  }
+  HandleButtonOrder() {
+    // convert this information to request for order api
+    console.log(
+      this.address,
+      this.arrCart,
+      this.methodPayment,
+      this.note,
+      this.account,
+      this.total,
+      this.voucher
+    );
   }
 }

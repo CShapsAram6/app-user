@@ -10,4 +10,27 @@ interface responseServiceDelivery {
   service_type_id: number;
 }
 
-export { requestServiceDelivery, responseServiceDelivery };
+interface ItemGHN {
+  name: string;
+  quantity: number;
+}
+interface RequestGHN {
+  service_type_id: number;
+  from_district_id: number;
+  to_district_id: number;
+  to_ward_code: string;
+  weight: number;
+  items: ItemGHN[];
+}
+
+interface responseGHN {
+  service_fee: number;
+  total: number;
+}
+export {
+  requestServiceDelivery,
+  responseServiceDelivery,
+  RequestGHN,
+  ItemGHN,
+  responseGHN,
+};

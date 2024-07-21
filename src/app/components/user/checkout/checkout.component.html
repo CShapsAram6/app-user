@@ -155,7 +155,7 @@
                 </h1>
                 <div class="flex items-center gap-5">
                     <button class="px-3 py-1 rounded-sm btn--voucher font-[500]" [class.active]="isActive == item.id"
-                        (click)="isActive = item.id" *ngFor="let item of arrPayMent">
+                        (click)="isActive = item.id; methodPayment = item" *ngFor="let item of arrPayMent">
                         {{item.name}}
                     </button>
                 </div>
@@ -171,7 +171,7 @@
                             Ghi chú
                         </label>
                         <textarea cols="30" class="border-2 px-3 py-2 h-[110px] rounded-sm"
-                            placeholder="Ghi chú đơn hàng"></textarea>
+                            placeholder="Ghi chú đơn hàng" [(ngModel)]="note"></textarea>
                     </div>
                     <h1 class="text-gray-500 text-[14px]">
                         <i class="fa-solid fa-circle-exclamation mr-3"></i>
@@ -185,22 +185,24 @@
                 <div class="w-[30%] flex flex-col gap-4 pr-[30px] py-[24px]">
                     <div class="flex items-center justify-between">
                         <p>Tổng tiền hàng:</p>
-                        <p class="font-[500]">200.000đ</p>
+                        <p class="font-[500]">{{total}}.000đ</p>
                     </div>
                     <div class="flex items-center justify-between">
                         <p>Phí vận chuyển:</p>
-                        <p class="font-[500]">200.000đ</p>
+                        <p class="font-[500]"> {{tipDelivery}}.000đ</p>
                     </div>
                     <div class="flex items-center justify-between">
                         <p>Tổng cộng voucher giảm giá:</p>
-                        <p class="font-[500]">200.000đ</p>
+                        <p class="font-[500]"> -{{disCount}}.000đ</p>
                     </div>
                     <div class="flex items-center justify-between">
                         <p>Tổng thanh toán:</p>
-                        <p class="text-2xl font-[500] text-title">200.000đ</p>
+                        <p class="text-2xl font-[500] text-title"> {{
+                            (total + tipDelivery - disCount)}}.000đ</p>
                     </div>
                     <button class="w-full bg-main hover:bg-black text-white 
-                    py-[10px] rounded-sm uppercase font-[500] text-[15px] transition-colors">Thanh toán</button>
+                    py-[10px] rounded-sm uppercase font-[500] text-[15px] transition-colors"
+                        (click)="HandleButtonOrder()">Thanh toán</button>
                 </div>
                 <!-- === total -->
             </div>

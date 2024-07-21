@@ -19,6 +19,13 @@ export class CartRepository implements ICartRepository {
     private cartService: CartService,
     @Inject('IAuth') private auth: IAuth
   ) {}
+  calculationTotal(carts: ICart[]): number {
+    let total: number = 0;
+    for (let i = 0; i < carts.length; i++) {
+      total += carts[i].price * carts[i].quantity;
+    }
+    return total;
+  }
   addCartEnterRedis(token: any): boolean {
     let informationAuth: IUserToken = this.auth.decodeToken(token);
     this.getData().subscribe((res) => {
