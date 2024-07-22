@@ -84,11 +84,11 @@
             </button>
             }
             @else {
-            <button class="hover:text-main uppercase text-[14px] font-[500] max-sm:hidden">
+            <button class="hover:text-main uppercase text-[14px] font-[500] max-sm:hidden" [routerLink]="['account']">
                 Tài khoản
             </button>
             }
-            <button (click)="isNav = !isNav">
+            <button (click)=" isNav=!isNav">
                 <i class="fa-solid fa-bars text-[20px] lg:hidden"></i>
             </button>
         </div>
@@ -303,8 +303,8 @@
     </section>
 </section>
 <!-- sign in -->
- <!--SignUp-->
- <section class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 pt-[76px] hidden--cart transition-all"
+<!--SignUp-->
+<section class="bg-[#000c] w-full h-full fixed z-50 top-0 left-0 pt-[76px] hidden--cart transition-all"
     [class.visibility--cart]="isSignUp">
     <section class="bg-white p-[25px] rounded-sm w-[400px] absolute left-[50%] translate-x-[-50%]">
         <div class="absolute top-2 right-2">
@@ -325,4 +325,4 @@
         </div>
     </section>
 </section>
- <!--End SignUp-->
+<!--End SignUp-->

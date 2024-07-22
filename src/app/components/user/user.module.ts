@@ -13,6 +13,11 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectProductComponent } from './select-product/select-product.component';
 import { CartComponent } from './cart/cart.component';
 import { AppModule } from '../../app.module';
+import { AccountComponent } from './account/account.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ManageAddressComponent } from './manage-address/manage-address.component';
+import { OrderComponent } from './order/order.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 const routes: Routes = [
   {
@@ -27,6 +32,28 @@ const routes: Routes = [
       },
       { path: 'shop', component: ShopComponent, title: 'Cửa hàng' },
       { path: 'check-out', component: CheckoutComponent, title: 'Thanh toán' },
+      {
+        path: 'account',
+        component: AccountComponent,
+        children: [
+          { path: '', component: ProfileComponent, title: 'Hồ sơ' },
+          {
+            path: 'address',
+            component: ManageAddressComponent,
+            title: 'Địa chi',
+          },
+          {
+            path: 'purchase',
+            component: OrderComponent,
+            title: 'Đơn hàng',
+          },
+          {
+            path: 'forget-password',
+            component: ForgetPasswordComponent,
+            title: 'Thay đổi mật khẩu',
+          },
+        ],
+      },
     ],
   },
 ];
@@ -38,6 +65,11 @@ const routes: Routes = [
     AddressComponent,
     VoucherComponent,
     SelectProductComponent,
+    AccountComponent,
+    ProfileComponent,
+    ManageAddressComponent,
+    OrderComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +78,7 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule    
+    FormsModule,
   ],
 })
 export class UserModule {}
