@@ -6,5 +6,6 @@ export interface singleResponse<T> {
 
 export interface orderResponse{
   success: boolean;
+  data: string;
   message: string;
 }

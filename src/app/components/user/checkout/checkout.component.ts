@@ -187,6 +187,10 @@ export class CheckoutComponent implements OnInit {
     );
     this.orderRepository.createOrder(orderData, this.token).subscribe(
       (res) => {
+        console.log(res.data)
+        if(this.methodPayment.id == 2){
+          window.location.href = res.data;
+        }
         alert('Đặt hàng thành công');
         console.log(res);
         this.router.navigate(['account/purchase']);
