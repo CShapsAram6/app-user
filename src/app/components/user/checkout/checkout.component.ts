@@ -14,12 +14,15 @@ import {
   responseGHN,
   responseServiceDelivery,
 } from '../../../model/serviceDelivery.model';
+import { Router } from '@angular/router';
 import { IServiceOrder } from '../../../interface/serviceOrder.interface';
 import { singleResponse } from '../../../model/response.model';
 import { AddressService } from '../../../services/address.service';
 import { IAuth } from '../../../interface/auth.interface';
 import { IUserToken } from '../../../model/user.model';
 import { forkJoin, map, mergeMap, of, tap } from 'rxjs';
+import { IOrderRequest } from '../../../model/order.model';
+import { IOrderRepository } from '../../../interface/order.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -33,9 +36,11 @@ export class CheckoutComponent implements OnInit {
     @Inject('ICartRepository') private cartRepostory: ICartRepository,
     @Inject('IServiceOrder') private serviceRepostory: IServiceOrder,
     @Inject('IAuth') private auth: IAuth,
+    @Inject('IOrderRepository') private orderRepository: IOrderRepository,
     private paymentService: PaymentService,
     private orderService: OrderService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private router: Router
   ) {}
   arrCart: ICart[] = [];
   arrPayMent: IPayMentDtos[] = [];
@@ -154,16 +159,42 @@ export class CheckoutComponent implements OnInit {
         this.tipDelivery = Number(fee);
       });
   }
+
+  token: string = this.auth.getCookie('TokenUser');
   HandleButtonOrder() {
+    const orderData: IOrderRequest = {
+      voucherId: this.voucher.id,
+      feeDelivery: this.tipDelivery,
+      paymentMethodId: this.methodPayment.id,
+      addressDelivery: this.address.address,
+      phoneDelivery: this.address.phone,
+      noteDelivery: this.note,
+      orderItems: Object.values(this.arrCart).map((item) => ({
+        idProduct: item.id,
+        size: item.size,
+        quantity: item.quantity,
+      }))
+    };
     // convert this information to request for order api
     console.log(
       this.address,
       this.arrCart,
-      this.methodPayment,
+      this.methodPayment.id,
       this.note,
       this.account,
       this.total,
       this.voucher
     );
+    this.orderRepository.createOrder(orderData, this.token).subscribe(
+      (res) => {
+        alert('Đặt hàng thành công');
+        console.log(res);
+        this.router.navigate(['account/purchase']);
+      },
+      (err) => {
+        alert('Đặt hàng thất bại');
+        console.log(err);
+      }
+    )
   }
 }

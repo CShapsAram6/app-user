@@ -3,3 +3,8 @@ export interface singleResponse<T> {
   message: string;
   data: T;
 }
+
+export interface orderResponse{
+  success: boolean;
+  message: string;
+}

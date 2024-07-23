@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { token } from '../environment/environment.bassic';
+import { environment, token } from '../environment/environment.bassic';
 import { Observable } from 'rxjs';
-import { singleResponse } from '../model/response.model';
+import { orderResponse, singleResponse } from '../model/response.model';
 import {
   RequestGHN,
   requestServiceDelivery,
   responseGHN,
   responseServiceDelivery,
 } from '../model/serviceDelivery.model';
+import { IOrderRequest } from '../model/order.model';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +36,9 @@ export class OrderService {
       request,
       { headers: this.headers }
     );
+  }
+
+  createOrder(request: IOrderRequest, token: string){
+    return this.http.post<orderResponse>(`${environment.api}/Order/create-order-${token}`, request);
   }
 }
