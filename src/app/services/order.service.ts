@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment, token } from '../environment/environment.bassic';
 import { Observable } from 'rxjs';
@@ -9,7 +9,8 @@ import {
   responseGHN,
   responseServiceDelivery,
 } from '../model/serviceDelivery.model';
-import { IOrderRequest } from '../model/order.model';
+import { IOrderRequest, IOrderUserDto, IOrderUserRequest } from '../model/order.model';
+import { HtmlParser } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -40,5 +41,14 @@ export class OrderService {
 
   createOrder(request: IOrderRequest, token: string){
     return this.http.post<orderResponse>(`${environment.api}/Order/create-order-${token}`, request);
+  }
+
+  getOrderUser(token: string, request: IOrderUserRequest): Observable<singleResponse<IOrderUserDto[]>> {
+    const parmas = new HttpParams()
+      .set('status', request.status)
+      .set('pageSize', request.pageSize)
+    return this.http.get<singleResponse<IOrderUserDto[]>>(
+      `${environment.api}/Order/get-order-user-${token}`, {params: parmas}
+    );
   }
 }
