@@ -56,8 +56,8 @@
                 </div>
                 <div
                     class="pt-[24px] px-[24px] flex items-center justify-end gap-2 [&_button]:px-[10px] [&_button]:py-[8px] [&_button]:rounded-sm [&_button]:font-[500] [&_button]:w-[128px]">
-                    <button class="text-secondColor hover:bg-secondColor/10">Hủy đơn hàng</button>
-                    <button class="border hover:bg-secondColor/10">Chi tiết</button>
+                    <button class="text-secondColor hover:bg-secondColor/10" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0">Hủy đơn hàng</button>
+                    <button class="border hover:bg-secondColor/10" [routerLink]="['/account/order-detail', item.id]">Chi tiết</button>
                 </div>
             </div>
         </div>

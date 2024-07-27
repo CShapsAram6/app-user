@@ -9,7 +9,7 @@ import {
   responseGHN,
   responseServiceDelivery,
 } from '../model/serviceDelivery.model';
-import { IOrderRequest, IOrderUserDto, IOrderUserRequest } from '../model/order.model';
+import { IOrderDetailDto, IOrderRequest, IOrderUserDto, IOrderUserRequest } from '../model/order.model';
 import { HtmlParser } from '@angular/compiler';
 
 @Injectable({
@@ -49,6 +49,12 @@ export class OrderService {
       .set('pageSize', request.pageSize)
     return this.http.get<singleResponse<IOrderUserDto[]>>(
       `${environment.api}/Order/get-order-user-${token}`, {params: parmas}
+    );
+  }
+
+  getOrderById(id: number): Observable<IOrderDetailDto> {
+    return this.http.get<IOrderDetailDto>(
+      `${environment.api}/Order/get-order-detail-${id}`
     );
   }
 }

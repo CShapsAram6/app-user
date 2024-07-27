@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ManageAddressComponent } from './manage-address/manage-address.component';
 import { OrderComponent } from './order/order.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,11 @@ const routes: Routes = [
             title: 'Đơn hàng',
           },
           {
+            path: 'order-detail/:id',
+            component: OrderDetailComponent,
+            title: 'Chi tiết đơn hàng',
+          },
+          {
             path: 'forget-password',
             component: ForgetPasswordComponent,
             title: 'Thay đổi mật khẩu',
@@ -70,6 +76,7 @@ const routes: Routes = [
     ManageAddressComponent,
     OrderComponent,
     ForgetPasswordComponent,
+    OrderDetailComponent,
   ],
   imports: [
     CommonModule,
