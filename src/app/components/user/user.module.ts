@@ -20,6 +20,7 @@ import { OrderComponent } from './order/order.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { CommentComponent } from './single-product/comment/comment.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,11 @@ const routes: Routes = [
             title: 'Đơn hàng',
           },
           {
+            path: 'order-detail/:id',
+            component: OrderDetailComponent,
+            title: 'Chi tiết đơn hàng',
+          },
+          {
             path: 'forget-password',
             component: ForgetPasswordComponent,
             title: 'Thay đổi mật khẩu',
@@ -84,6 +90,7 @@ const routes: Routes = [
     ForgetPasswordComponent,
     SingleProductComponent,
     CommentComponent,
+    OrderDetailComponent,
   ],
   imports: [
     CommonModule,

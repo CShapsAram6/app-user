@@ -1,12 +1,7 @@
 <section class="w-full">
     <div
         class="flex [&_button]:pb-[16px] [&_button]:w-[141px] justify-between [&_button]:font-[500] [&_button]:text-[16px]">
-        <button class="hover:text-main active">Tất cả</button>
-        <button class="hover:text-main">Chờ thanh toán</button>
-        <button class="hover:text-main">Vẩn chuyển</button>
-        <button class="hover:text-main">Hoàn thành</button>
-        <button class="hover:text-main">Đã hủy</button>
-        <button class="hover:text-main">Trả hàng/Hoàn tiền</button>
+        <button class="hover:text-main" *ngFor="let tab of getTab()" (click)="setActiveTab(tab)" [ngClass]="{'active': activeTab === tab}">{{tab}}</button>
     </div>
     <div class="w-full relative h-[48px] my-[12px]">
         <div class="absolute top-[50%] translate-y-[-50%] left-4">
@@ -17,56 +12,57 @@
             placeholder="Bạn có thể tìm kiếm theo tên Shop, ID đơn hàng hoặc Tên Sản phẩm">
     </div>
 
-    <div class="rounded-sm mt-4 bg-[#bbbbbb0d]" *ngFor="let item of [1,1,1,1]">
+    <div class="rounded-sm mt-4 bg-[#bbbbbb0d]" *ngFor="let item of orderUserDto">
         <div class="pt-[24px] px-[24px] pb-[12px]">
             <div class="flex items-center justify-between">
                 <div class="flex items-center [&_h1]:m-0 [&_h1]:font-[500]">
-                    <h1 class="border-r pr-2">20/20/2300</h1>
-                    <h1 class="pl-2">#DH001</h1>
+                    <h1 class="border-r pr-2">{{item.timeCreate | date: "HH:mm:ss - dd/MM/yyyy"}}</h1>
+                    <h1 class="pl-2">#DH{{(item.id).toString().padStart(4,'0')}}</h1>
                 </div>
                 <div class="">
-                    <button class="text-title text-[15px]">
-                        <i class="fa-solid fa-truck-fast"></i>
-                        Đơn hàng đã được giao thành công
-                    </button>
+                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0"><i class="fa-solid fa-truck-fast"></i> Chờ người bán xác nhận đơn hàng</button>
+                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 1 && item.statusDelivery === 1"><i class="fa-solid fa-truck-fast"></i> Đơn hàng đang được giao</button>
+                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 1 && item.statusDelivery === 2"><i class="fa-solid fa-truck-fast"></i> Giao hàng thành công</button>
+                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 1 && item.statusDelivery === 3"><i class="fa-solid fa-truck-fast"></i> Giao hàng thất bại</button>
+                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 3 && item.statusDelivery === 0"><i class="fa-solid fa-truck-fast"></i> Đơn hàng đã bị hủy</button>
                 </div>
             </div>
-            <div class="flex justify-between items-center border-t mt-2 pt-[12px]" *ngFor="let item of [1,1]">
+            <div class="flex justify-between items-center border-t mt-2 pt-[12px]" *ngFor="let item of item.itemOrders">
                 <div class="flex items-center gap-x-4">
                     <button class="size-[70px] overflow-hidden rounded-sm">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134004-7r98o-lnsgkt98pujx04" alt=""
+                        <img src="{{item.productDetail.imageUrl}}" alt=""
                             class="size-full object-cover">
                     </button>
                     <div class="">
-                        <button class="text-left w-[39rem]">Bàn ủi khô Philips HD1172, bàn ủi làm thẳng quần áo nhanh,
-                            phù
-                            hợp mọi
-                            loại vải, tiết kiệm điện,
-                            thiết kế chắc chắn</button>
-                        <p class="mt-2">x 1</p>
+                        <button class="text-left w-[39rem]">{{item.productDetail.nameProduct}}</button>
+                        <p class="mt-2">x {{item.quantity}}</p>
                     </div>
                 </div>
                 <div class="text-main font-[500]">
-                    <h1>10.000d</h1>
+                    <h1>{{(item.productDetail.price * 1000).toLocaleString()}}₫</h1>
                 </div>
             </div>
         </div>
-        <div class="border-t bg-main/5 flex items-center justify-between 
+        <div class="border-t bg-main/5 flex items-center justify-between
         [&_div]:px-[24px] py-[24px]">
-            <div class="flex-1 flex items-top gap-3">
+            <div class="flex-1 flex items-top gap-3" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0">
                 <label for="" class="pt-1 text-[15px] font-[500]">Lý do huỷ:</label>
                 <input type="text" class="border-1 flex-1 px-3 py-2 rounded-sm  focus:border-main bg-white">
             </div>
+            <div class="flex-1 flex items-top gap-3" *ngIf="item.statusOrder !== 0 || item.statusDelivery !== 0"></div>
             <div class="flex flex-col items-end">
                 <div class="flex justify-end">
-                    <h1 class="text-secondColor/70">Thành tiền: <span class="text-[23px] font-[500] text-title">10.000d</span> </h1>
+                    <h1 class="text-secondColor/70">Thành tiền: <span class="text-[23px] font-[500] text-title">{{(item.total * 1000).toLocaleString()}}₫</span> </h1>
                 </div>
                 <div
                     class="pt-[24px] px-[24px] flex items-center justify-end gap-2 [&_button]:px-[10px] [&_button]:py-[8px] [&_button]:rounded-sm [&_button]:font-[500] [&_button]:w-[128px]">
-                    <button class="text-secondColor hover:bg-secondColor/10">Hủy đơn hàng</button>
-                    <button class="border hover:bg-secondColor/10">Chi tiết</button>
+                    <button class="text-secondColor hover:bg-secondColor/10" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0">Hủy đơn hàng</button>
+                    <button class="border hover:bg-secondColor/10" [routerLink]="['/account/order-detail', item.id]">Chi tiết</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<div class=" flex justify-center">
+  <button class="text-[20px] text-white mt-4 font-[500] bg-[#016bb9] py-2 px-4 rounded-sm" (click)="SeeMoreOrder()">Xem thêm</button>
+</div>

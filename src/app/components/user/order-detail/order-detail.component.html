@@ -1,0 +1,72 @@
+<section class="">
+  <div class="flex justify-between mb-1 bg-[#f6f7fb] p-4">
+    <button class="" [routerLink]="['/account/purchase']"><i class="fa-solid fa-chevron-left"></i> Trở lại</button>
+    <span class="">Mã đơn hàng: #DH0{{orderDetail.id}} |  Chờ xác nhận</span>
+  </div>
+  <div class="flex justify-center items-center bg-[#f6f7fb] py-4">
+    <span class="border-4 border-[#2dc258] h-[60px] w-[60px] rounded-full justify-center flex items-center">
+      <i class="fa-regular fa-rectangle-list text-[#2dc258] text-[22px]"></i>
+    </span>
+    <span class="h-[4px] w-[150px] bg-[#2dc258]"></span>
+    <span class="border-4 border-[#2dc258] h-[60px] w-[60px] rounded-full justify-center flex items-center">
+      <i class="fa-solid fa-list-check text-[#2dc258] text-[22px]"></i>
+    </span>
+    <span class="h-[4px] w-[150px] bg-[#2dc258]"></span>
+    <span class="border-4 border-[#2dc258] h-[60px] w-[60px] rounded-full justify-center flex items-center">
+      <i class="fa-solid fa-truck-fast text-[#2dc258] text-[22px]"></i>
+    </span>
+    <span class="h-[4px] w-[150px] bg-[#2dc258]"></span>
+    <span class="border-4 border-[#2dc258] h-[60px] w-[60px] rounded-full justify-center flex items-center">
+      <i class="fa-solid fa-check text-[#2dc258] text-[22px]"></i>
+    </span>
+  </div>
+  <div class="flex justify-center items-center bg-[#f6f7fb] pb-4">
+    <p class="w-[160px] text-center">Đặt hàng thành công</p>
+    <span class="w-[50px]"></span>
+    <p class="w-[160px] text-center">Đã xác nhận đơn hàng</p>
+    <span class="w-[50px]"></span>
+    <p class="w-[160px] text-center">Đang giao hàng</p>
+    <span class="w-[50px]"></span>
+    <p class="w-[160px] text-center">Giao hàng thành công</p>
+  </div>
+
+  <div class="line"></div>
+  <div class="flex justify-between items-center border-t p-3 pt-[12px] bg-[#f6f7fb]">
+    <div><span class="text-[20px]">Địa Chỉ Nhận Hàng</span>
+      <div class="font-[400] mt-3">
+        <h1 class="mb-2">{{orderDetail.customerName}}</h1>
+        <h1 class="mb-2">{{orderDetail.customerPhone}}</h1>
+        <h1>{{orderDetail.customerAddress}}</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-between items-center border-t p-3 pt-[12px] bg-[#f6f7fb]" *ngFor="let item of orderDetail.itemOrder">
+    <div class="flex items-center gap-x-4 ">
+        <button class="size-[70px] overflow-hidden rounded-sm">
+            <img src="{{item.productDetail.imageUrl}}" alt=""
+                class="size-full object-cover">
+        </button>
+        <div class="">
+            <button class="text-left w-[39rem]">{{item.productDetail.nameProduct}}</button>
+            <p class="mt-2">x {{item.quantity}}</p>
+        </div>
+    </div>
+    <div class="text-main font-[500]">
+        <h1>{{(item.productDetail.price * 1000).toLocaleString()}}₫</h1>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 grid-flow-row-dense bg-[#f6f7fb]">
+    <div class="border-1 p-3 col-span-2"><span class="float-right">Tổng tiền hàng</span></div>
+    <div class="border-1 p-3"><span class="float-right">{{((orderDetail.total + orderDetail.discount - orderDetail.feeDelivery) * 1000).toLocaleString()}}₫</span></div>
+    <div class="border-1 p-3 col-span-2"><span class="float-right">Phí vận chuyển</span></div>
+    <div class="border-1 p-3"><span class="float-right">{{(orderDetail.feeDelivery * 1000).toLocaleString()}}₫</span></div>
+    <div class="border-1 p-3 col-span-2"><span class="float-right">Giảm giá từ voucher</span></div>
+    <div class="border-1 p-3"><span class="float-right">-{{(orderDetail.discount * 1000).toLocaleString()}}₫</span></div>
+    <div class="border-1 p-3 col-span-2"><span class="float-right">Tổng thanh toán</span></div>
+    <div class="border-1 p-3"><span class="float-right text-main font-[500] text-[20px]">{{(orderDetail.total * 1000).toLocaleString()}}₫</span></div>
+    <div class="border-1 p-3 col-span-2"><span class="float-right">Phương thức thanh toán</span></div>
+    <div class="border-1 p-3"><span class="float-right">{{orderDetail.namePaymentMethod}}</span></div>
+  </div>
+</section>
