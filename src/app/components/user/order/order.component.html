@@ -24,7 +24,8 @@
                     <button class="text-title text-[15px]" *ngIf="item.statusOrder === 1 && item.statusDelivery === 1"><i class="fa-solid fa-truck-fast"></i> Đơn hàng đang được giao</button>
                     <button class="text-title text-[15px]" *ngIf="item.statusOrder === 1 && item.statusDelivery === 2"><i class="fa-solid fa-truck-fast"></i> Giao hàng thành công</button>
                     <button class="text-title text-[15px]" *ngIf="item.statusOrder === 1 && item.statusDelivery === 3"><i class="fa-solid fa-truck-fast"></i> Giao hàng thất bại</button>
-                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 3 && item.statusDelivery === 0"><i class="fa-solid fa-truck-fast"></i> Đơn hàng đã bị hủy</button>
+                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 3 && item.statusDelivery === 0"><i class="fa-solid fa-truck-fast"></i> Đơn hàng đã bị hủy bởi admin</button>
+                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 2 && item.statusDelivery === 0"><i class="fa-solid fa-truck-fast"></i> Đơn hàng đã bị hủy bởi bạn</button>
                 </div>
             </div>
             <div class="flex justify-between items-center border-t mt-2 pt-[12px]" *ngFor="let item of item.itemOrders">
@@ -47,7 +48,7 @@
         [&_div]:px-[24px] py-[24px]">
             <div class="flex-1 flex items-top gap-3" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0">
                 <label for="" class="pt-1 text-[15px] font-[500]">Lý do huỷ:</label>
-                <input type="text" class="border-1 flex-1 px-3 py-2 rounded-sm  focus:border-main bg-white">
+                <input type="text" class="border-1 flex-1 px-3 py-2 rounded-sm  focus:border-main bg-white" [formControl]="reason">
             </div>
             <div class="flex-1 flex items-top gap-3" *ngIf="item.statusOrder !== 0 || item.statusDelivery !== 0"></div>
             <div class="flex flex-col items-end">
@@ -56,7 +57,7 @@
                 </div>
                 <div
                     class="pt-[24px] px-[24px] flex items-center justify-end gap-2 [&_button]:px-[10px] [&_button]:py-[8px] [&_button]:rounded-sm [&_button]:font-[500] [&_button]:w-[128px]">
-                    <button class="text-secondColor hover:bg-secondColor/10" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0">Hủy đơn hàng</button>
+                    <button class="text-secondColor hover:bg-secondColor/10" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0" (click)="cancelOrderByUser(item.id)">Hủy đơn hàng</button>
                     <button class="border hover:bg-secondColor/10" [routerLink]="['/account/order-detail', item.id]">Chi tiết</button>
                 </div>
             </div>

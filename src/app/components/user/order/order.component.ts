@@ -2,7 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { OrderService } from '../../../services/order.service';
 import { IOrderRepository } from '../../../interface/order.interface';
 import { IAuth } from '../../../interface/auth.interface';
-import { IOrderUserDto, IOrderUserRequest } from '../../../model/order.model';
+import { ICancelOrderUserRequest, IOrderUserDto, IOrderUserRequest } from '../../../model/order.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-order',
@@ -21,6 +22,7 @@ export class OrderComponent implements OnInit{
   activeTab: string = 'Tất cả'
   pageSize: number = 10
   orderUserDto: IOrderUserDto [] = [];
+  token: string = this.auth.getCookie('TokenUser');
 
   getTab(){
     return  ['Tất cả', 'Chờ thanh toán', 'Vận chuyển', 'Hoàn thành', 'Đã hủy', 'Trả hàng/Hoàn tiền']
@@ -49,5 +51,25 @@ export class OrderComponent implements OnInit{
         console.log(err);
       }
     );
+  }
+
+  reason = new FormControl('');
+  cancelOrderByUser(id: number) {
+    console.log(id)
+    console.log(this.reason.value)
+    const request: ICancelOrderUserRequest = {
+      reasonCancelUser: this.reason.value as string,
+      token: this.token
+    }
+    this.orderRepository.cancelOrderByUser(id, request).subscribe(
+      (res) => {
+        alert(res.message)
+        this.reason.setValue('')
+        this.loadOrderUser()
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
   }
 }
