@@ -55,13 +55,6 @@ export class UserComponent implements OnInit {
     }
     return of({ data: token, success: true, message: 'ok' });
   }
-
-  OpenPopupCart() {
-    this.cartComponent.isCart = true;
-    document.body.style.overflow = 'hidden';
-    this.cartComponent.ngOnInit();
-  }
-
   // signup
   isSignUp: boolean = false;
   SignIn(){

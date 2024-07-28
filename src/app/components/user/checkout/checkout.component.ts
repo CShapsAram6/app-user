@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ICartRepository } from '../../../interface/cart.interface';
-import { ICart } from '../../../model/cart.model';
+import { ICart, IChangeQuantity } from '../../../model/cart.model';
 import { AddressComponent } from '../address/address.component';
 import { PaymentService } from '../../../services/payment.service';
 import { IPayMentDtos } from '../../../model/payments.model';
@@ -113,6 +113,8 @@ export class CheckoutComponent implements OnInit {
 
   LoadDataByVoucherComponent(data: voucherDtos) {
     this.voucher = data;
+    if (data.discount === 0) return;
+
     this.calculationVoucher(data);
   }
   calculationVoucher(data: voucherDtos) {
@@ -173,7 +175,7 @@ export class CheckoutComponent implements OnInit {
         idProduct: item.id,
         size: item.size,
         quantity: item.quantity,
-      }))
+      })),
     };
     // convert this information to request for order api
     console.log(
@@ -187,8 +189,8 @@ export class CheckoutComponent implements OnInit {
     );
     this.orderRepository.createOrder(orderData, this.token).subscribe(
       (res) => {
-        console.log(res.data)
-        if(this.methodPayment.id == 2){
+        console.log(res.data);
+        if (this.methodPayment.id == 2) {
           window.location.href = res.data;
         }
         alert('Đặt hàng thành công');
@@ -199,6 +201,34 @@ export class CheckoutComponent implements OnInit {
         alert('Đặt hàng thất bại');
         console.log(err);
       }
-    )
+    );
+  }
+
+  RemoveItem(id: number) {
+    this.cartRepostory.deleteCart(id).subscribe((res) => {
+      if (res) {
+        this.LoadCart().subscribe((res) => {
+          this.arrCart = res.data;
+          this.total = this.cartRepostory.calculationTotal(res.data);
+        });
+        return;
+      }
+    });
+  }
+  ChangeQuantity(id: number, type: string) {
+    let model: IChangeQuantity = {
+      type: type,
+      id: id,
+      idAccount: 0,
+    };
+    this.cartRepostory.changeQuantity(model).subscribe((res) => {
+      if (res) {
+        this.LoadCart().subscribe((res) => {
+          this.arrCart = res.data;
+          this.total = this.cartRepostory.calculationTotal(res.data);
+        });
+        return;
+      }
+    });
   }
 }

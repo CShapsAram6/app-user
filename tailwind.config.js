@@ -9,6 +9,7 @@ module.exports = {
         error: "#cc0000",
         backgroup: "#f6f7fb",
         secondColor: "#51544f",
+        star: "#eeb52d",
       },
     },
   },

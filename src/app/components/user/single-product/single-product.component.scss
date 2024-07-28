@@ -1,0 +1,15 @@
+.border-color {
+    border: thick double black;
+}
+.is-active {
+    border: thick double #016bb9 !important;
+}
+.active {
+    background-color: #016cb92d;
+}
+.btn-color {
+    font-weight: 500;
+    & div {
+        border: thick double #016bb9 !important;
+    }
+}

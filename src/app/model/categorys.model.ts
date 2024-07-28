@@ -3,4 +3,5 @@ interface categoryDtos {
   name: string;
 }
 
+
 export { categoryDtos };

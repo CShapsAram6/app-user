@@ -1,6 +1,13 @@
 .active {
-    color: #79a206;
-    border: 1px solid #79a206 !important;
+    color: #016bb9;
+    border: 1px solid #016bb9 !important;
+    font-weight: bold;
+}
+.border-color {
+    border: thick double #51544f;
+}
+.color-active {
+    border: thick double #016bb9;
 }
 @keyframes popup {
     0% {

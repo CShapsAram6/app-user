@@ -18,6 +18,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ManageAddressComponent } from './manage-address/manage-address.component';
 import { OrderComponent } from './order/order.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { SingleProductComponent } from './single-product/single-product.component';
+import { CommentComponent } from './single-product/comment/comment.component';
 
 const routes: Routes = [
   {
@@ -29,6 +31,11 @@ const routes: Routes = [
         path: '',
         component: HomeComponent,
         title: 'Trang chủ',
+      },
+      {
+        path: 'cart',
+        component: CartComponent,
+        title: 'Giỏ hàng',
       },
       { path: 'shop', component: ShopComponent, title: 'Cửa hàng' },
       { path: 'check-out', component: CheckoutComponent, title: 'Thanh toán' },
@@ -54,6 +61,11 @@ const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'single-product/:id',
+        component: SingleProductComponent,
+        title: 'Sản phẩm chi tiết',
+      },
     ],
   },
 ];
@@ -70,6 +82,8 @@ const routes: Routes = [
     ManageAddressComponent,
     OrderComponent,
     ForgetPasswordComponent,
+    SingleProductComponent,
+    CommentComponent,
   ],
   imports: [
     CommonModule,

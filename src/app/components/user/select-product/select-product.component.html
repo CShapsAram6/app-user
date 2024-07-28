@@ -29,8 +29,8 @@
                         <h3 class="text-[16px] font-serif mt-3">
                             Thông tin sản phẩm
                         </h3>
-                        <p class="mt-2 leading-6 line-clamp-4 text-secondColor text-[15px] text-justify">
-                            {{singleProduct.description}}
+                        <p class="mt-2 leading-6 line-clamp-4 text-secondColor text-[15px] text-justify"
+                            [innerHTML]="singleProduct.description">
                         </p>
                     </div>
                     <!-- name -->
@@ -40,15 +40,32 @@
                             <p class="text-[16px] text-secondColor">Loại sản phẩm:</p>
                             <p class="text-[16px] font-[500]"> {{category.name}} </p>
                         </div>
-                        <div class="mt-4 flex items-center gap-4 flex-wrap">
-                            <button *ngFor="let item of singleProduct.variant"
-                                class="text-[13px] font-[500] border p-2 border-secondColor text-[#e3e3e3] hover:text-main hover:border-main rounded-sm"
+                        <div class="mt-2 flex items-center gap-4 flex-wrap">
+                            <button *ngFor="let item of singleProduct.variant" class="text-[13px] font-[500] border p-2 border-secondColor text-secondColor/70
+                                hover:text-main hover:border-main rounded-sm uppercase"
                                 [class.active]="item.id == isVariant"
                                 (click)="isVariant = item.id; price = item.price; variant = item">
-                                SIZE {{item.size}}</button>
+                                SIZE {{StringSize(item.size)}}
+                            </button>
                         </div>
                     </div>
                     <!-- size -->
+                    <!-- colors -->
+                    <div class="mt-2">
+                        <div class="mt-3 flex items-center justify-between">
+                            <p class="text-[16px] text-secondColor">
+                                Màu sắc
+                            </p>
+                        </div>
+                        <div class="mt-2 flex items-center gap-4 flex-wrap">
+                            <button *ngFor="let item of singleProduct.colors"
+                                class="p-2 rounded-sm h-[33px] w-[60px] border-color"
+                                [class.color-active]="isColor == color.id" (click)="isColor = color.id; color = color"
+                                [ngStyle]="{backgroundColor: item.code}">
+                            </button>
+                        </div>
+                    </div>
+                    <!-- colors -->
                     <!-- quantity -->
                     <div class="mt-4">
                         <h1 class="text-[16px] text-secondColor">Số lượng:</h1>

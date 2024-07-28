@@ -16,6 +16,13 @@ interface ICart {
   price: number;
   image: string;
   total: number;
+  colors: IColorCart[];
+}
+
+interface IColorCart {
+  id: number;
+  code: string;
+  quantity: number;
 }
 interface ICartRedis {
   accountId: number;
@@ -27,4 +34,17 @@ interface ICartRedisAfterLogin {
   itemCarts: ICart[];
 }
 
-export { ICartLocal, ICart, ICartRedis, ICartRedisAfterLogin };
+interface IChangeQuantity {
+  type: string;
+  id: number;
+  idAccount: number;
+}
+
+export {
+  ICartLocal,
+  ICart,
+  ICartRedis,
+  ICartRedisAfterLogin,
+  IChangeQuantity,
+  IColorCart,
+};

@@ -1,0 +1,35 @@
+$color: rgba(128, 128, 128, 0.349);
+
+.privew-image {
+    width: 69px;
+    height: 72px;
+    overflow: hidden;
+    overflow-y: auto;
+    cursor: pointer;
+    border: 1px dashed $color;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    & p {
+        padding: 0 7px;
+        margin: 0px auto;
+        width: 73%;
+        font-size: 9px;
+    }
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    & button {
+        width: 19px;
+        height: 19px;
+        color: white;
+        background: #cf3333;
+        & i {
+            font-size: 13px;
+        }
+    }
+}

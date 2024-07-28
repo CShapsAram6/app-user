@@ -1,0 +1,169 @@
+<!-- slider -->
+<section
+    style="background: url('https://preview.colorlib.com/theme/warehouse/images/hero_1.jpg.webp') no-repeat center;"
+    class="w-full h-[499px] relative">
+    <div class="container max-w-[1200px] relative h-full z-10">
+        <div class="absolute top-[50%] left-0 translate-y-[-50%] max-lg:left-5">
+            <h1 class="text-white text-[60px] font-bold 
+            max-lg:text-[40px]">
+                {{product.name}}
+            </h1>
+            <div class="mt-4 flex items-center gap-2 text-[17px] font-[500] text-white">
+                <button class="hover:text-main" [routerLink]="['']">Trang chủ</button>
+                <span>-</span>
+                <span class="">Cửa hàng</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute top-0 left-0 w-full h-full bg-[#00000073] z-[1]">
+
+    </div>
+</section>
+<!-- slider -->
+
+<section class="container max-w-[1200px] py-[120px]">
+    <div class="flex justify-between gap-x-[30px]">
+        <div class="">
+            <div class="w-[680px] h-[580px] border rounded-sm">
+                <img [src]="link" alt="" class="size-full object-cover scale-75">
+            </div>
+            <div class="flex overflow-y-auto w-full gap-x-3 mt-3">
+                <button class="size-[90px] rounded-sm border" *ngFor="let item of product.images"
+                    (mouseover)="link = item.link">
+                    <img [src]="item.link + '=s100'" alt="" class="size-full object-cover">
+                </button>
+            </div>
+        </div>
+        <div class="pt-3 w-[480px]">
+            <div class="flex items-center gap-2">
+                <h1 class="text-[32px] font-[500]">
+                    {{product.name}}
+                </h1>
+                <button class="border p-2 rounded-full hover:bg-secondColor/10">
+                    <i class="fa-regular fa-heart text-[20px]"></i>
+                </button>
+            </div>
+            <div class="flex items-end gap-x-4 mt-2">
+                <p class="text-title text-[23px] font-[500]">
+                    {{variant.price}}.000đ
+                </p>
+                <p class="m-0 text-secondColor">Số lượng: {{variant.quantity}}</p>
+            </div>
+            <div class="mt-3">
+                <div class="">
+                    <p class="m-0 font-[500] text-[20px] capitalize">
+                        {{category}}
+                    </p>
+                </div>
+                <!-- file -->
+                <div class="mt-3 border-t-2">
+                    <div class="flex gap-x-2 mt-3">
+                        <button
+                            class="border w-[140px] flex items-center gap-x-2 px-3 py-2 rounded-sm hover:bg-secondColor/10"
+                            *ngFor="let item of product.files">
+                            <div class="w-[50px]">
+                                @if(item.fileType === 'application/pdf'){
+                                <img src="https://www.iconpacks.net/icons/2/free-pdf-file-icon-3382-thumb.png" alt=""
+                                    class="size-full object-cover">
+                                }
+                                @else {
+                                <img src="https://th.bing.com/th/id/R.2bdaf8023b05e198e28e8d7e501cf770?rik=%2bUAk%2ftU97C85GA&riu=http%3a%2f%2fpediaa.com%2fwp-content%2fuploads%2f2018%2f06%2fDifference-Between-File-and-Folder_Figure-1.png&ehk=5rwsypioaWwh3U0yCLIbACbAJIcKes4CLQ7POapQOn4%3d&risl=&pid=ImgRaw&r=0"
+                                    alt="" class="size-full object-cover">
+                                }
+                            </div>
+                            @if(item.fileName.trim() === ''){
+                            <p class="text-wrap text-[15px] line-clamp-2">
+                                không có tên
+                            </p>
+                            }
+                            @else {
+                            <p class="text-wrap text-[15px] line-clamp-2">
+                                {{item.fileName}}
+                            </p>
+                            }
+                        </button>
+                    </div>
+                </div>
+                <!-- file -->
+
+            </div>
+            <div class="mt-3 border-t-2 pt-3 flex items-center gap-3 flex-wrap">
+                <div class="flex items-center flex-wrap gap-1" *ngFor="let item of product.variant">
+                    <button class="rounded-full size-[18px] font-[500] border"
+                        (click)="variant = item; isVariant = item.id" [class.is-active]="item.id === isVariant">
+                    </button>
+                    <p class="m-0 cursor-pointer" [class.font-bold]="item.id === isVariant"
+                        (click)="variant = item; isVariant = item.id">
+                        Size {{StringSize(item.size)}}
+                    </p>
+                </div>
+            </div>
+            <div class="mt-3 border-t-2 py-3 border-b-2">
+                <div class="flex items-center flex-wrap gap-3 w-full">
+                    <button *ngFor="let item of product.colors" class="
+                    size-[30px] rounded-full font-[500]" [class.border-color]="item.id === isColor" (click)="color = item; isColor = item.id;
+                        SelectColor(item)" [style]="{backgroundColor: item.code}">
+                    </button>
+                </div>
+            </div>
+            <!-- button -->
+            <div class="mt-3 border-b-2 pb-3" *ngIf="arrColor.length > 0">
+                <div class="flex items-center flex-wrap gap-3 w-full">
+                    <button class="border flex items-center gap-x-2 rounded-sm px-2 py-1"
+                        [class.btn-color]="item.id === colorCart.id" *ngFor="let item of arrColor"
+                        (click)="colorCart = item; quantity = item.quantity.toString()">
+                        <div class="
+                        size-[25px] rounded-full font-[500]" [style]="{backgroundColor: item.code}">
+                        </div>
+                        <p class=" m-0 text-[14px] font-[500]">
+                            {{item.quantity}}
+                        </p>
+                    </button>
+                </div>
+            </div>
+            <div class="flex items-center mt-3 h-[30px] [&_button]:h-full gap-x-3">
+                <button class="hover:bg-[#e3e3e3] px-4 py-1 rounded-sm border border-main"
+                    (click)="ChangeQuantity('minus', colorCart)">
+                    <i class="fa-solid fa-minus"></i>
+                </button>
+                <input type="text" class="w-[13rem] h-full text-center border py-1 rounded-sm flex-1"
+                    [(ngModel)]="quantity" (input)="onInput($event)" max="100" maxlength="2">
+                <button class="hover:bg-[#e3e3e3] px-4 py-1 rounded-sm border border-main"
+                    (click)="ChangeQuantity('plus', colorCart)">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <div
+                class="mt-10 flex items-center [&_button]:px-[15px] 
+            [&_button]:py-4 [&_button]:uppercase [&_button]:w-[50%] [&_button]:text-[15px] [&_button]:font-[500] [&_button]:rounded-sm">
+                <button class="text-secondColor text-nowrap hover:bg-secondColor/10" (click)="AddToCart()">
+                    Thêm vào giỏ hàng
+                </button>
+                <button class="bg-main text-white hover:bg-title">
+                    Mua ngay
+                </button>
+            </div>
+            <!-- button -->
+        </div>
+    </div>
+</section>
+
+<section class="container max-w-[1200px] pb-[120px]">
+    <div
+        class="flex items-center border-b-2 [&_button]:px-3 [&_button]:py-4 [&_button]:rounded-sm [&_button]:font-[500]">
+        <button class="hover:bg-secondColor/10" [class.active]="isComment == 1" (click)="isComment = 1">
+            Chi tiết sản phẩm
+        </button>
+        <button class="hover:bg-secondColor/10" [class.active]="isComment == 2" (click)="isComment = 2">
+            Đánh giá bình luận sản phẩm
+        </button>
+    </div>
+    @if(isComment == 1){
+    <div class="text-justify mt-[20px] text-[18px] leading-6" [innerHTML]="product.description">
+    </div>
+    }
+    @else {
+    <app-comment></app-comment>
+    }
+</section>

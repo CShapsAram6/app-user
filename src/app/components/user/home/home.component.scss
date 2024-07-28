@@ -8,10 +8,13 @@
             bottom: 20px;
         }
         & img {
-            transform: rotate(5deg) scale(1.1);
+            transform: rotate(5deg) scale(0.6);
             transition: all 0.25s linear;
         }
     }
+}
+.image-cart{
+    transform: scale(0.5);
 }
 @keyframes identifier {
     0% {

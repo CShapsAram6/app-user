@@ -19,6 +19,7 @@
 <!-- ===== content -->
 <section class="py-[120px] bg-[#f8f8f8]">
     <div class="container max-w-[1200px]">
+        @if (arrCart.length > 0) {
         <!-- information delivery -->
         <div class="bg-white px-[30px] py-[24px] rounded-sm">
             <h1 class="text-[18px] text-title font-[500]">
@@ -63,13 +64,16 @@
                     </div>
                     <div class="w-[10rem] line-clamp-2 text-wrap text-center">
                         <div class="flex items-center gap-3 h-[25px]">
-                            <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-[#79a206]">
-                                <i class="fa-solid fa-minus text-[15px]">
-
-                                </i>
+                            <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-title"
+                                (click)="ChangeQuantity(item.id, 'minius')">
+                                <i class="fa-solid fa-minus text-[15px]"></i>
                             </button>
-                            <input type="text" value="1" class="text-center border-1 w-[60px] p-1 h-full" disabled>
-                            <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-[#79a206]">
+
+                            <input type="text" value="{{item.quantity}}"
+                                class="text-center border-1 w-[60px] p-1 h-full" disabled>
+
+                            <button class="bg-white border p-1 rounded-sm px-2 h-full hover:text-title"
+                                (click)="ChangeQuantity(item.id, 'plus')">
                                 <i class="fa-solid fa-plus text-[15px]"></i>
                             </button>
                         </div>
@@ -78,7 +82,7 @@
                         <h1 class="font-[500]">{{item.total}}.000d</h1>
                     </div>
                     <div class="w-[10rem] line-clamp-2 text-wrap text-right">
-                        <button class="text-error">
+                        <button class="text-error" (click)="RemoveItem(item.id)">
                             <i class="fa-solid fa-xmark text-[22px]"></i>
                         </button>
                     </div>
@@ -209,6 +213,20 @@
             <!-- ==== order -->
         </div>
         <!-- ==== payment -->
+        }
+        @else {
+        <div class="bg-white rounded-sm mt-4 py-[24px] px-[30px]">
+            <h1 class="text-[30px] font-[500]">Không có sản phẩm !!!!</h1>
+            <p class="font-[300] mt-2">
+                Quay lại
+                <button class="text-main hover:text-title" [routerLink]="['/']">
+                    Của hàng
+                </button>
+                để tiếp tục mua sắm
+            </p>
+        </div>
+        }
+
     </div>
 </section>
 <!-- ===== content -->

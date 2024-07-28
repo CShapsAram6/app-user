@@ -184,7 +184,7 @@ py-[120px]">
     <div class="mt-[70px] grid grid-cols-4 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
         <div class="border rounded-sm cart--item bg-white" *ngFor="let item of products">
             <div class="w-full h-[340px] overflow-hidden relative">
-                <img [src]="item.image" alt="" class="w-full h-full object-cover ">
+                <img [src]="item.image" alt="" class="w-full h-full object-cover image-cart">
                 <div class="absolute z-20 bottom-[-50px] left-0 w-full px-9 btn--add transition-all">
                     <button (click)="isPopup = true; GetProducts(item.id);"
                         class="bg-main text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-title hover:text-white">
@@ -196,7 +196,7 @@ py-[120px]">
             <div class="">
                 <h2
                     class="text-[#296253] text-[17px] font-serif text-center mt-[24px] font-[500] line-clamp-1 uppercase">
-                    <a href="">
+                    <a [routerLink]="['single-product/' + item.id]">
                         {{ item.name }}
                     </a>
                 </h2>

@@ -1,17 +1,18 @@
 import { Inject, Injectable } from '@angular/core';
 import { ICartRepository } from '../interface/cart.interface';
-import { ICart, ICartRedis, ICartRedisAfterLogin } from '../model/cart.model';
 import {
-  productsDtos,
-  singleProductDto,
-  variantDtos,
-} from '../model/product.model';
+  ICart,
+  ICartRedis,
+  ICartRedisAfterLogin,
+  IChangeQuantity,
+  IColorCart,
+} from '../model/cart.model';
+import { singleProductDto, variantDtos } from '../model/product.model';
 import { Observable, of } from 'rxjs';
 import { singleResponse } from '../model/response.model';
 import { IAuth } from '../interface/auth.interface';
 import { IUserToken } from '../model/user.model';
 import { CartService } from '../services/cart.service';
-import { get } from 'http';
 
 @Injectable({ providedIn: 'root' })
 export class CartRepository implements ICartRepository {
@@ -19,6 +20,27 @@ export class CartRepository implements ICartRepository {
     private cartService: CartService,
     @Inject('IAuth') private auth: IAuth
   ) {}
+  changeQuantity(model: IChangeQuantity): Observable<singleResponse<string>> {
+    let token: string = this.auth.getCookie('TokenUser');
+    let user: IUserToken = this.auth.decodeToken(token);
+    model.idAccount = Number(user.Id);
+    return this.cartService.changeQuantity(model);
+  }
+  deleteCart(id: number): Observable<singleResponse<string>> {
+    let token: string = this.auth.getCookie('TokenUser');
+    let user: IUserToken = this.auth.decodeToken(token);
+    return this.cartService.deleteCart(Number(user.Id), id);
+  }
+  convertStringFile(size: number): string {
+    switch (size) {
+      case 1:
+        return 'Lớn';
+      case 2:
+        return 'Vừa';
+      default:
+        return 'Nhỏ';
+    }
+  }
   calculationTotal(carts: ICart[]): number {
     let total: number = 0;
     for (let i = 0; i < carts.length; i++) {
@@ -51,10 +73,15 @@ export class CartRepository implements ICartRepository {
 
   async setData(
     variant: variantDtos,
-    singleProduct: singleProductDto
+    singleProduct: singleProductDto,
+    color: IColorCart[]
   ): Promise<void> {
     let token: string = this.auth.getCookie('TokenUser');
-    let item: ICart = await this.mapToCartProduct(variant, singleProduct);
+    let item: ICart = await this.mapToCartProduct(
+      variant,
+      singleProduct,
+      color
+    );
     if (!token) {
       await this.setDataWhenNotHaveToken(item);
       return;
@@ -65,7 +92,7 @@ export class CartRepository implements ICartRepository {
   async setDataWhenNotHaveToken(item: ICart) {
     let local = localStorage.getItem('cart');
     if (local) {
-      this.localExist(item, 'cart', local);
+      this.localExist(item, 'cart', local, item.colors);
       return;
     }
     this.localNotExist(item, 'cart');
@@ -109,30 +136,53 @@ export class CartRepository implements ICartRepository {
     localStorage.setItem(key, JSON.stringify(arrCart));
   }
   // if local have key == 'key' exist
-  localExist(item: ICart, key: string, local: any) {
+  localExist(item: ICart, key: string, local: any, colors: IColorCart[]) {
     let list: ICart[] = JSON.parse(local);
     let index = list.findIndex((x) => x.id == item.id);
+    let arrColor: IColorCart[] = [];
     if (index == -1) {
       list.push(item);
     } else {
-      list[index].quantity += 1;
-      list[index].total += item.price;
+      colors.map((item) => {
+        arrColor = this.colorExist(list[index].colors, item);
+      });
+      let totalQuantity = 0;
+      arrColor.map((item) => {
+        totalQuantity += item.quantity;
+      });
+      list[index].quantity = totalQuantity;
     }
+
     localStorage.setItem('cart', JSON.stringify(list));
+  }
+
+  colorExist(color: IColorCart[], item: IColorCart): IColorCart[] {
+    let index = color.findIndex((x) => x.id == item.id);
+    if (index == -1) {
+      return color;
+    }
+    color[index].quantity += item.quantity;
+    return color;
   }
 
   async mapToCartProduct(
     vari: variantDtos,
-    pro: singleProductDto
+    pro: singleProductDto,
+    color: IColorCart[]
   ): Promise<ICart> {
+    let totalQuantity = 0;
+    color.map((item) => {
+      totalQuantity += item.quantity;
+    });
     return {
-      id: pro.id,
+      id: vari.id,
       name: pro.name,
-      quantity: 1,
+      quantity: totalQuantity,
       size: vari.size,
       price: vari.price,
       image: pro.images.find((a) => a.isActive == true)?.link as string,
       total: vari.price * 1,
+      colors: color,
     };
   }
 

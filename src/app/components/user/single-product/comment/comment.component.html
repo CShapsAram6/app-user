@@ -1,0 +1,67 @@
+<section class="mt-3 border-b-2 pb-4">
+    <div class="px-2 py-3 rounded-sm flex items-center h-[70px] gap-x-2">
+        <input type="text" class="border bg-white p-2 h-full flex-1 rounded-sm" placeholder="Viết bình luận....">
+        <button class="bg-main text-white font-[500] px-3 py-2 rounded-sm h-full hover:bg-title">
+            Đánh giá
+        </button>
+    </div>
+    <div class="px-2">
+        <input class="form-control d-none" type="file" id="formFileMultiple" multiple=""
+            (change)="onFilesSelected($event)">
+        <div class="d-flex gap-3 flex-wrap">
+            <div class="position-relative rounded rounded-1 privew-image" *ngFor="let item of imageUrls">
+                <img [src]="item.url" alt="" class="rounded-1">
+                <button class="position-absolute rounded-sm" (click)="RemoveItem(item.index)"
+                    style="top: 0px; right: 0px;">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <label for="formFileMultiple" class="form-label privew-image hover:bg-secondColor/10">
+                <i class="fa-regular fa-image"></i>
+            </label>
+        </div>
+    </div>
+</section>
+<section class="">
+    <div class="flex items-top gap-x-3 w-full border-b-2 py-4 px-2 relative" *ngFor="let item of [1,1,1,1,1]">
+        <div class="size-[40px] rounded-full overflow-hidden border">
+            <img src="https://assets-global.website-files.com/65f021a0664a58453bb57b1c/65f273cb0dc21c8d455ec780_wepik-export-20240220123432guEG%201.png"
+                alt="" class="size-full object-cover">
+        </div>
+        <div class="">
+            <h1 class="text-[17px] font-[500]">
+                darlanedossantoslima
+            </h1>
+            <p class="mt-1 text-[12px] flex items-center gap-x-1 text-star">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+            </p>
+            <p class="font-[500] mt-1 text-secondColor/80 text-[14px]">
+                2024-07-09 20:51
+            </p>
+            <!--content -->
+            <div class="mt-3">
+                <h1>
+                    Đã đến nơi đóng gói tốt,
+                    Tôi vẫn chưa thử nghiệm nó.
+                    Tôi sẽ nhận xét lại ngay sau khi tôi kiểm tra nó
+                </h1>
+                <div class="flex items-center mt-3 gap-x-3">
+                    <div class="size-[72px] rounded-sm border" *ngFor="let item of [1,1,1,1]">
+                        <img src="https://assets-global.website-files.com/65f021a0664a58453bb57b1c/65f273cb0dc21c8d455ec780_wepik-export-20240220123432guEG%201.png"
+                            alt="" class="size-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <!--content -->
+        </div>
+        <div class="absolute top-3 right-4">
+            <button>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+</section>
