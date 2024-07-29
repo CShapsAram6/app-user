@@ -1,8 +1,14 @@
-.hidden--cart {
-    opacity: 0;
-    visibility: hidden;
+.btn-color {
+    font-weight: 500;
+    & div {
+        border: 2px solid black !important;
+    }
 }
-.visibility--cart {
-    opacity: 1;
-    visibility: visible;
+.btn-cart:hover {
+    &:hover {
+        border: 1px solid black !important;
+        &-img {
+            border-bottom: 1px solid black !important;
+        }
+    }
 }

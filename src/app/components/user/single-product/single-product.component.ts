@@ -39,11 +39,18 @@ export class SingleProductComponent implements OnInit {
     this.LoadPage();
   }
 
-  onInput(event: Event) {
+  onInput(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     let value = inputElement.value;
+
+    // Chỉ cho phép nhập số
     if (!/^[0-9]*$/.test(value)) {
       inputElement.value = value.replace(/[^0-9]/g, '');
+    }
+
+    // Không cho phép nhập quá 50
+    if (parseInt(value, 10) > 50) {
+      inputElement.value = '50';
     }
   }
   ChangeQuantity(type: string, item: IColorCart) {

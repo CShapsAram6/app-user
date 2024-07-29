@@ -26,7 +26,6 @@ export class CartService {
     return this.http.post<singleResponse<string>>(
       `${environment.api}/Cart/cart-after-login`,
       request,
-      { headers: this.headers }
     );
   }
 

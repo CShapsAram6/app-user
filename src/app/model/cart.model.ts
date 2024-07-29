@@ -38,6 +38,7 @@ interface IChangeQuantity {
   type: string;
   id: number;
   idAccount: number;
+  idColor: number;
 }
 
 export {

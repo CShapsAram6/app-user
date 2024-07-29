@@ -2,7 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ICart, IChangeQuantity } from '../../../model/cart.model';
 import { ICartRepository } from '../../../interface/cart.interface';
 import { IAuth } from '../../../interface/auth.interface';
-import { IUserToken } from '../../../model/user.model';
+import { VariantService } from '../../../services/variant.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -12,22 +13,36 @@ import { IUserToken } from '../../../model/user.model';
 export class CartComponent implements OnInit {
   constructor(
     @Inject('ICartRepository') private cartRepository: ICartRepository,
-    @Inject('IAuth') private auth: IAuth
+    @Inject('IAuth') private auth: IAuth,
+    private variantService: VariantService,
+    private router: Router
   ) {}
-  isCart: boolean = false;
   arrCartItem: ICart[] = [];
   total: number = 0;
+  isPopup: number = 0;
+  index: number = 0;
+  selectedColorIndices: number[] = [];
+
+  arrSelectProdcuts: ICart[] = [];
+  isAll: boolean = false;
+
   ngOnInit(): void {
     this.LoadCart();
   }
   closePopup() {
     document.body.style.overflow = 'auto';
   }
-
+  ChangeRouterSingleProduct(id: number) {
+    this.variantService.getIdProduct(id).subscribe((res) => {
+      if (res.success) {
+        this.router.navigate(['/single-product', res.data]);
+      }
+    });
+  }
   LoadCart() {
     this.cartRepository.getDataByToken().subscribe((res) => {
       this.arrCartItem = res.data;
-      this.total = this.cartRepository.calculationTotal(res.data);
+      this.selectedColorIndices = this.arrCartItem.map(() => 0);
     });
   }
   StringSize(size: number): string {
@@ -38,22 +53,91 @@ export class CartComponent implements OnInit {
     this.cartRepository.deleteCart(id).subscribe((res) => {
       if (res.success) {
         this.LoadCart();
-        return;
       }
     });
   }
 
-  ChangeQuantity(id: number, type: string) {
-    let model: IChangeQuantity = {
-      type: type,
-      id: id,
+  ChangeQuantity(idColor: number, type: string, id: number): void {
+    const request: IChangeQuantity = {
+      type,
+      id,
       idAccount: 0,
+      idColor,
     };
-    this.cartRepository.changeQuantity(model).subscribe((res) => {
-      if (res) {
-        this.LoadCart();
-        return;
+
+    this.cartRepository.changeQuantity(request).subscribe((res) => {
+      if (res.success) {
+        this.LoadPage();
       }
     });
+  }
+
+  UpdateQuantityInClient(res: ICart[]): void {
+    this.arrSelectProdcuts = res.filter((item) =>
+      this.arrSelectProdcuts.some((selected) => selected.id === item.id)
+    );
+  }
+
+  LoadPage() {
+    this.cartRepository.getDataByToken().subscribe((res) => {
+      this.arrCartItem = res.data;
+      this.UpdateQuantityInClient(res.data);
+      this.total = this.cartRepository.calculationTotal(this.arrSelectProdcuts);
+    });
+  }
+
+  onInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    let value = inputElement.value;
+
+    // Chỉ cho phép nhập số
+    if (!/^[0-9]*$/.test(value)) {
+      inputElement.value = value.replace(/[^0-9]/g, '');
+    }
+
+    // Không cho phép nhập quá 50
+    if (parseInt(value, 10) > 50) {
+      inputElement.value = '50';
+    }
+    if (value.trim() == '') {
+      inputElement.value = '1';
+    }
+  }
+
+  SelectAll(): void {
+    if (this.arrSelectProdcuts.length === this.arrCartItem.length) {
+      this.arrSelectProdcuts = [];
+    } else {
+      this.arrSelectProdcuts = [...this.arrCartItem];
+    }
+    this.total = this.cartRepository.calculationTotal(this.arrSelectProdcuts);
+  }
+
+  SelectItem(item: ICart) {
+    const isCheck = this.CheckedItem(item.id);
+    const index = this.arrSelectProdcuts.findIndex((x) => x.id === item.id);
+
+    if (isCheck) {
+      this.arrSelectProdcuts.splice(index, 1);
+    } else {
+      this.arrSelectProdcuts.push(item);
+    }
+
+    this.isAll = this.arrCartItem.length === this.arrSelectProdcuts.length;
+    this.total = this.cartRepository.calculationTotal(this.arrSelectProdcuts);
+  }
+
+  CheckedItem(id: number): boolean {
+    const isCheck: boolean = this.arrSelectProdcuts.some(
+      (item) => item.id === id
+    );
+    this.total = this.cartRepository.calculationTotal(this.arrSelectProdcuts);
+    return isCheck;
+  }
+
+  NextPageCheckOut() {
+    let products: string = JSON.stringify(this.arrSelectProdcuts);
+    sessionStorage.setItem('products', products);
+    this.router.navigate(['/check-out']);
   }
 }

@@ -14,15 +14,16 @@ import {
   responseGHN,
   responseServiceDelivery,
 } from '../../../model/serviceDelivery.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IServiceOrder } from '../../../interface/serviceOrder.interface';
 import { singleResponse } from '../../../model/response.model';
 import { AddressService } from '../../../services/address.service';
 import { IAuth } from '../../../interface/auth.interface';
 import { IUserToken } from '../../../model/user.model';
-import { forkJoin, map, mergeMap, of, tap } from 'rxjs';
+import { forkJoin, map, mergeMap, Observable, of, tap } from 'rxjs';
 import { IOrderRequest } from '../../../model/order.model';
 import { IOrderRepository } from '../../../interface/order.interface';
+import { VariantService } from '../../../services/variant.service';
 
 @Component({
   selector: 'app-checkout',
@@ -40,7 +41,9 @@ export class CheckoutComponent implements OnInit {
     private paymentService: PaymentService,
     private orderService: OrderService,
     private addressService: AddressService,
-    private router: Router
+    private router: Router,
+    private pramaster: ActivatedRoute,
+    private variantService: VariantService
   ) {}
   arrCart: ICart[] = [];
   arrPayMent: IPayMentDtos[] = [];
@@ -60,21 +63,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   LoadData() {
-    forkJoin({
-      cart: this.LoadCart(),
-      payment: this.LoadPayment(),
-      address: this.getAddress(),
-    }).subscribe({
-      next: (results) => {},
-      error: (err) => {
-        console.error('An error occurred:', err);
-      },
-    });
+    this.LoadCart();
+    this.LoadPayment();
+    this.getAddress();
   }
 
   LoadService(to_id: number) {
     let request: requestServiceDelivery =
       this.serviceRepostory.mapToRequest(to_id);
+
     this.orderService.getServicesOrder(request).subscribe((res) => {
       this.arrService = res.data;
       this.isService = res.data[0].service_type_id;
@@ -82,22 +79,22 @@ export class CheckoutComponent implements OnInit {
   }
 
   LoadCart() {
-    return this.cartRepostory.getDataByToken().pipe(
-      tap((res) => {
-        this.arrCart = res.data;
-        this.total = this.cartRepostory.calculationTotal(res.data);
-      })
-    );
+    let sesstion = sessionStorage.getItem('products');
+    if (sesstion) {
+      this.arrCart = JSON.parse(sesstion);
+      if (this.arrCart.length > 0) {
+        sessionStorage.removeItem('products');
+        this.total = this.cartRepostory.calculationTotal(this.arrCart);
+      }
+    }
   }
 
   LoadPayment() {
-    return this.paymentService.getData().pipe(
-      tap((response) => {
-        this.arrPayMent = response.data;
-        this.isActive = response.data[0].id;
-        this.methodPayment = response.data[0];
-      })
-    );
+    return this.paymentService.getData().subscribe((response) => {
+      this.arrPayMent = response.data;
+      this.isActive = response.data[0].id;
+      this.methodPayment = response.data[0];
+    });
   }
   openPopup(type: string) {
     if (type == 'address') {
@@ -114,7 +111,6 @@ export class CheckoutComponent implements OnInit {
   LoadDataByVoucherComponent(data: voucherDtos) {
     this.voucher = data;
     if (data.discount === 0) return;
-
     this.calculationVoucher(data);
   }
   calculationVoucher(data: voucherDtos) {
@@ -129,11 +125,11 @@ export class CheckoutComponent implements OnInit {
     let token: string = this.auth.getCookie('TokenUser');
     let user: IUserToken = this.auth.decodeToken(token);
     this.account = user;
-    return this.addressService.getData(Number(user.Id)).pipe(
-      tap((response) => {
+    return this.addressService
+      .getData(Number(user.Id))
+      .subscribe((response) => {
         this.LoadAddress(response.data[0]);
-      })
-    );
+      });
   }
   LoadAddress(data: addressModel) {
     this.address = data;
@@ -203,31 +199,13 @@ export class CheckoutComponent implements OnInit {
       }
     );
   }
-
-  RemoveItem(id: number) {
-    this.cartRepostory.deleteCart(id).subscribe((res) => {
-      if (res) {
-        this.LoadCart().subscribe((res) => {
-          this.arrCart = res.data;
-          this.total = this.cartRepostory.calculationTotal(res.data);
-        });
-        return;
-      }
-    });
+  StringSize(size: number): string {
+    return this.cartRepostory.convertStringFile(size);
   }
-  ChangeQuantity(id: number, type: string) {
-    let model: IChangeQuantity = {
-      type: type,
-      id: id,
-      idAccount: 0,
-    };
-    this.cartRepostory.changeQuantity(model).subscribe((res) => {
-      if (res) {
-        this.LoadCart().subscribe((res) => {
-          this.arrCart = res.data;
-          this.total = this.cartRepostory.calculationTotal(res.data);
-        });
-        return;
+  ChangeRouterSingleProduct(id: number) {
+    this.variantService.getIdProduct(id).subscribe((res) => {
+      if (res.success) {
+        this.router.navigate(['/single-product', res.data]);
       }
     });
   }

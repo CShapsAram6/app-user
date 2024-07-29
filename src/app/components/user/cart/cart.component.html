@@ -1,0 +1,168 @@
+<!-- slider -->
+<section
+    style="background: url('https://preview.colorlib.com/theme/warehouse/images/hero_1.jpg.webp') no-repeat center;"
+    class="w-full h-[200px] relative">
+    <div class="container max-w-[1200px] relative h-full z-10">
+        <div class="absolute top-[50%] left-0 translate-y-[-50%] max-lg:left-5">
+            <h1 class="text-white text-[60px] font-bold 
+            max-lg:text-[40px]">
+                Giỏ hàng
+            </h1>
+            <div class="mt-4 flex items-center gap-2 text-[17px] font-[500] text-white">
+                <button class="hover:text-main" [routerLink]="['']">Trang chủ</button>
+                <span>-</span>
+                <span class="">Cửa hàng</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute top-0 left-0 w-full h-full bg-[#00000073] z-[1]">
+    </div>
+</section>
+<!-- slider -->
+<main class="">
+    <section class="container max-w-[1200px] pb-[120px] pt-[50px]">
+        <!-- title -->
+        <div class="w-full px-4 h-[55px] rounded-sm flex items-center justify-between bg-white border-b">
+            <div class="pl-4 pr-2 w-[58px]">
+                <input
+                    class="relative float-left -ms-[1.5rem] me-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-secondary-500 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] checked:border-main checked:bg-main checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ms-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ms-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent rtl:float-right dark:border-neutral-400 dark:checked:border-main dark:checked:bg-main"
+                    type="checkbox" [checked]="isAll" id="checkboxDefault" (click)="SelectAll()" />
+                <label class="inline-block ps-[0.15rem] hover:cursor-pointer" for="checkboxDefault">
+                </label>
+            </div>
+            <div class="flex-1">Sản phẩm</div>
+            <div class="w-[170px] text-center">Đơn giá</div>
+            <div class="w-[170px] text-center">Số lượng</div>
+            <div class="w-[170px] text-center">Số tiền</div>
+            <div class="w-[170px] text-center">Thao tác</div>
+        </div>
+        <!-- title -->
+
+        <!-- content -->
+        <div class="w-full p-4 pt-3 rounded-sm flex items-center justify-between mt-3 bg-white border-b relative"
+            *ngFor="let item of arrCartItem; let itemIndex = index">
+            <div class="pl-4 pr-2 w-[58px]">
+                <input
+                    class="relative float-left -ms-[1.5rem] me-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-secondary-500 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] checked:border-main checked:bg-main checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ms-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ms-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent rtl:float-right dark:border-neutral-400 dark:checked:border-main dark:checked:bg-main"
+                    type="checkbox" id="checkboxDefault{{item.id}}" [checked]="CheckedItem(item.id)"
+                    (click)="SelectItem(item)" />
+                <label class="inline-block ps-[0.15rem] hover:cursor-pointer" for="checkboxDefault{{item.id}}">
+                </label>
+            </div>
+            <div class="flex-1">
+                <div class="flex items-center gap-3">
+                    <div class="size-[80px] border rounded-sm">
+                        <img [src]="item.image" alt="" class="size-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <button class="text-left line-clamp-2 hover:text-main text-secondColor"
+                            (click)="ChangeRouterSingleProduct(item.id)">
+                            {{item.name}}
+                        </button>
+                        <p class="text-[16px] font-[500] mt-1">Size
+                            {{StringSize(item.size)}}
+                        </p>
+                        <div class="mt-2 flex items-center gap-x-2">
+                            <button class="border rounded-sm p-1 flex items-center gap-x-2 hover:bg-[#51544f21]"
+                                *ngFor="let color of  item.colors; let colorIndex = index"
+                                [class.btn-color]="selectedColorIndices[itemIndex] === colorIndex"
+                                (click)="selectedColorIndices[itemIndex] = colorIndex">
+                                <div class=" size-[17px] rounded-full" [ngStyle]="{'background-color': color.code}">
+                                </div>
+                                <span class="text-[14px] font-[300]">x{{color.quantity}} </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-[170px] text-center">
+                {{item.price | currency : ' ': 'symbol':'1.0-0' }}.000đ
+                <span class="text-[14px]">x {{item.quantity}}</span>
+            </div>
+            <div class="w-[170px] text-center">
+                <div class="flex items-center justify-center h-[30px] [&_button]:h-full [&_button]:w-[30px]">
+                    <button class="hover:bg-[#e3e3e3] rounded-sm border border-main"
+                        (click)="ChangeQuantity(item.colors[selectedColorIndices[itemIndex]].id, 'minius', item.id)">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+                    <input type="text" class="w-[50px] h-full text-center border-y py-1 border-x-0 " max="50"
+                        maxlength="2" [value]="item.colors[selectedColorIndices[itemIndex]].quantity"
+                        (input)="onInput($event)">
+                    <button class="hover:bg-[#e3e3e3] rounded-sm border border-main"
+                        (click)="ChangeQuantity(item.colors[selectedColorIndices[itemIndex]].id, 'plus', item.id)">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="w-[170px] text-center">
+                {{item.total | currency:' ':'symbol':'1.0-0'}}.000đ
+            </div>
+            <div class="w-[170px] text-center">
+                <div class="flex flex-col items-center">
+                    <button class="hover:text-error" (click)="RemoveItem(item.id)">Xóa</button>
+                    @if(isPopup != item.id){
+                    <button class="flex items-center justify-center mt-2 text-main hover:text-title"
+                        (click)="isPopup = item.id">
+                        <div class="w-[80%]">
+                            Tìm sản phẩm tương tự
+                        </div>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </button>
+                    }
+                    @else if(isPopup == item.id){
+                    <button class="flex items-center justify-center mt-2 text-main hover:text-title"
+                        (click)="isPopup = 0">
+                        <div class="w-[80%] line-clamp-1">
+                            Tìm sản phẩm tương tự
+                        </div>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </button>
+                    }
+                </div>
+            </div>
+            <div class="absolute w-full bg-white border border-main left-0 top-[76px] shadow-xl z-50"
+                [class.hidden]="isPopup != item.id">
+                <div class="px-[30px] py-[26px] rounded-sm flex overflow-hidden justify-between">
+                    <!-- item  -->
+                    <button
+                        class="w-[167px] rounded-sm border hover:translate-y-[-10px] transition-transform flex-shrink-0 btn-cart"
+                        *ngFor="let item of [1,1,1,1,1,1]">
+                        <div class="w-full h-[165px] overflow-hidden border-b btn-cart-img">
+                            <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rbla-lnnzeltsfgyu20" alt=""
+                                class="size-full object-cover">
+                        </div>
+                        <div class="p-[8px] mt-2">
+                            <h1 class="text-left line-clamp-2 text-secondColor">
+                                xiaozhubangchu Lung linh Keycaps XDA cá tính thăng hoa cao Keycaps chất liệu PBT đục bàn
+                            </h1>
+                            <p class="text-left text-[17px] font-[500] text-main mt-4">
+                                200.000đ
+                            </p>
+                        </div>
+                    </button>
+                    <!-- item  -->
+                </div>
+            </div>
+        </div>
+        <!-- content -->
+
+        <!-- footer -->
+        <div class="w-full p-4 pt-3 rounded-sm flex justify-end mt-3 bg-white border-t  sticky bottom-0">
+            <div class="flex items-center gap-x-4">
+                <h1>Tổng thanh toán({{arrSelectProdcuts.length}} sản phẩm):
+                    <span class="text-[25px] text-title font-[500] ml-3">
+                        {{total | currency : ' ': 'symbol':'1.0-0'}}.000đ
+                    </span>
+                </h1>
+                <button
+                    class="bg-main px-[36px] py-[13px] uppercase font-[500] text-white rounded-sm hover:bg-title text-[14px] disabled:bg-main/60"
+                    (click)="NextPageCheckOut()" [disabled]="arrSelectProdcuts.length == 0">
+                    Thanh toán
+                </button>
+            </div>
+        </div>
+        <!-- footer -->
+
+    </section>
+</main>

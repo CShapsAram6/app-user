@@ -16,7 +16,9 @@
                 </div>
             </div>
             <!-- top group button -->
-            <div class="flex flex-col mt-4">
+            <div class="flex flex-col mt-4
+            [&_button]:flex [&_button]:items-center [&_button]:text-[14px] 
+            [&_i]:w-8 [&_i]:text-[18px]">
                 <button class="text-left py-[14px] uppercase text-[14px] font-[500] hover:text-main w-full"
                     routerLinkActive="text-main" [routerLink]="['/account']" [routerLinkActiveOptions]="{exact: true}">
                     <i class="fa-regular fa-user"></i>
@@ -34,6 +36,11 @@
                     routerLinkActive="text-main" [routerLink]="['/account/purchase']"><i
                         class="fa-solid fa-basket-shopping"></i> Đơn
                     hàng</button>
+                <button class="text-left py-[14px] uppercase text-[14px] font-[500] hover:text-main w-full"
+                    routerLinkActive="text-main" [routerLink]="['/account/favourite']"><i
+                        class="fa-brands fa-gratipay"></i>
+                    yêu thích
+                </button>
             </div>
         </div>
         <div class="flex-1">

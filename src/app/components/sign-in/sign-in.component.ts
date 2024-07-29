@@ -60,13 +60,9 @@ export class SignInComponent implements OnInit {
 
   SumbitForm() {
     let date: ISignInRequest = this.auth.handleLogin(this.loginForm.value);
-    console.log(date);
-
     this.authService.signIn(date).subscribe((res) => {
       if (res.data) {
-        alert('ok');
         this.cart.addCartEnterRedis(res.data);
-        // window.location.reload();
         return;
       } else {
         alert('fail');

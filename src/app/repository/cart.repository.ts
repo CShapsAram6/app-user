@@ -58,6 +58,7 @@ export class CartRepository implements ICartRepository {
       this.cartService.postDataAfterLogin(request).subscribe((res) => {
         if (res.success) {
           localStorage.removeItem('cart');
+          window.location.reload();
           return;
         }
       });
@@ -181,7 +182,7 @@ export class CartRepository implements ICartRepository {
       size: vari.size,
       price: vari.price,
       image: pro.images.find((a) => a.isActive == true)?.link as string,
-      total: vari.price * 1,
+      total: vari.price * totalQuantity,
       colors: color,
     };
   }
