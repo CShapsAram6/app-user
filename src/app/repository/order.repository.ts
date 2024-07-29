@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { IOrderRepository } from "../interface/order.interface";
 import { OrderService } from "../services/order.service";
-import { IOrderRequest, IOrderUserDto, IOrderUserRequest } from "../model/order.model";
+import { ICancelOrderUserRequest, IOrderDetailDto, IOrderRequest, IOrderUserDto, IOrderUserRequest } from "../model/order.model";
 import { Observable, of } from "rxjs";
 import { orderResponse, singleResponse } from "../model/response.model";
 
@@ -15,5 +15,13 @@ export class OrderRepository implements IOrderRepository {
 
   getOrderUser(token: string, request: IOrderUserRequest): Observable<singleResponse<IOrderUserDto[]>> {
     return this.orderService.getOrderUser(token, request);
+  }
+
+  getOrderById(id: number): Observable<singleResponse<IOrderDetailDto>> {
+    return this.orderService.getOrderById(id);
+  }
+
+  cancelOrderByUser(id: number, request: ICancelOrderUserRequest): Observable<orderResponse> {
+    return this.orderService.cancelOrderByUser(id, request);
   }
 }

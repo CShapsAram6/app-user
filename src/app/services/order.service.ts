@@ -9,7 +9,7 @@ import {
   responseGHN,
   responseServiceDelivery,
 } from '../model/serviceDelivery.model';
-import { IOrderDetailDto, IOrderRequest, IOrderUserDto, IOrderUserRequest } from '../model/order.model';
+import { ICancelOrderUserRequest, IOrderDetailDto, IOrderRequest, IOrderUserDto, IOrderUserRequest } from '../model/order.model';
 import { HtmlParser } from '@angular/compiler';
 
 @Injectable({
@@ -52,9 +52,16 @@ export class OrderService {
     );
   }
 
-  getOrderById(id: number): Observable<IOrderDetailDto> {
-    return this.http.get<IOrderDetailDto>(
-      `${environment.api}/Order/get-order-detail-${id}`
+  getOrderById(id: number): Observable<singleResponse<IOrderDetailDto>> {
+    return this.http.get<singleResponse<IOrderDetailDto>>(
+      `${environment.api}/Order/get-orderdetail-user-${id}`
+    );
+  }
+
+  cancelOrderByUser(id: number, request: ICancelOrderUserRequest): Observable<orderResponse> {
+    return this.http.put<orderResponse>(
+      `${environment.api}/Order/cancel-user-${id}`,
+      request
     );
   }
 }

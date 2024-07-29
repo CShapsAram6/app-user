@@ -59,5 +59,9 @@ interface IOrderUserRequest {
   pageSize: number;
 }
 
+interface ICancelOrderUserRequest {
+  reasonCancelUser: string;
+  token: string;
+}
 
-export { IOrderRequest, IOrderUserDto, IOrderUserRequest, IOrderDetailDto };
+export { IOrderRequest, IOrderUserDto, IOrderUserRequest, IOrderDetailDto, ICancelOrderUserRequest };
