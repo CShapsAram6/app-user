@@ -5,7 +5,7 @@ interface IOrderRequest {
   addressDelivery: string,
   phoneDelivery: string,
   noteDelivery: string,
-  orderItems: { idProduct: number; size: number; quantity: number; }[];
+  orderItems: { idProduct: number; idProductColor: number; size: number; quantity: number; }[];
 }
 
 interface IOrderUserDto {
@@ -21,6 +21,7 @@ interface IOrderUserDto {
         id: number;
         size: number;
         price: number;
+        colorProduct: string;
         nameProduct: string;
         imageUrl: string;
       }
@@ -48,6 +49,7 @@ interface IOrderDetailDto {
         id: number,
         size: number,
         price: number,
+        colorProduct: string,
         nameProduct: string,
         imageUrl: string
       }

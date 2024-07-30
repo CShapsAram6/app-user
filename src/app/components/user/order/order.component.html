@@ -36,7 +36,17 @@
                     </button>
                     <div class="">
                         <button class="text-left w-[39rem]">{{item.productDetail.nameProduct}}</button>
-                        <p class="mt-2">x {{item.quantity}}</p>
+                        <p class="mt-2" *ngIf="item.productDetail.size === 1"> Size: Lớn</p>
+                        <p class="mt-2" *ngIf="item.productDetail.size === 2"> Size: Vừa</p>
+                        <p class="mt-2" *ngIf="item.productDetail.size === 3"> Size: Nhỏ</p>
+                        <div class="mt-2 flex items-center gap-x-2">
+                          <button class="border rounded-sm p-1 flex items-center gap-x-2 hover:bg-[#51544f21]">
+                              <div class=" size-[17px] rounded-full"
+                                  [ngStyle]="{'background-color': item.productDetail.colorProduct}">
+                              </div>
+                              <span class="text-[14px] font-[300]">x{{item.quantity}}</span>
+                          </button>
+                      </div>
                     </div>
                 </div>
                 <div class="text-main font-[500]">
@@ -65,5 +75,5 @@
     </div>
 </section>
 <div class=" flex justify-center">
-  <button class="text-[20px] text-white mt-4 font-[500] bg-[#016bb9] py-2 px-4 rounded-sm" (click)="SeeMoreOrder()">Xem thêm</button>
+  <button class="text-[20px] text-white mt-4 font-[500] bg-[#016bb9] py-2 px-4 rounded-sm" [ngClass]="{ 'hidden': !buttonShow }" (click)="SeeMoreOrder()">Xem thêm</button>
 </div>

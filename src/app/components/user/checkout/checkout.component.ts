@@ -44,7 +44,7 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private pramaster: ActivatedRoute,
     private variantService: VariantService
-  ) {}
+  ) { }
   arrCart: ICart[] = [];
   arrPayMent: IPayMentDtos[] = [];
   methodPayment: IPayMentDtos = {} as IPayMentDtos;
@@ -167,31 +167,48 @@ export class CheckoutComponent implements OnInit {
       addressDelivery: this.address.address,
       phoneDelivery: this.address.phone,
       noteDelivery: this.note,
-      orderItems: Object.values(this.arrCart).map((item) => ({
-        idProduct: item.id,
-        size: item.size,
-        quantity: item.quantity,
-      })),
+      orderItems: Object.values(this.arrCart).flatMap((item) =>
+        item.colors.map((color) => ({
+          idProduct: item.id,
+          idProductColor: color.id,
+          size: item.size,
+          quantity: color.quantity,
+        }))
+      ),
     };
-    // convert this information to request for order api
+
     console.log(
-      this.address,
+      // this.address,
       this.arrCart,
-      this.methodPayment.id,
-      this.note,
-      this.account,
-      this.total,
-      this.voucher
+      // this.methodPayment.id,
+      // this.note,
+      // this.account,
+      // this.total,
+      // this.voucher
     );
     this.orderRepository.createOrder(orderData, this.token).subscribe(
       (res) => {
-        console.log(res.data);
-        if (this.methodPayment.id == 2) {
-          window.location.href = res.data;
+        if (res.data == "Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có") {
+          alert('Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có!')
         }
-        alert('Đặt hàng thành công');
-        console.log(res);
-        this.router.navigate(['account/purchase']);
+        else {
+          console.log(res.data);
+          //Xóa giỏ hàng
+          orderData.orderItems.forEach((item) => {
+            this.cartRepostory.deleteCart(item.idProduct).subscribe((res) => {
+              if (res.success) {
+                this.LoadCart();
+              }
+            });
+          })
+          //Chuyển qua thanh toán vnPay
+          if (this.methodPayment.id == 2) {
+            window.location.href = res.data;
+          }
+          alert('Đặt hàng thành công');
+          console.log(res);
+          this.router.navigate(['account/purchase']);
+        }
       },
       (err) => {
         alert('Đặt hàng thất bại');
