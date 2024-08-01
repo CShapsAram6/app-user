@@ -36,16 +36,16 @@
                         <i class="fa-solid fa-xmark text-2xl"></i>
                     </button>
                 </div>
-
                 <a class=" text-[15px] font-[500] uppercase hover:text-main cursor-pointer" [routerLink]="['']"
                     routerLinkActive="text-main" [routerLinkActiveOptions]="{exact: true}">Trang chủ</a>
                 <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-main" [routerLink]="['shop']"
                     routerLinkActive="text-main">Cửa hàng</a>
                 <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-main"
-                    routerLinkActive="text-main">Bài
+                    routerLinkActive="text-main" [routerLink]="['blog/1']">Bài
                     viết</a>
                 <a class=" text-[15px] font-[500] uppercase cursor-pointer hover:text-main"
                     routerLinkActive="text-main">Liên hệ</a>
+
 
                 <div class="hidden max-sm:block">
                     <div class="flex items-center justify-between mt-5">

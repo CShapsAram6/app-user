@@ -22,6 +22,7 @@ import { SingleProductComponent } from './single-product/single-product.componen
 import { CommentComponent } from './single-product/comment/comment.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { BlogComponent } from './blog/blog.component';
 import { CardProductComponent } from './card-product/card-product.component';
 
 const routes: Routes = [
@@ -79,6 +80,11 @@ const routes: Routes = [
         component: SingleProductComponent,
         title: 'Sản phẩm chi tiết',
       },
+      {
+        path:'blog/:page',
+        component:BlogComponent,
+        title:'Bài viết',
+      },
     ],
   },
 ];
@@ -99,6 +105,7 @@ const routes: Routes = [
     CommentComponent,
     OrderDetailComponent,
     FavoriteComponent,
+    BlogComponent,
     CardProductComponent,
   ],
   imports: [
