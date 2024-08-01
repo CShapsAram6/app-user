@@ -1,3 +1,4 @@
+@if(0 > 1){
 <!-- login with google -->
 <div id="google-btn"></div>
 <div class="mt-4 relative">
@@ -36,4 +37,89 @@
     </button>
 </form>
 <!-- form -->
+}
 
+<main class="flex items-center">
+    <section class="flex-1 relative">
+        <div class="h-dvh">
+            <img src="https://themewagon.github.io/homeland/images/hero_bg_1.jpg" alt="" class="size-full object-cover">
+        </div>
+        <div class="absolute size-full top-0 left-0 bg-[#00000073]"></div>
+    </section>
+    <section class="w-[480px] py-[40px] h-dvh relative">
+        <div class="flex justify-center mb-[70px] mt-[50px]">
+            <button class="">
+                <h1 class="uppercase text-[20px] font-[500]">
+                    Chống thấm khang an
+                </h1>
+                <h1 class="uppercase text-[7.8px]">
+                    Cung Thi công chống thấm - Cung cấp vật tư chống thấm
+                </h1>
+            </button>
+        </div>
+        <div class="text-center mb-[32px]">
+            <h1 class="text-[21px] font-[500]">Đăng nhập</h1>
+        </div>
+        <div class="flex justify-center">
+            <div id="google-btn"></div>
+        </div>
+        @if (isForm) {
+        <!-- form -->
+        <form class="mt-4 w-[348px] m-auto" [formGroup]="loginForm">
+            <div class="w-full">
+                <input type="text" placeholder="Nhập email"
+                    class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+                    formControlName="userName">
+                <p class="mt-2 text-[15px] font-[500] text-color_validata">
+                    <i class="fa-solid fa-circle-exclamation mr-2"></i>
+                    Bạn chưa nhập email
+                </p>
+            </div>
+            <div class="w-full mt-3">
+                <input type="password" placeholder="Nhập mật khẩu"
+                    class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
+                    formControlName="password">
+                <p class="mt-2 text-[15px] font-[500] text-color_validata">
+                    <i class="fa-solid fa-circle-exclamation mr-2"></i>
+                    Bạn chưa nhập email
+                </p>
+            </div>
+            <div class="mt-4 flex justify-end">
+                <button class="text-title font-[500] hover:text-main/65">
+                    Quên mật khẩu
+                </button>
+            </div>
+            <button
+                class="w-full mt-4 bg-main text-white py-[10px] rounded-sm hover:bg-black transition-colors font-[500] uppercase text-[15px]"
+                (click)="SumbitForm()">
+                Đăng nhập
+            </button>
+        </form>
+        <!-- form -->
+        }
+        @else {
+        <div class="flex justify-center mt-3">
+            <button class="border w-[348px] h-[38px] font-[500] rounded-sm" (click)="isForm = true">
+                <i class="fa-regular fa-user text-[18px] mr-2"></i>
+                Tiếp tục với tên đăng nhập
+            </button>
+        </div>
+        }
+        <div class="w-[348px] mx-auto mt-12 text-[15px]">
+            <p class="text-center mt-3 text-[15px] leading-5 text-secondColor/80">
+                Bằng cách tiếp tục, bạn đồng ý với Điều khoản sử dụng và Chính sách quyền riêng tư của chúng tôi
+            </p>
+        </div>
+        <div class="w-[348px] mx-auto mt-8 text-[15px]">
+            <p class="text-center mt-3 text-[15px] leading-5">
+                Bạn chưa có tài khoản? <button class="text-main">Đăng kí</button>
+            </p>
+        </div>
+
+        <div class="absolute top-5 left-4" *ngIf="isForm">
+            <button (click)="isForm = false" class="hover:text-main">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Quay lại
+            </button>
+        </div>
+    </section>
+</main>

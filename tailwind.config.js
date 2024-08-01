@@ -11,6 +11,7 @@ module.exports = {
         secondColor: "#51544f",
         star: "#eeb52d",
         bgPrimary: "#f8f8f8",
+        color_validata: "#eb644c",
       },
     },
   },

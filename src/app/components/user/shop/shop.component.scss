@@ -2,14 +2,9 @@
     background: #016bb9;
     color: white !important;
 }
-.cart--item {
-    &:hover {
-        & .btn--add {
-            bottom: 20px;
-        }
-        & img {
-            transform: rotate(5deg) scale(1.1);
-            transition: all 0.25s linear;
-        }
-    }
+.is-active {
+    border: thick double #016bb9 !important;
+}
+.is-color-active {
+    border: 2px solid #03253e !important;
 }
