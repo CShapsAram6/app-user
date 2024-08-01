@@ -44,7 +44,7 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private pramaster: ActivatedRoute,
     private variantService: VariantService
-  ) { }
+  ) {}
   arrCart: ICart[] = [];
   arrPayMent: IPayMentDtos[] = [];
   methodPayment: IPayMentDtos = {} as IPayMentDtos;
@@ -114,7 +114,7 @@ export class CheckoutComponent implements OnInit {
     this.calculationVoucher(data);
   }
   calculationVoucher(data: voucherDtos) {
-    if (data.discountType.trim() == 'phần trăm') {
+    if (data.discountType.trim() == 'percent') {
       this.disCount = Math.ceil((this.total * data.discount) / 100);
     } else {
       this.disCount = this.total - data.discount;
@@ -179,7 +179,7 @@ export class CheckoutComponent implements OnInit {
 
     console.log(
       // this.address,
-      this.arrCart,
+      this.arrCart
       // this.methodPayment.id,
       // this.note,
       // this.account,
@@ -188,10 +188,14 @@ export class CheckoutComponent implements OnInit {
     );
     this.orderRepository.createOrder(orderData, this.token).subscribe(
       (res) => {
-        if (res.data == "Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có") {
-          alert('Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có!')
-        }
-        else {
+        if (
+          res.data ==
+          'Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có'
+        ) {
+          alert(
+            'Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có!'
+          );
+        } else {
           console.log(res.data);
           //Xóa giỏ hàng
           orderData.orderItems.forEach((item) => {
@@ -200,7 +204,7 @@ export class CheckoutComponent implements OnInit {
                 this.LoadCart();
               }
             });
-          })
+          });
           //Chuyển qua thanh toán vnPay
           if (this.methodPayment.id == 2) {
             window.location.href = res.data;

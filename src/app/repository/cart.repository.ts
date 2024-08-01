@@ -17,12 +17,14 @@ import { singleResponse } from '../model/response.model';
 import { IAuth } from '../interface/auth.interface';
 import { IUserToken } from '../model/user.model';
 import { CartService } from '../services/cart.service';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class CartRepository implements ICartRepository {
   constructor(
     private cartService: CartService,
-    @Inject('IAuth') private auth: IAuth
+    @Inject('IAuth') private auth: IAuth,
+    private router: Router
   ) {}
   changeQuantity(model: IChangeQuantity): Observable<singleResponse<string>> {
     let token: string = this.auth.getCookie('TokenUser');
@@ -62,7 +64,8 @@ export class CartRepository implements ICartRepository {
       this.cartService.postDataAfterLogin(request).subscribe((res) => {
         if (res.success) {
           localStorage.removeItem('cart');
-          window.location.href = 'http://localhost:4200/';
+          // window.location.href = 'http://localhost:4200/';
+          this.router.navigate(['/']);
           return;
         }
       });

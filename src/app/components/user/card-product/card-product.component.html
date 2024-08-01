@@ -11,7 +11,7 @@
     </div>
     <div class="">
         <h2 class="text-black text-[17px] font-serif text-center mt-[24px] font-[500] line-clamp-1 uppercase">
-            <a href=""> {{product.name}} </a>
+            <a [routerLink]="['/single-product/' + product.id]"> {{product.name}} </a>
         </h2>
         <p class="text-main text-[17x] text-center mb-[24px] mt-3 font-[500]"> {{product.price | currency : ' ' :
             'symbol' : '1.0-0'}},000đ
