@@ -14,6 +14,7 @@ import { appProviders } from './context/appProviders.context';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './components/user/cart/cart.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CartComponent } from './components/user/cart/cart.component';
     SignUpComponent,
     UserComponent,
     CartComponent,
+    HeaderComponent,
   ],
   imports: [
     UserModule,

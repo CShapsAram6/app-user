@@ -1,4 +1,8 @@
-import { singleProductDto, variantDtos } from '../model/product.model';
+import {
+  productsUsingShop,
+  singleProductDto,
+  variantDtos,
+} from '../model/product.model';
 import { Observable } from 'rxjs';
 import { singleResponse } from '../model/response.model';
 import { ICart, IChangeQuantity, IColorCart } from '../model/cart.model';
@@ -17,4 +21,9 @@ export interface ICartRepository {
   convertStringFile(size: number): string;
   deleteCart(id: number): Observable<singleResponse<string>>;
   changeQuantity(model: IChangeQuantity): Observable<singleResponse<string>>;
+  setCartShop(
+    variant: variantDtos,
+    colors: IColorCart[],
+    products: productsUsingShop
+  ): void;
 }

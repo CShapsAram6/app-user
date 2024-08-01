@@ -7,7 +7,11 @@ import {
   IChangeQuantity,
   IColorCart,
 } from '../model/cart.model';
-import { singleProductDto, variantDtos } from '../model/product.model';
+import {
+  productsUsingShop,
+  singleProductDto,
+  variantDtos,
+} from '../model/product.model';
 import { Observable, of } from 'rxjs';
 import { singleResponse } from '../model/response.model';
 import { IAuth } from '../interface/auth.interface';
@@ -58,7 +62,7 @@ export class CartRepository implements ICartRepository {
       this.cartService.postDataAfterLogin(request).subscribe((res) => {
         if (res.success) {
           localStorage.removeItem('cart');
-          window.location.reload();
+          window.location.href = 'http://localhost:4200/';
           return;
         }
       });
@@ -88,6 +92,37 @@ export class CartRepository implements ICartRepository {
       return;
     }
     this.setDataWhenHaveToken(item, token);
+  }
+
+  async setCartShop(
+    variant: variantDtos,
+    colors: IColorCart[],
+    products: productsUsingShop
+  ) {
+    let token: string = this.auth.getCookie('TokenUser');
+    let item: ICart = await this.mapperToCartLocal(variant, colors, products);
+    if (!token) {
+      await this.setDataWhenNotHaveToken(item);
+      return;
+    }
+    this.setDataWhenHaveToken(item, token);
+  }
+
+  mapperToCartLocal(
+    variant: variantDtos,
+    colors: IColorCart[],
+    products: productsUsingShop
+  ): ICart {
+    return {
+      id: variant.id,
+      name: products.name,
+      image: products.image,
+      price: variant.price,
+      quantity: colors[0].quantity,
+      size: variant.size,
+      total: variant.price * 1,
+      colors: colors,
+    };
   }
 
   async setDataWhenNotHaveToken(item: ICart) {

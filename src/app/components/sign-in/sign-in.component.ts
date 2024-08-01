@@ -24,6 +24,7 @@ export class SignInComponent implements OnInit {
     userName: [''],
     password: [''],
   });
+  isForm: boolean = false;
 
   ngOnInit(): void {
     this.LoginByGoogle();

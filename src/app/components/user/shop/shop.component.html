@@ -1,95 +1,143 @@
 <!-- slider -->
 <section
-    style="background: url('https://images.pexels.com/photos/2462015/pexels-photo-2462015.jpeg?auto=compress&cs=tinysrgb') no-repeat;"
-    class="w-full h-[499px]">
-    <div class="container max-w-[1200px] relative h-full">
+    style="background: url('https://assets-global.website-files.com/64ed0f8950c730ce2ffa16ec/6524160bb43380d403f34e76_drew-dau-xI3fdzznkWg-unsplash-p-2000.jpg') no-repeat center;"
+    class="w-full h-[200px] relative">
+    <div class="container max-w-[1200px] relative h-full z-10">
         <div class="absolute top-[50%] left-0 translate-y-[-50%] max-lg:left-5">
-            <h1 class="text-title text-[60px] font-serif font-bold 
+            <h1 class="text-white text-[60px] font-bold 
             max-lg:text-[40px]">
                 Cửa hàng
             </h1>
-            <div class="mt-4 flex items-center gap-2 text-[17px] font-[500]">
+            <div class="mt-4 flex items-center gap-2 text-[17px] font-[500] text-white">
                 <button class="hover:text-main" [routerLink]="['']">Trang chủ</button>
                 <span>-</span>
-                <span>Cửa hàng</span>
+                <span class="">Cửa hàng</span>
             </div>
         </div>
+    </div>
+
+    <div class="absolute top-0 left-0 w-full h-full bg-[#00000073] z-[1]">
     </div>
 </section>
 <!-- slider -->
 
-<!-- cartegory -->
-<section class="mt-[120px] container max-w-[1200px] flex items-center justify-between">
-    <div class="">
-        <h1 class="text-[18px] font-bold uppercase">Có 18 sản phẩm</h1>
-    </div>
-    <div class="flex items-center gap-4 flex-wrap max-lg:hidden">
-        <button class="text-[15px] font-[500] hover:text-main uppercase btn--active py-1 px-3 rounded-sm">Tất
-            cả</button>
-        <button class="text-[15px] font-[500] hover:text-main uppercase py-1 px-3">Outdoor</button>
-        <button class="text-[15px] font-[500] hover:text-main uppercase py-1 px-3">Indoor</button>
-        <button class="text-[15px] font-[500] hover:text-main uppercase py-1 px-3">
-            Terrace & Balcony
-        </button>
-        <button class="text-[15px] font-[500] hover:text-main uppercase py-1 px-3">Office Desk</button>
-    </div>
-    <!-- dropdown -->
-    <div class="lg:hidden">
-        <div class="text-center">
-            <div (click.outside)="dropdownOpen = false" class="relative inline-block text-left">
-                <button (click)="dropdownOpen = !dropdownOpen"
-                    class="bg-main flex items-center rounded-sm px-4 py-2 text-[15px] font-[500] text-white uppercase hover:bg-main/80">
+<main class="pt-[50px] pb-[120px] container max-w-[1200px]">
+    <article class="flex justify-between">
+        <section class="flex-1 max-xl:hidden">
+            <div class="flex flex-col sticky top-[5rem]">
+                <h1 class="mb-2 border-b pb-3">Loại sản phẩm:</h1>
+                <button class="text-left
+                px-1 py-3 flex items-center gap-x-4 capitalize font-[500] hover:text-title"
+                    (click)="isCategory = 0; GetProductsByIdCategory(0)">
+                    <div class="p-1 size-[17px] flex items-center justify-center rounded-sm text-white border"
+                        [class.bg-main]="isCategory == 0">
+                        @if (isCategory == 0) {
+                        <i class="fa-solid fa-check text-[12px]"></i>
+                        }
+                    </div>
                     Tất cả
-                    <span class="pl-4">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            class="fill-current">
-                            <path
-                                d="M10 14.25C9.8125 14.25 9.65625 14.1875 9.5 14.0625L2.3125 7C2.03125 6.71875 2.03125 6.28125 2.3125 6C2.59375 5.71875 3.03125 5.71875 3.3125 6L10 12.5312L16.6875 5.9375C16.9688 5.65625 17.4063 5.65625 17.6875 5.9375C17.9687 6.21875 17.9687 6.65625 17.6875 6.9375L10.5 14C10.3437 14.1563 10.1875 14.25 10 14.25Z" />
-                        </svg>
-                    </span>
                 </button>
-                <div [ngClass]="dropdownOpen ? 'top-full opacity-100 visible' : 'top-[110%] invisible opacity-0' "
-                    class="shadow-1 dark:shadow-box-dark absolute left-0 z-40 mt-2 w-full rounded-sm bg-white dark:bg-dark-2 transition-all overflow-hidden">
-                    <a href="" class=" block p-3 text-[14px] uppercase hover:text-main font-[500] hover:bg-main/5">
-                        OUTDOOR
-                    </a>
-                </div>
+                <button class="text-left
+                px-1 py-3 flex items-center gap-x-4 capitalize font-[500] hover:text-title"
+                    (click)="isCategory = item.id; GetProductsByIdCategory(item.id)" *ngFor="let item of arrCategorys">
+                    <div class="p-1 size-[17px] flex items-center justify-center rounded-sm border text-white"
+                        [class.bg-main]="isCategory == item.id">
+                        @if (item.id == isCategory) {
+                        <i class="fa-solid fa-check text-[12px]"></i>
+                        }
+                    </div>
+                    {{item.name}}
+                </button>
             </div>
-        </div>
-    </div>
-    <!-- dropdown -->
-</section>
-<!-- cartegory -->
+        </section>
+        <section class="w-[960px] max-xl:flex-1 bg-secondColor/5 px-[30px] relative">
+            @if(products.length > 0){
+            <div class="w-full bg-white mt-3 rounded-sm px-[25px] 
+                py-[15px]">
+                <h1 class="text-[17px] font-[500]">Có {{products.length}} sản phẩm</h1>
+            </div>
+            <!-- item -->
+            <div class="w-full flex mt-[30px] rounded-sm bg-white max-md:flex-col relative"
+                *ngFor="let item of products; let itemIndex = index">
+                <button class="size-[290px] p-[30px] max-lg:size-[200px] max-lg:pt-[4rem] max-md:w-full max-md:h-auto">
+                    <img [src]="item.image" alt="" class="size-full object-cover">
+                </button>
+                <div class=" py-[4rem] grid grid-cols-2 flex-1 max-md:grid-cols-1 max-md:py-[2rem]">
+                    <div class="px-[35px] border-x">
+                        <button [routerLink]="['/single-product/' + item.id]" class="text-[20px] text-title font-[500]">
+                            {{item.name}}
+                        </button>
+                        <div class="text-justify mt-4 leading-6 line-clamp-4" [innerHTML]="item.description">
+                        </div>
+                    </div>
 
-<!-- products -->
-<section class="container max-w-[1200px] mt-[60px]">
-    <div class="grid grid-cols-4 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
-        <div class="border rounded-sm cart--item bg-white" *ngFor="let item of items">
-            <div class="w-full h-[340px] overflow-hidden relative">
-                <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/637315062bd81e4589147fe3_image-1.jpg"
-                    alt="" class="w-full h-full object-cover ">
-                <div class="absolute z-20 bottom-[-50px] left-0 w-full px-9 btn--add transition-all">
-                    <button
-                        class="bg-main text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-title hover:text-white">
-                        <i class="fa-solid fa-cart-plus mr-[5px]"></i>
-                        Thêm vào giỏ hàng
+                    <div class="px-[35px] max-md:mt-3">
+                        <button class="text-[20px] font-[500] text-main">
+                            {{item.variant[selectedSizeIndices[itemIndex]].price | currency:' ':'symbol':'1.0-0'}}.000đ
+                        </button>
+                        <div class="mt-3 flex items-center gap-x-3">
+                            <button class="
+                                size-[20px] border border-black rounded-full font-[500]"
+                                [ngStyle]="{'background': colors.code}"
+                                *ngFor="let colors of item.colors; let colorIndex = index"
+                                [class.is-color-active]="selectedColorIndices[itemIndex] === colorIndex"
+                                (click)="selectedColorIndices[itemIndex] = colorIndex">
+                                @if(selectedColorIndices[itemIndex] === colorIndex){
+                                <i class="fa-solid fa-check text-[12px]"></i>
+                                }
+                            </button>
+                        </div>
+                        <div class="flex items-center mt-3 gap-x-3 flex-wrap">
+                            <div class="flex items-center gap-x-1"
+                                *ngFor="let variant of item.variant;let variantIndex = index">
+                                <button class="rounded-full size-[18px] font-[500] border"
+                                    [class.is-active]="selectedSizeIndices[itemIndex] === variantIndex"
+                                    (click)="selectedSizeIndices[itemIndex] = variantIndex"></button>
+                                <p class="">
+                                    {{StringSize(variant.size)}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button class="w-full bg-main rounded-sm py-[10px]
+                                uppercase text-white font-[500] text-[14px] hover:bg-title
+                                "
+                                (click)="AddToCart(item.colors[selectedColorIndices[itemIndex]], item.id, item.variant[selectedSizeIndices[itemIndex]])">
+                                Thêm vào giỏ hàng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute top-2 right-3">
+                    <button class="border border-black p-2 rounded-full">
+                        <i class="fa-regular fa-heart"></i>
                     </button>
                 </div>
             </div>
-            <div class="">
-                <h2
-                    class="text-[#296253] text-[17px] font-serif text-center mt-[24px] font-[500] line-clamp-1 uppercase">
-                    <a href="">Mini Olive Tree</a>
-                </h2>
-                <p class="text-main text-[17x] text-center mb-[24px] mt-3 font-[500]">40.000đ</p>
+            <!--  item -->
+            <div class="flex justify-center my-5">
+                <button class="text-[16px] font-[500] bg-main
+                    px-4 py-2 rounded-sm text-white hover:bg-title
+                    " (click)="SeeMoreProdcuts(page)" *ngIf="isButton">
+                    Xem thêm
+                </button>
             </div>
-        </div>
-    </div>
-</section>
-<!-- products -->
+            }
+            @else {
+            <div class="w-full flex items-center justify-center mt-[10rem] rounded-sm px-[25px]">
+                <h1 class="text-[30px] text-secondColor font-[500]">
+                    <i class="fa-solid fa-filter-circle-xmark"></i>
+                    Không tìm thấy sản phẩm
+                </h1>
+            </div>
+            }
+
+        </section>
+    </article>
+</main>
 
 <!-- ====== Pagination Section Start -->
-<div class="bg-white pb-[120px] mt-[40px] text-center dark:bg-dark">
+<!-- <div class="bg-white pb-[120px] mt-[40px] text-center dark:bg-dark">
     <div
         class="mb-12 inline-flex justify-center rounded bg-white p-3 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.13)] dark:bg-dark-2">
         <ul class="inline-flex overflow-hidden rounded-lg border border-stroke dark:border-white/5">
@@ -120,5 +168,5 @@
 
         </ul>
     </div>
-</div>
+</div> -->
 <!-- ====== Pagination Section End -->
