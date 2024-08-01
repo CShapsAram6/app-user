@@ -4,5 +4,8 @@ interface blogDto {
     content: string;
     datePush: string;
     images: string;
+    accountId: number;
+    imageacc:string;
+    nameacc:string;
   }
   export{blogDto}
