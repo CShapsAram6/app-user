@@ -18,6 +18,16 @@ interface singleProductDto {
   files: fileDtos[];
 }
 
+interface productsUsingShop {
+  id: number;
+  category: number;
+  name: string;
+  description: string;
+  image: string;
+  variant: variantDtos[];
+  colors: colorDtos[];
+}
+
 interface colorDtos {
   id: number;
   code: string;
@@ -45,4 +55,11 @@ interface variantDtos {
   status: boolean;
 }
 
-export { productsDtos, singleProductDto, variantDtos, colorDtos, fileDtos };
+export {
+  productsDtos,
+  singleProductDto,
+  variantDtos,
+  colorDtos,
+  fileDtos,
+  productsUsingShop,
+};

@@ -12,7 +12,7 @@ export class VouchersService {
   constructor(private http: HttpClient) {}
   getData(): Observable<singleResponse<voucherDtos[]>> {
     return this.http.get<singleResponse<voucherDtos[]>>(
-      `${environment.api}/Voucher/get-all`
+      `${environment.api}/Voucher/get-voucher-by-status?status=-1`
     );
   }
 }

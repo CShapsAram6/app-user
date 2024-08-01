@@ -23,6 +23,7 @@ import { CommentComponent } from './single-product/comment/comment.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { BlogComponent } from './blog/blog.component';
+import { CardProductComponent } from './card-product/card-product.component';
 
 const routes: Routes = [
   {
@@ -105,6 +106,7 @@ const routes: Routes = [
     OrderDetailComponent,
     FavoriteComponent,
     BlogComponent,
+    CardProductComponent,
   ],
   imports: [
     CommonModule,

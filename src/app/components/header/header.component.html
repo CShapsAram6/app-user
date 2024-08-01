@@ -1,0 +1,91 @@
+<!-- header -->
+<header class="w-full bg-main py-[7px] flex items-center justify-center relative">
+    <h1 class="text-white">
+        <i class="fa-solid fa-phone-volume mr-3"></i>
+        Hotline : 0966 433 493
+    </h1>
+</header>
+<!-- header -->
+<header class="border-b">
+    <div class="container max-w-[1200px]">
+        <div class="py-[36px] flex items-center gap-x-[40px]">
+            <!-- logo -->
+            <button class="">
+                <h1 class="uppercase text-[20px] font-[500]">
+                    Chống thấm khang an
+                </h1>
+                <h1 class="uppercase text-[7.8px]">
+                    Cung Thi công chống thấm - Cung cấp vật tư chống thấm
+                </h1>
+            </button>
+            <!-- logo -->
+            <div class="flex-1 h-[35px] flex items-center">
+                <input type="text" class="border px-[12px] py-[8px] h-full flex-1 rounded-s-sm">
+                <button class="hover:bg-title rounded-e-sm text-white bg-main h-full px-[40px]">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <div class="[&_button]:flex [&_button]:items-center [&_button]:gap-2 flex items-center gap-6">
+                @if(!isGroupBtn){
+                <button class="" [routerLink]="['sign-in']">
+                    <div class="">
+                        <i class="fa-regular fa-user text-[20px]"></i>
+                    </div>
+                    <div class="text-[14px] text-left">
+                        <p class="text-[14px]">Tài khoản</p>
+                        <strong class="text-[16px]">Đăng nhập</strong>
+                    </div>
+                </button>
+                }
+                @else {
+                <button class="" [routerLink]="['account']">
+                    <div class="">
+                        <i class="fa-regular fa-user text-[20px]"></i>
+                    </div>
+                    <div class="text-[14px] text-left">
+                        <p class="text-[14px]">Tài khoản</p>
+                        <strong class="text-[16px]">
+                            {{fullName}}
+                        </strong>
+                    </div>
+                </button>
+                }
+                <button class="" [routerLink]="['/cart']">
+                    <div class="">
+                        <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6371fca3352e282d8446f624_icon.svg"
+                            alt="">
+                    </div>
+                    <div class="text-[14px] text-left">
+                        <p class="text-[14px]">Giỏ hàng</p>
+                        <strong class="text-[16px]">{{total | currency:' ':'symbol':'1.0-0'}}.000đ</strong>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+<nav class="sticky top-0 bg-white z-50 shadow-sm">
+    <div class="container max-w-[1200px]">
+        <div class="py-[16px] flex items-center justify-between">
+            <div class="flex-1 flex items-center gap-x-[50px] 
+            font-[500] text-[16px] [&_button]:uppercase
+            ">
+                <button class="hover:text-title" [routerLink]="['']" routerLinkActive="text-main"
+                    [routerLinkActiveOptions]="{exact: true}">Trang chủ</button>
+                <button class="hover:text-title" [routerLink]="['shop']" routerLinkActive="text-main">Cửa hàng</button>
+                <button class="hover:text-title" routerLinkActive="text-main">Liên hệ</button>
+                <button class="hover:text-title" routerLinkActive="text-main">Bài viết</button>
+            </div>
+            <div class="flex items-center gap-x-8">
+                <h1>
+                    <i class="fa-solid fa-phone-volume mr-2"></i>
+                    0966 433 493
+                </h1>
+                <h1>
+                    <i class="fa-solid fa-envelope mr-2"></i>
+                    {{'example@gmail.com'}}
+                </h1>
+            </div>
+        </div>
+    </div>
+</nav>

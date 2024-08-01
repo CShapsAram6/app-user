@@ -1,0 +1,20 @@
+<section class="border rounded-sm">
+    <div class="w-full h-[340px] overflow-hidden relative">
+        <img [src]="product.image" alt="" class="w-full h-full object-contain scale-[0.7]">
+        <div class="absolute z-20 bottom-[-50px] left-0 w-full px-9 btn--add transition-all">
+            <button
+                class="bg-main text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-title hover:text-white">
+                <i class="fa-solid fa-cart-plus mr-[5px]"></i>
+                Thêm vào giỏ hàng
+            </button>
+        </div>
+    </div>
+    <div class="">
+        <h2 class="text-black text-[17px] font-serif text-center mt-[24px] font-[500] line-clamp-1 uppercase">
+            <a [routerLink]="['/single-product/' + product.id]"> {{product.name}} </a>
+        </h2>
+        <p class="text-main text-[17x] text-center mb-[24px] mt-3 font-[500]"> {{product.price | currency : ' ' :
+            'symbol' : '1.0-0'}},000đ
+        </p>
+    </div>
+</section>

@@ -120,14 +120,14 @@
                             </div>
                             <div class="pr-4">
                                 <h2 class="font-[500]"> {{voucher.name}} </h2>
-                                @if(voucher.discountType == "phần trăm"){
+                                @if(voucher.discountType == "percent"){
                                 <h2 class="text-[13px] text-[#00000042]">
                                     Giảm {{voucher.discount}}% giá trị đơn hàng
                                 </h2>
                                 }
                                 @else {
                                 <h2 class="text-[13px] text-[#00000042]">
-                                    Giảm -{{voucher.discount}} 000đ
+                                    Giảm -{{voucher.discount | currency : ' ': 'symbol':'1.0-0}} 000đ'}}
                                 </h2>
                                 }
                             </div>
@@ -200,16 +200,16 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <p>Phí vận chuyển:</p>
-                        <p class="font-[500]"> {{tipDelivery}}.000đ</p>
+                        <p class="font-[500]"> {{tipDelivery | currency : ' ': 'symbol':'1.0-0' }}.000đ</p>
                     </div>
                     <div class="flex items-center justify-between">
                         <p>Tổng cộng voucher giảm giá:</p>
-                        <p class="font-[500]"> -{{disCount}}.000đ</p>
+                        <p class="font-[500]"> -{{disCount | currency : ' ': 'symbol':'1.0-0'}}.000đ</p>
                     </div>
                     <div class="flex items-center justify-between">
                         <p>Tổng thanh toán:</p>
                         <p class="text-2xl font-[500] text-title"> {{
-                            (total + tipDelivery - disCount)}}.000đ</p>
+                            (total + tipDelivery - disCount | currency : ' ': 'symbol':'1.0-0')}}.000đ</p>
                     </div>
                     <button class="w-full bg-main hover:bg-title text-white
                     py-[15px] rounded-sm uppercase font-[500] text-[15px] transition-colors"

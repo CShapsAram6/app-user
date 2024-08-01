@@ -16,4 +16,9 @@ export class CategorysService {
       `${environment.api}/Category/Get-cate-${id}`
     );
   }
+  getData(): Observable<singleResponse<categoryDtos[]>> {
+    return this.http.get<singleResponse<categoryDtos[]>>(
+      `${environment.api}/Category/get-all`
+    );
+  }
 }
