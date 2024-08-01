@@ -19,6 +19,7 @@ export class OrderComponent implements OnInit{
     this.loadOrderUser()
   }
 
+  buttonShow: boolean = false
   activeTab: string = 'Tất cả'
   pageSize: number = 10
   orderUserDto: IOrderUserDto [] = [];
@@ -46,6 +47,12 @@ export class OrderComponent implements OnInit{
       (res) => {
         console.log(res);
         this.orderUserDto = res.data
+        if(this.orderUserDto.length > 10){
+          this.buttonShow = true
+        }
+        else{
+          this.buttonShow = false
+        }
       },
       (err) => {
         console.log(err);
