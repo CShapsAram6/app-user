@@ -95,4 +95,12 @@ export class AddressService {
       { headers: this.headerJWT }
     );
   }
+
+  changeIsPrimary(request: addressGetById): Observable<singleResponse<string>> {
+    return this.http.patch<singleResponse<string>>(
+      `${environment.api}/Address/change-primary`,
+      request,
+      { headers: this.headerJWT }
+    );
+  }
 }

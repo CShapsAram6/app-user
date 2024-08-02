@@ -55,6 +55,13 @@ interface variantDtos {
   status: boolean;
 }
 
+interface IRelateToProductsDto {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+}
+
 export {
   productsDtos,
   singleProductDto,
@@ -62,4 +69,5 @@ export {
   colorDtos,
   fileDtos,
   productsUsingShop,
+  IRelateToProductsDto,
 };

@@ -1,0 +1,18 @@
+<div class="px-[30px] py-[26px] rounded-sm flex overflow-hidden gap-x-5">
+    <!-- item  -->
+    <button class="w-[167px] rounded-sm border hover:translate-y-[-10px] transition-transform flex-shrink-0 btn-cart"
+        [routerLink]="['/single-product', item.id]" *ngFor="let item of arrProducts">
+        <div class="w-full h-[165px] overflow-hidden border-b btn-cart-img">
+            <img [src]="item.image" alt="" class="size-full object-cover scale-[0.7]">
+        </div>
+        <div class="p-[8px] mt-2">
+            <h1 class="text-left line-clamp-2 h-[39px] text-secondColor">
+                {{item.name}}
+            </h1>
+            <p class="text-left text-[17px] font-[500] text-main mt-4">
+                {{item.price | currency : ' ': 'symbol':'1.0-0'}}.000đ
+            </p>
+        </div>
+    </button>
+    <!-- item  -->
+</div>

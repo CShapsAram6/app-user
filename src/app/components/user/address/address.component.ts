@@ -185,13 +185,14 @@ export class AddressComponent implements OnInit {
     let request: addressRequest = this.iaddressRepository.generateRequest(
       this.addressForm.value as addressModel
     );
+    request.address.isPrimary = !this.arrAddress;
+
     this.addressService.create(request).subscribe((res) => {
       if (res.success) {
         this.transForm = 'translateX(0)';
         this.isHeight = '456px';
         this.LoadAddress();
         this.addressForm.reset();
-        return;
       }
     });
   }
@@ -215,7 +216,18 @@ export class AddressComponent implements OnInit {
     });
   }
   UsingAddress(item: addressModel) {
-    this.dataEvent.emit(item);
-    this.closePopup();
+    let token: string = this.auth.getCookie('TokenUser');
+    let user: IUserToken = this.auth.decodeToken(token);
+
+    let model: addressGetById = {
+      id: item.id,
+      user: Number(user.Id),
+    };
+    this.addressService.changeIsPrimary(model).subscribe((res) => {
+      if (res.success) {
+        this.dataEvent.emit(item);
+        this.closePopup();
+      }
+    });
   }
 }

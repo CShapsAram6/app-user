@@ -9,7 +9,6 @@ export class AddressRepository implements IAddressRepository {
   constructor(@Inject('IAuth') private auth: IAuth) {}
   generateRequest(model: addressModel): addressRequest {
     let token: string = this.auth.getCookie('TokenUser');
-
     let user: IUserToken = this.auth.decodeToken(token);
     return {
       id: Number(user.Id),

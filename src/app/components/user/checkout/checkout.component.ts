@@ -122,14 +122,16 @@ export class CheckoutComponent implements OnInit {
   }
 
   getAddress() {
-    let token: string = this.auth.getCookie('TokenUser');
-    let user: IUserToken = this.auth.decodeToken(token);
+    const token = this.auth.getCookie('TokenUser');
+    const user = this.auth.decodeToken(token) as IUserToken;
     this.account = user;
-    return this.addressService
-      .getData(Number(user.Id))
-      .subscribe((response) => {
-        this.LoadAddress(response.data[0]);
-      });
+
+    this.addressService.getData(Number(user.Id)).subscribe((response) => {
+      const primaryAddress = response.data?.find((item) => item.isPrimary);
+      if (primaryAddress) {
+        this.LoadAddress(primaryAddress);
+      }
+    });
   }
   LoadAddress(data: addressModel) {
     this.address = data;

@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ICart, IChangeQuantity } from '../../../model/cart.model';
 import { ICartRepository } from '../../../interface/cart.interface';
 import { IAuth } from '../../../interface/auth.interface';
 import { VariantService } from '../../../services/variant.service';
 import { Router } from '@angular/router';
+import { RelateToProductsComponent } from './relate-to-products/relate-to-products.component';
 
 @Component({
   selector: 'app-cart',
@@ -11,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent implements OnInit {
+  @ViewChild(RelateToProductsComponent)
+  relateToProductsComponent!: RelateToProductsComponent;
   constructor(
     @Inject('ICartRepository') private cartRepository: ICartRepository,
     @Inject('IAuth') private auth: IAuth,
@@ -139,5 +142,9 @@ export class CartComponent implements OnInit {
     let products: string = JSON.stringify(this.arrSelectProdcuts);
     sessionStorage.setItem('products', products);
     this.router.navigate(['/check-out']);
+  }
+
+  GetPrroductsRelateTo(id: number) {
+    this.relateToProductsComponent.LoadProducts(id);
   }
 }

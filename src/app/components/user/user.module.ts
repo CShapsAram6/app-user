@@ -81,9 +81,9 @@ const routes: Routes = [
         title: 'Sản phẩm chi tiết',
       },
       {
-        path:'blog/:page',
-        component:BlogComponent,
-        title:'Bài viết',
+        path: 'blog/:page',
+        component: BlogComponent,
+        title: 'Bài viết',
       },
     ],
   },

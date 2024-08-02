@@ -18,6 +18,7 @@ interface addressModel {
   phone: string;
   idDistrict: string;
   idWard: string;
+  isPrimary: boolean;
 }
 interface addressRequest {
   id: number;

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environment/environment.bassic';
 import {
+  IRelateToProductsDto,
   productsDtos,
   productsUsingShop,
   singleProductDto,
@@ -38,6 +39,14 @@ export class ProductService {
   ): Observable<singleResponse<productsUsingShop[]>> {
     return this.http.get<singleResponse<productsUsingShop[]>>(
       `${environment.api}/Product/category-${id}`
+    );
+  }
+
+  getRelateToProducts(
+    id: number
+  ): Observable<singleResponse<IRelateToProductsDto[]>> {
+    return this.http.get<singleResponse<IRelateToProductsDto[]>>(
+      `${environment.api}/Product/relate-to-${id}`
     );
   }
 }

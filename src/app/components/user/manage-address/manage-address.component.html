@@ -1,7 +1,7 @@
 <section class="">
     <div class="flex items-center justify-between border-b-2 pb-[22px] px-[30px]">
         <h1 class="text-[18px]">Địa chỉ của tôi</h1>
-        <button class="h-[40px] px-[20px] bg-main rounded-sm hover:bg-title text-white">
+        <button class="h-[40px] px-[20px] bg-main rounded-sm hover:bg-title text-white" (click)="OpenPopup()">
             <i class="fa-solid fa-plus mr-1"></i>
             Thêm địa chỉ mới
         </button>
@@ -10,34 +10,36 @@
         <h1 class="text-[17px] px-[30px]">Địa chỉ</h1>
 
         <!-- item -->
-        <div class="px-[30px] py-[18px]" style="border-bottom: 1px solid #e6e6e6;">
+        <div class="px-[30px] py-[18px]" style="border-bottom: 1px solid #e6e6e6;" *ngFor="let item of address">
             <div class="py-3 flex items-center justify-between">
                 <div class="">
                     <div class="flex items-center gap-2">
-                        <h1 class="text-[19px] m-0"> Lê Sỹ Kiên </h1>
+                        <h1 class="text-[19px] m-0"> {{item.fullName}} </h1>
                         <p>-</p>
                         <p class="text-[16px] m-0 text-secondColor">
-                            (+84) 905250356
+                            {{item.phone}}
                         </p>
                     </div>
                     <div class="mt-1 text-secondColor">
                         <p class="text-[15px] leading-5">
-                            515/20/5 hà huy tập
-                            Phường Tân Lợi, Thành Phố Buôn Ma Thuột, Đắk Lắk
+                            {{item.address}}
                         </p>
                     </div>
                     <div class="">
-                        <button class="text-main text-[14px] mt-2 py-[2px] px-[4px]" style="border: 1px solid;">
+                        <button class="text-main text-[14px] mt-2 py-[2px] px-[4px]" style="border: 1px solid;"
+                            *ngIf="item.isPrimary">
                             Mặc định
                         </button>
                     </div>
                 </div>
                 <div class="flex flex-col items-end">
                     <div class="flex items-center gap-x-4">
-                        <button class="text-main text-[15px]">Cập nhật</button>
+                        <button class="text-main text-[15px]" (click)="UpdateAddress(item.id)">Cập nhật</button>
                         <button class="text-main text-[15px]">Xóa</button>
                     </div>
-                    <button class="mt-2 text-[14px] border px-[12px] py-[4px] hover:bg-secondColor/10">
+                    <button
+                        class="mt-2 text-[14px] border px-[12px] py-[4px] hover:bg-secondColor/10 disabled:bg-secondColor/5 disabled:text-secondColor/80"
+                        [disabled]="item.isPrimary" (click)="ChangeAddress(item.id)">
                         Thiết lập mặc định
                     </button>
                 </div>
@@ -46,3 +48,5 @@
         <!-- item -->
     </div>
 </section>
+
+<app-address></app-address>

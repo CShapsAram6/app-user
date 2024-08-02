@@ -103,7 +103,7 @@
                     <button class="hover:text-error" (click)="RemoveItem(item.id)">Xóa</button>
                     @if(isPopup != item.id){
                     <button class="flex items-center justify-center mt-2 text-main hover:text-title"
-                        (click)="isPopup = item.id">
+                        (click)="isPopup = item.id;GetPrroductsRelateTo(item.id)">
                         <div class="w-[80%]">
                             Tìm sản phẩm tương tự
                         </div>
@@ -112,7 +112,7 @@
                     }
                     @else if(isPopup == item.id){
                     <button class="flex items-center justify-center mt-2 text-main hover:text-title"
-                        (click)="isPopup = 0">
+                        (click)="isPopup = 0;">
                         <div class="w-[80%] line-clamp-1">
                             Tìm sản phẩm tương tự
                         </div>
@@ -123,26 +123,7 @@
             </div>
             <div class="absolute w-full bg-white border border-main left-0 top-[76px] shadow-xl z-50"
                 [class.hidden]="isPopup != item.id">
-                <div class="px-[30px] py-[26px] rounded-sm flex overflow-hidden justify-between">
-                    <!-- item  -->
-                    <button
-                        class="w-[167px] rounded-sm border hover:translate-y-[-10px] transition-transform flex-shrink-0 btn-cart"
-                        *ngFor="let item of [1,1,1,1,1,1]">
-                        <div class="w-full h-[165px] overflow-hidden border-b btn-cart-img">
-                            <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rbla-lnnzeltsfgyu20" alt=""
-                                class="size-full object-cover">
-                        </div>
-                        <div class="p-[8px] mt-2">
-                            <h1 class="text-left line-clamp-2 text-secondColor">
-                                xiaozhubangchu Lung linh Keycaps XDA cá tính thăng hoa cao Keycaps chất liệu PBT đục bàn
-                            </h1>
-                            <p class="text-left text-[17px] font-[500] text-main mt-4">
-                                200.000đ
-                            </p>
-                        </div>
-                    </button>
-                    <!-- item  -->
-                </div>
+                <app-relate-to-products></app-relate-to-products>
             </div>
         </div>
         <!-- content -->

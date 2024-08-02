@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './components/user/cart/cart.component';
 import { HeaderComponent } from './components/header/header.component';
+import { RelateToProductsComponent } from './components/user/cart/relate-to-products/relate-to-products.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HeaderComponent } from './components/header/header.component';
     UserComponent,
     CartComponent,
     HeaderComponent,
+    RelateToProductsComponent,
   ],
   imports: [
     UserModule,

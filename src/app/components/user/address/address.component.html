@@ -34,10 +34,13 @@
                                     (click)="ChangeForm('create', item.id)">
                                     Cập nhật
                                 </button>
-                                <button class="text-title font-[500] text-[15px] uppercase"
-                                    (click)="UsingAddress(item)">
+                                <button class="text-title font-[500] text-[15px] uppercase" (click)="UsingAddress(item)"
+                                    *ngIf="!item.isPrimary">
                                     Sử dụng
                                 </button>
+                                <div class="text-main font-[500] text-[15px] uppercase" *ngIf=" item.isPrimary">
+                                    Mặc định
+                                </div>
                             </div>
 
                             <div class=" absolute top-1 right-1">

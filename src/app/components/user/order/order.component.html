@@ -1,7 +1,8 @@
 <section class="w-full">
     <div
         class="flex [&_button]:pb-[16px] [&_button]:w-[141px] justify-between [&_button]:font-[500] [&_button]:text-[16px]">
-        <button class="hover:text-main" *ngFor="let tab of getTab()" (click)="setActiveTab(tab)" [ngClass]="{'active': activeTab === tab}">{{tab}}</button>
+        <button class="hover:text-main" *ngFor="let tab of getTab()" (click)="setActiveTab(tab)"
+            [ngClass]="{'active': activeTab === tab}">{{tab}}</button>
     </div>
     <div class="w-full relative h-[48px] my-[12px]">
         <div class="absolute top-[50%] translate-y-[-50%] left-4">
@@ -20,19 +21,30 @@
                     <h1 class="pl-2">#DH{{(item.id).toString().padStart(4,'0')}}</h1>
                 </div>
                 <div class="">
-                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0"><i class="fa-solid fa-truck-fast"></i> Chờ người bán xác nhận đơn hàng</button>
-                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 1 && item.statusDelivery === 1"><i class="fa-solid fa-truck-fast"></i> Đơn hàng đang được giao</button>
-                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 1 && item.statusDelivery === 2"><i class="fa-solid fa-truck-fast"></i> Giao hàng thành công</button>
-                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 1 && item.statusDelivery === 3"><i class="fa-solid fa-truck-fast"></i> Giao hàng thất bại</button>
-                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 3 && item.statusDelivery === 0"><i class="fa-solid fa-truck-fast"></i> Đơn hàng đã bị hủy bởi admin</button>
-                    <button class="text-title text-[15px]" *ngIf="item.statusOrder === 2 && item.statusDelivery === 0"><i class="fa-solid fa-truck-fast"></i> Đơn hàng đã bị hủy bởi bạn</button>
+                    <button class="text-title text-[15px]"
+                        *ngIf="item.statusOrder === 0 && item.statusDelivery === 0"><i
+                            class="fa-solid fa-truck-fast"></i> Chờ người bán xác nhận đơn hàng</button>
+                    <button class="text-title text-[15px]"
+                        *ngIf="item.statusOrder === 1 && item.statusDelivery === 1"><i
+                            class="fa-solid fa-truck-fast"></i> Đơn hàng đang được giao</button>
+                    <button class="text-title text-[15px]"
+                        *ngIf="item.statusOrder === 1 && item.statusDelivery === 2"><i
+                            class="fa-solid fa-truck-fast"></i> Giao hàng thành công</button>
+                    <button class="text-title text-[15px]"
+                        *ngIf="item.statusOrder === 1 && item.statusDelivery === 3"><i
+                            class="fa-solid fa-truck-fast"></i> Giao hàng thất bại</button>
+                    <button class="text-title text-[15px]"
+                        *ngIf="item.statusOrder === 3 && item.statusDelivery === 0"><i
+                            class="fa-solid fa-truck-fast"></i> Đơn hàng đã bị hủy bởi admin</button>
+                    <button class="text-title text-[15px]"
+                        *ngIf="item.statusOrder === 2 && item.statusDelivery === 0"><i
+                            class="fa-solid fa-truck-fast"></i> Đơn hàng đã bị hủy bởi bạn</button>
                 </div>
             </div>
             <div class="flex justify-between items-center border-t mt-2 pt-[12px]" *ngFor="let item of item.itemOrders">
                 <div class="flex items-center gap-x-4">
                     <button class="size-[70px] overflow-hidden rounded-sm">
-                        <img src="{{item.productDetail.imageUrl}}" alt=""
-                            class="size-full object-cover">
+                        <img src="{{item.productDetail.imageUrl}}" alt="" class="size-full object-cover">
                     </button>
                     <div class="">
                         <button class="text-left w-[39rem]">{{item.productDetail.nameProduct}}</button>
@@ -40,13 +52,13 @@
                         <p class="mt-2" *ngIf="item.productDetail.size === 2"> Size: Vừa</p>
                         <p class="mt-2" *ngIf="item.productDetail.size === 3"> Size: Nhỏ</p>
                         <div class="mt-2 flex items-center gap-x-2">
-                          <button class="border rounded-sm p-1 flex items-center gap-x-2 hover:bg-[#51544f21]">
-                              <div class=" size-[17px] rounded-full"
-                                  [ngStyle]="{'background-color': item.productDetail.colorProduct}">
-                              </div>
-                              <span class="text-[14px] font-[300]">x{{item.quantity}}</span>
-                          </button>
-                      </div>
+                            <button class="border rounded-sm p-1 flex items-center gap-x-2 hover:bg-[#51544f21]">
+                                <div class=" size-[17px] rounded-full"
+                                    [ngStyle]="{'background-color': item.productDetail.colorProduct}">
+                                </div>
+                                <span class="text-[14px] font-[300]">x{{item.quantity}}</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="text-main font-[500]">
@@ -58,22 +70,29 @@
         [&_div]:px-[24px] py-[24px]">
             <div class="flex-1 flex items-top gap-3" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0">
                 <label for="" class="pt-1 text-[15px] font-[500]">Lý do huỷ:</label>
-                <input type="text" class="border-1 flex-1 px-3 py-2 rounded-sm  focus:border-main bg-white" [formControl]="reason">
+                <input type="text" class="border-1 flex-1 px-3 py-2 rounded-sm  focus:border-main bg-white"
+                    [formControl]="reason">
             </div>
             <div class="flex-1 flex items-top gap-3" *ngIf="item.statusOrder !== 0 || item.statusDelivery !== 0"></div>
             <div class="flex flex-col items-end">
                 <div class="flex justify-end">
-                    <h1 class="text-secondColor/70">Thành tiền: <span class="text-[23px] font-[500] text-title">{{(item.total * 1000).toLocaleString()}}₫</span> </h1>
+                    <h1 class="text-secondColor/70">Thành tiền: <span
+                            class="text-[23px] font-[500] text-title">{{(item.total * 1000).toLocaleString()}}₫</span>
+                    </h1>
                 </div>
                 <div
                     class="pt-[24px] px-[24px] flex items-center justify-end gap-2 [&_button]:px-[10px] [&_button]:py-[8px] [&_button]:rounded-sm [&_button]:font-[500] [&_button]:w-[128px]">
-                    <button class="text-secondColor hover:bg-secondColor/10" *ngIf="item.statusOrder === 0 && item.statusDelivery === 0" (click)="cancelOrderByUser(item.id)">Hủy đơn hàng</button>
-                    <button class="border hover:bg-secondColor/10" [routerLink]="['/account/order-detail', item.id]">Chi tiết</button>
+                    <button class="text-secondColor hover:bg-secondColor/10"
+                        *ngIf="item.statusOrder === 0 && item.statusDelivery === 0"
+                        (click)="cancelOrderByUser(item.id)">Hủy đơn hàng</button>
+                    <button class="border hover:bg-secondColor/10" [routerLink]="['/account/order-detail', item.id]">Chi
+                        tiết</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <div class=" flex justify-center">
-  <button class="text-[20px] text-white mt-4 font-[500] bg-[#016bb9] py-2 px-4 rounded-sm" [ngClass]="{ 'hidden': !buttonShow }" (click)="SeeMoreOrder()">Xem thêm</button>
+    <button class="text-[20px] text-white mt-4 font-[500] bg-[#016bb9] py-2 px-4 rounded-sm"
+        [ngClass]="{ 'hidden': !buttonShow }" (click)="SeeMoreOrder()">Xem thêm</button>
 </div>
