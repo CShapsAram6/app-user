@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { singleResponse } from "../model/response.model";
 import { environment } from "../environment/environment.bassic";
-import { blogDto } from '../model/blog.model';
+import { blogDto, getblogid } from '../model/blog.model';
 
 
 
@@ -23,5 +23,12 @@ export class BlogService {
   }
   countblog(name:FormData):Observable<singleResponse<number>>{
     return this.http.post<singleResponse<number>>(`${environment.api}/Blog/getNumber-blog`,name);
+  }
+
+  GetBlogid(id:number):Observable<singleResponse<getblogid>>{
+    return this.http.get<singleResponse<getblogid>>(`${environment.api}/Blog/Get-bloguser-${id}`);
+  }
+  RandomBlog():Observable<singleResponse<blogDto[]>>{
+    return this.http.get<singleResponse<blogDto[]>>(`${environment.api}/Blog/randomblog`)
   }
 }
