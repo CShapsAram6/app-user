@@ -24,6 +24,7 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { BlogComponent } from './blog/blog.component';
 import { CardProductComponent } from './card-product/card-product.component';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,11 @@ const routes: Routes = [
         component: BlogComponent,
         title: 'Bài viết',
       },
+      {
+        path:'blog-detail/:id',
+        component: BlogDetailComponent,
+        title:'Bài viết chi tiết',
+      },
     ],
   },
 ];
@@ -107,6 +113,7 @@ const routes: Routes = [
     FavoriteComponent,
     BlogComponent,
     CardProductComponent,
+    BlogDetailComponent,
   ],
   imports: [
     CommonModule,

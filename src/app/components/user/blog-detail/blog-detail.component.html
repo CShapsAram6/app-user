@@ -1,0 +1,76 @@
+<section
+    style="background: url('https://assets-global.website-files.com/64ed0f8950c730ce2ffa16ec/6524160bb43380d403f34e76_drew-dau-xI3fdzznkWg-unsplash-p-2000.jpg') no-repeat center;"
+    class="w-full h-[200px] relative">
+    <div class="container max-w-[1200px] relative h-full z-10">
+        <div class="absolute top-[50%] left-0 translate-y-[-50%] max-lg:left-5">
+            <h1 class="text-white text-[60px] font-bold 
+            max-lg:text-[40px]">
+                Bài viết
+            </h1>
+            <div class="mt-4 flex items-center gap-2 text-[17px] font-[500] text-white">
+                <button class="hover:text-main" [routerLink]="['']">Trang chủ</button>
+                <span>-</span>
+                <span class="">Bài viết</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute top-0 left-0 w-full h-full bg-[#00000073] z-[1]">
+    </div>
+</section>
+
+<main class="container mx-auto mt-8 pb-8">
+    <div class="flex flex-wrap justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto">
+                <!-- Blog post header -->
+                <!-- Featured image -->
+                <img src="{{blog.images}}" alt="Featured image"
+                    class="w-full max-w-[800px] h-auto max-h-[500px] object-contain">
+                <div class="py-8">
+                    <h1 class="text-3xl font-bold mb-2">{{blog.header}}</h1>
+                    <div class="flex justify-between items-center mt-[20px]">
+                        <div class="flex items-center gap-2">
+                            <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/6385974f39e0d684a66a812a_003-man-1.png"
+                                *ngIf="blog.imageacc == null" alt="">
+                            <img src="{{blog.imageacc}}" alt="" srcset="" *ngIf="blog.imageacc != null">
+                            <h4 class="text-[#8e8d8d] text-[15px] font-serif">{{blog.nameacc}}</h4>
+                        </div>
+                        <h4 class="flex items-center gap-2 text-[15px] text-[#8e8d8d] font-serif">
+                            <img src="	https://assets.website-files.com/63708df071bc73798fae96ee/6378997554cc50631be9cf63_calender.svg"
+                                alt="">
+                            {{ blog.datePush | date:'dd-MM-yyyy' }}
+                        </h4>
+                    </div>
+                </div>
+                <!-- Blog post content -->
+                <div class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto" [innerHTML]="blog.content">
+
+                </div>
+            </div>
+        </div>
+        <div class="w-full md:w-4/12 px-4 mb-8">
+            <div class="bg-gray-100 px-4 py-6 rounded">
+                <h3 class="text-lg font-bold mb-2">Bài viết khác</h3>
+                <ul class="list-none list-inside">
+                    <li class="relative border border-gray-200 rounded-lg shadow-lg mt-3" *ngFor="let item of blogs">
+                        <button class="flex items-center p-4" [routerLink]="['/blog-detail', item.id]">
+                            <img class="object-cover w-12 h-12 rounded-lg"
+                                src="{{item.images}}" alt="" />
+
+                            <div class="ml-3 overflow-hidden">
+                                <p class="font-medium text-gray-900 text-left">{{item.header.length > 35 ? (item.header | slice:0:35) + '...' : item.header}}</p>
+                                <div class="max-w-xs text-sm text-gray-500 truncate text-left" [innerHTML]="item.content.length > 40 ? (item.content | slice:0:40) + '...' : item.content"></div>
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class='flex flex-col gap-3'>
+
+</div>
+<!-- Blog post with featured image -->
