@@ -13,5 +13,13 @@ interface ISignUp{
   phone:string;
   password:string;
 }
+interface UserInfoDTO{
+  Id : number;
+  UserName: string;
+  Email: string;
+  Phone: string;
+  FullName: string;
+  linkAvatar: string;
+}
 
-export { ISignInRequest, IUserToken, ISignUp };
+export { ISignInRequest, IUserToken, ISignUp,UserInfoDTO };
