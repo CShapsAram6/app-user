@@ -17,4 +17,7 @@ export class UserService {
       `${environment.api}/User/get-user-info?id=${Id}`
     );
   }
+  UpdateUserInfo(data: any) {
+    return this.http.put(`${environment.api}/User/update-user-info`, data);
+  }
 }

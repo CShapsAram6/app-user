@@ -1,6 +1,9 @@
+<h1 class="text-center mt-1 font-semibold dark:text-gray-300">Hồ Sơ Cá Nhân</h1>
+
 <form [formGroup]="profileForm">
   <!-- Cover Image -->
-  <div class="w-full rounded-sm bg-[url('https://images.unsplash.com/photo-1449844908441-8829872d2607?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxob21lfGVufDB8MHx8fDE3MTA0MDE1NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat items-center" >
+  <div
+    class="w-full rounded-sm bg-[url('https://images.unsplash.com/photo-1449844908441-8829872d2607?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxob21lfGVufDB8MHx8fDE3MTA0MDE1NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat items-center">
     <!-- Profile Image -->
     <div class="relative w-full">
       <img *ngIf="profileForm.get('linkAvatar')?.value; else placeholder" [src]="profileForm.get('linkAvatar')?.value"
@@ -33,39 +36,54 @@
     </div>
   </div>
 
-  <h2 class="text-center mt-1 font-semibold dark:text-gray-300">Hồ Sơ Cá Nhân</h2>
   <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
     <div class="w-full mb-4 mt-6">
       <label for="" class="mb-2 dark:text-gray-300">Tên Tài Khoản</label>
       <input type="text"
-        class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-        placeholder="Tên tài khoản" formControlName="userName">
+      class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+      placeholder="Tên tài khoản" formControlName="userName" readonly>
+    
     </div>
-    <div class="w-full mb-4 lg:mt-6">
+  </div>
+  <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+    <div class="w-full mb-4 mt-6">
       <label for="" class="dark:text-gray-300">Họ và tên</label>
       <input type="text"
         class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-        placeholder="Họ và tên" formControlName="fullName">
+        placeholder="Họ và tên" formControlName="fullName" >
+        <div *ngIf="profileForm.get('fullName')?.invalid && profileForm.get('fullName')?.touched" class="text-danger">
+          Nhập lại họ tên
+        </div>
     </div>
   </div>
-
   <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
-    <div class="w-full">
+    <div class="w-full mb-4 mt-6">
       <label for="" class="dark:text-gray-300">Email</label>
       <input type="email"
         class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
         placeholder="Email" formControlName="email">
+      <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="text-danger">
+        Sai định dạng email
+      </div>
+
     </div>
-    <div class="w-full">
+  </div>
+  <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+    <div class="w-full mb-4 mt-6">
       <h3 class="dark:text-gray-300 mb-2">Số điện thoại</h3>
       <input type="tel"
         class="text-grey p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
         formControlName="phone" placeholder="Số điện thoại">
+
+        <div *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched" class="text-danger py-4">
+          Sai định dạng số điện thoại
+          </div>
     </div>
   </div>
 
+
   <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
-    <div class="w-full">
+    <div class="w-full mb-4 mt-6">
       <label for="" class="dark:text-gray-300">Địa chỉ</label>
       <input type="text"
         class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
@@ -74,6 +92,6 @@
   </div>
 
   <div class="w-full rounded-lg bg-blue-500 mt-4 text-white text-lg font-semibold">
-    <button type="submit" class="w-full p-4">Lưu</button>
+    <button type="submit" class="w-full p-4" (click)="onSave()">Lưu</button>
   </div>
 </form>

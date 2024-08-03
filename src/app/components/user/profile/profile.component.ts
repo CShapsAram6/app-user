@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { UserInfoDTO } from '../../../model/user.model';
 import { singleResponse } from '../../../model/response.model';
+import { CustomValidators } from './custom-validate';
 
 @Component({
   selector: 'app-profile',
@@ -15,11 +16,13 @@ export class ProfileComponent implements OnInit {
 
   constructor(private service: UserService, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
-      userName: [''],
-      fullName: [''],
-      email: [''],
-      phone: [''],
-      linkAvatar : ['']
+      Id: this.Id,
+      userName: ['',[Validators.required]],
+      fullName: ['',[Validators.required, CustomValidators.fullNameValidator()]],
+      email: ['',[Validators.required,Validators.email]],
+      phone: ['',[Validators.required,Validators.pattern(/^(\+\d{1,3}[- ]?)?\d{10}$/)]],
+      address:['',[Validators.required]],
+      linkAvatar : ['',[Validators.required]]
     });
   }
 
@@ -45,6 +48,20 @@ export class ProfileComponent implements OnInit {
     });
   }
   onSave(): void {
+    
+    if (this.profileForm.valid) {
+      this.service.UpdateUserInfo(this.profileForm.value).subscribe(
+        (res) => {
+          console.log('User info updated successfully', res);
+        },
+        (error) => {
+          console.error('Error updating user info', error);
+        }
+      );
+    } else {
+      this.profileForm.markAllAsTouched();
+      console.warn('Profile form is invalid');
+    }
   }
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;

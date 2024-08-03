@@ -20,6 +20,7 @@ interface UserInfoDTO{
   Phone: string;
   FullName: string;
   linkAvatar: string;
+  address: string;
 }
 
 export { ISignInRequest, IUserToken, ISignUp,UserInfoDTO };
