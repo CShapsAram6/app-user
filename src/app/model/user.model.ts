@@ -18,7 +18,7 @@ interface UserInfoDTO{
   UserName: string;
   Email: string;
   Phone: string;
-  FullName: string;
+  fullName: string;
   linkAvatar: string;
   address: string;
 }
