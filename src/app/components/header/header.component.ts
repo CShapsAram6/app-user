@@ -5,6 +5,7 @@ import { IAuth } from '../../interface/auth.interface';
 import { AuthService } from '../../services/auth.service';
 import { IUserToken } from '../../model/user.model';
 import { ICartRepository } from '../../interface/cart.interface';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-header',
@@ -15,18 +16,28 @@ export class HeaderComponent implements OnInit {
   isGroupBtn: boolean = false;
   fullName: string = '';
   total: number = 0;
+  isMenu: boolean = false;
   constructor(
     @Inject('IAuth') private auth: IAuth,
     @Inject('ICartRepository') private cartRepository: ICartRepository,
-    private userSevices: AuthService
+    private userSevices: AuthService,
+    private sharedService: SharedService
   ) {}
   ngOnInit(): void {
+    this.sharedService.buttonClicked$.subscribe(() => {
+      this.LoadUser();
+      this.LoadCart();
+    });
     this.LoadUser();
+
     this.LoadCart();
   }
   LoadUser() {
     let token = this.auth.getCookie('TokenUser');
-    if (token) this.isGroupBtn = true;
+    this.isGroupBtn = token ? true : false;
+    if (!token) {
+      return;
+    }
     let user: IUserToken = this.auth.decodeToken(token);
     this.userSevices.GetNameUser(Number(user.Id)).subscribe((res) => {
       this.fullName = res.data;

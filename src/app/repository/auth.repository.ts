@@ -5,6 +5,9 @@ import { ISignInRequest, IUserToken } from '../model/user.model';
 @Injectable({ providedIn: 'root' })
 export class AuthRepository implements IAuth {
   constructor() {}
+  removeCookie(name: string): void {
+    
+  }
   decodeToken(token: any): IUserToken {
     return JSON.parse(atob(token.split('.')[1]));
   }

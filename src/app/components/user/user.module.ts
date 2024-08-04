@@ -24,6 +24,9 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { BlogComponent } from './blog/blog.component';
 import { CardProductComponent } from './card-product/card-product.component';
+import { CookieService } from 'ngx-cookie-service';
+import { provideToastr, ToastrModule } from 'ngx-toastr';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   {
@@ -116,6 +119,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     FormsModule,
+    ToastrModule.forRoot(),
   ],
+  providers: [CookieService, provideAnimations(), provideToastr()],
 })
 export class UserModule {}

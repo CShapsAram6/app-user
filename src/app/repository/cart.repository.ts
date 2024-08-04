@@ -18,6 +18,7 @@ import { IAuth } from '../interface/auth.interface';
 import { IUserToken } from '../model/user.model';
 import { CartService } from '../services/cart.service';
 import { Router } from '@angular/router';
+import { SharedService } from '../services/shared.service';
 
 @Injectable({ providedIn: 'root' })
 export class CartRepository implements ICartRepository {
@@ -64,7 +65,6 @@ export class CartRepository implements ICartRepository {
       this.cartService.postDataAfterLogin(request).subscribe((res) => {
         if (res.success) {
           localStorage.removeItem('cart');
-          // window.location.href = 'http://localhost:4200/';
           this.router.navigate(['/']);
           return;
         }
@@ -79,36 +79,30 @@ export class CartRepository implements ICartRepository {
     };
   }
 
-  async setData(
+  setData(
     variant: variantDtos,
     singleProduct: singleProductDto,
     color: IColorCart[]
-  ): Promise<void> {
+  ): Observable<singleResponse<string>> {
     let token: string = this.auth.getCookie('TokenUser');
-    let item: ICart = await this.mapToCartProduct(
-      variant,
-      singleProduct,
-      color
-    );
+    let item: ICart = this.mapToCartProduct(variant, singleProduct, color);
     if (!token) {
-      await this.setDataWhenNotHaveToken(item);
-      return;
+      return this.setDataWhenNotHaveToken(item);
     }
-    this.setDataWhenHaveToken(item, token);
+    return this.setDataWhenHaveToken(item, token);
   }
 
-  async setCartShop(
+  setCartShop(
     variant: variantDtos,
     colors: IColorCart[],
     products: productsUsingShop
-  ) {
+  ): Observable<singleResponse<string>> {
     let token: string = this.auth.getCookie('TokenUser');
-    let item: ICart = await this.mapperToCartLocal(variant, colors, products);
+    let item: ICart = this.mapperToCartLocal(variant, colors, products);
     if (!token) {
-      await this.setDataWhenNotHaveToken(item);
-      return;
+      return this.setDataWhenNotHaveToken(item);
     }
-    this.setDataWhenHaveToken(item, token);
+    return this.setDataWhenHaveToken(item, token);
   }
 
   mapperToCartLocal(
@@ -128,21 +122,22 @@ export class CartRepository implements ICartRepository {
     };
   }
 
-  async setDataWhenNotHaveToken(item: ICart) {
+  setDataWhenNotHaveToken(item: ICart): Observable<singleResponse<string>> {
     let local = localStorage.getItem('cart');
     if (local) {
       this.localExist(item, 'cart', local, item.colors);
-      return;
+      return of({ data: '', success: false, message: 'not ok' });
     }
-    this.localNotExist(item, 'cart');
+    return of({ data: '', success: true, message: 'ok' });
   }
 
-  async setDataWhenHaveToken(item: ICart, token: string) {
+  setDataWhenHaveToken(
+    item: ICart,
+    token: string
+  ): Observable<singleResponse<string>> {
     let user: IUserToken = this.auth.decodeToken(token);
     let request: ICartRedis = this.mapRequestCartResis(item, Number(user.Id));
-    this.cartService.setData(request).subscribe((res) => {
-      console.log(res);
-    });
+    return this.cartService.setData(request);
   }
 
   mapRequestCartResis(item: ICart, id: number): ICartRedis {
@@ -204,11 +199,11 @@ export class CartRepository implements ICartRepository {
     return color;
   }
 
-  async mapToCartProduct(
+  mapToCartProduct(
     vari: variantDtos,
     pro: singleProductDto,
     color: IColorCart[]
-  ): Promise<ICart> {
+  ): ICart {
     let totalQuantity = 0;
     color.map((item) => {
       totalQuantity += item.quantity;
