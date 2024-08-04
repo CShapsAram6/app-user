@@ -48,10 +48,10 @@
         tôi. Tại đây,
         bạn sẽ tìm
         thấy tất cả các tin tức và
-        cập nhật mới nhất từ ​​nhóm của chúng tôi cũng như các bài đăng blog thú vị từ các tác giả khách mời.</p>
+        cập nhật mới nhất từ ​​nhóm của chúng tôi cũng như các bài đăng blog thú vị từ các tác giả khách mời.</p>        
     <div class="w-full mt-[66px] grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-sm:grid-cols-1">
         <div *ngFor="let item of blogs">
-            <button class="w-full h-[273px] overflow-hidden cart--item rounded-sm">
+            <button class="w-full h-[273px] overflow-hidden cart--item rounded-sm" [routerLink]="['/blog-detail', item.id]">
                 <img src="{{item.images}}"
                     alt="" class="w-full h-full object-cover-contain">
             </button>
@@ -69,12 +69,12 @@
                 </h4>
             </div>
             <div class="mt-[18px]">
-                <a href="" class="hover:text-main">
+                <a [routerLink]="['/blog-detail', item.id]" class="hover:text-main">
                     <h1 class="text-[24px] line-clamp-1 font-[500]">{{item.header}}</h1>
                 </a>
                 <p class="mt-[15px] line-clamp-2 leading-7 text-[#51544f]" [innerHTML]="item.content.length > 150 ? (item.content | slice:0:150) + '...' : item.content">
                 </p>
-                <button class="mt-[20px] text-[16px] hover:text-main font-[500]">Xem thêm</button>
+                <a class="mt-[20px] text-[16px] hover:text-main font-[500]" [routerLink]="['/blog-detail', item.id]">Xem thêm</a>
             </div>
         </div>
     </div>
