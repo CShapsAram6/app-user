@@ -190,6 +190,8 @@ export class CheckoutComponent implements OnInit {
     );
     this.orderRepository.createOrder(orderData, this.token).subscribe(
       (res) => {
+        console.log(res);
+
         if (
           res.data ==
           'Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có'
@@ -210,6 +212,9 @@ export class CheckoutComponent implements OnInit {
           //Chuyển qua thanh toán vnPay
           if (this.methodPayment.id == 2) {
             window.location.href = res.data;
+          }
+          if (this.methodPayment.id == 3) {
+            window.location.href = res.data.orderurl;
           }
           alert('Đặt hàng thành công');
           console.log(res);
