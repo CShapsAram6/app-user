@@ -12,4 +12,5 @@ export interface IAuth {
   getCookie(name: string): string;
   handleLogin(response: any): ISignInRequest;
   decodeToken(token: any): IUserToken;
+  removeCookie(name: string): void;
 }

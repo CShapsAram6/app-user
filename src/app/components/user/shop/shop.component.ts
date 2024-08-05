@@ -10,6 +10,8 @@ import { categoryDtos } from '../../../model/categorys.model';
 import { ICartRepository } from '../../../interface/cart.interface';
 import { Router } from '@angular/router';
 import { IColorCart } from '../../../model/cart.model';
+import { SharedService } from '../../../services/shared.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -19,7 +21,9 @@ export class ShopComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categorySevice: CategorysService,
-    @Inject('ICartRepository') private cartRepository: ICartRepository
+    @Inject('ICartRepository') private cartRepository: ICartRepository,
+    private sharedService: SharedService,
+    private toastrServices: ToastrService
   ) {}
   dropdownOpen: boolean = false;
   isButton: boolean = true;
@@ -103,10 +107,16 @@ export class ShopComponent implements OnInit {
       quantity: 1,
     };
 
-    this.cartRepository.setCartShop(
-      variant,
-      [colorCart],
-      this.products[productIndex]
-    );
+    this.cartRepository
+      .setCartShop(variant, [colorCart], this.products[productIndex])
+      .subscribe((res) => {
+        if (res.success) {
+          this.sharedService.emitButtonClick();
+          this.toastrServices.success(
+            'Thêm vào giỏ hàng thành công',
+            'Thành công'
+          );
+        }
+      });
   }
 }

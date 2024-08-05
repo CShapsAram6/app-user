@@ -226,6 +226,7 @@ export class AddressComponent implements OnInit {
     this.addressService.changeIsPrimary(model).subscribe((res) => {
       if (res.success) {
         this.dataEvent.emit(item);
+        this.LoadAddress();
         this.closePopup();
       }
     });

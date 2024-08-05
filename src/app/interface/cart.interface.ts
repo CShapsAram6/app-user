@@ -12,7 +12,7 @@ export interface ICartRepository {
     variant: variantDtos,
     singleProduct: singleProductDto,
     color: IColorCart[]
-  ): void;
+  ): Observable<singleResponse<string>>;
   getData(): Observable<singleResponse<ICart[]>>;
   countNumberCart(): number;
   addCartEnterRedis(token: any): boolean;
@@ -25,5 +25,5 @@ export interface ICartRepository {
     variant: variantDtos,
     colors: IColorCart[],
     products: productsUsingShop
-  ): void;
+  ): Observable<singleResponse<string>>;
 }
