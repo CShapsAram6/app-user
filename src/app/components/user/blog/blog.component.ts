@@ -46,7 +46,7 @@ export class BlogComponent implements OnInit {
     console.log(formData);
     this.blogsv.countblog(formData).pipe(
       tap((res: singleResponse<number>) => {
-        let lengthpageblog: number = Math.ceil(res.data / 10);
+        let lengthpageblog: number = Math.ceil(res.data / 9);
         console.log(res + " Cái này là res ở loadnumber");
         this.numberPages = [];  // Reset numberPages before pushing new values
         for (let i = 1; i <= lengthpageblog; i++) {
