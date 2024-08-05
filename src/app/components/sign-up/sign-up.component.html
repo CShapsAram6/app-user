@@ -1,8 +1,26 @@
-<div class="hearder d-flex justify-center">
-    <h2 class="text-[35px] font-[500] text-[#79a206]">Đăng ký</h2>
-</div>
-<!-- form -->
-<form class="mt-4"  [formGroup]="registerform">
+<main class="flex items-center">
+    <section class="flex-1 relative">
+        <div class="h-dvh">
+            <img src="https://themewagon.github.io/homeland/images/hero_bg_1.jpg" alt="" class="size-full object-cover">
+        </div>
+        <div class="absolute size-full top-0 left-0 bg-[#00000073]"></div>
+    </section>
+    <section class="w-[480px] py-[40px] h-dvh relative">
+        <div class="flex justify-center mb-[70px] mt-[50px]">
+            <button class="" [routerLink]="['']">
+                <h1 class="uppercase text-[20px] font-[500]">
+                    Chống thấm khang an
+                </h1>
+                <h1 class="uppercase text-[7.8px]">
+                    Cung Thi công chống thấm - Cung cấp vật tư chống thấm
+                </h1>
+            </button>
+        </div>
+        <div class="text-center mb-[32px]">
+            <h1 class="text-[21px] font-[500]">Đăng ký</h1>
+        </div>       
+        <!-- form -->
+<form class="mt-4 w-[348px] m-auto"  [formGroup]="registerform">
     <div class="w-full">
         <input type="text" placeholder="Nhập tên tài khoản"
             class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
@@ -93,5 +111,13 @@
         Đăng ký
     </button>
 </form>
+<div class="w-[348px] mx-auto mt-8 text-[15px]">
+    <p class="text-center mt-3 text-[15px] leading-5">
+        Bạn đã có tài khoản? <button class="text-main" [routerLink]="['/sign-in']">Đăng nhập</button>
+    </p>
+</div>
+
+    </section>
+</main>
 <!-- form -->
 
