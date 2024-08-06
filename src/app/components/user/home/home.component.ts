@@ -14,10 +14,12 @@ export class HomeComponent implements OnInit {
   [x: string]: any;
   list: any[] = [1, 2, 3, 4];
   blog: any[] = [1, 1, 1];
+  type: number = 1;
 
   @ViewChild(SelectProductComponent) selecProducts!: SelectProductComponent;
   page: number = 1;
   products: productsDtos[] = [];
+  topProducts: productsDtos[] = [];
   isPopup: boolean = false;
 
   constructor(
@@ -26,6 +28,15 @@ export class HomeComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.LoadProduct(this.page);
+    this.LoadTopProducts(this.type);
+  }
+
+  LoadTopProducts(type: number) {
+    this.productService
+      .getTopProducts(type)
+      .subscribe((res: singleResponse<productsDtos[]>) => {
+        this.topProducts = res.data;
+      });
   }
 
   LoadProduct(page: number) {

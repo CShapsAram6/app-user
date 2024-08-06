@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ISignInRequest, ISignUp } from '../model/user.model';
+import { ISignInRequest, ISignUp, userByEmail } from '../model/user.model';
 import { catchError, map, Observable } from 'rxjs';
 import { singleResponse } from '../model/response.model';
 import { environment } from '../environment/environment.bassic';
@@ -12,7 +12,7 @@ import { error } from 'console';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, @Inject('IAuth') private auth: IAuth) {}
+  constructor(private http: HttpClient, @Inject('IAuth') private auth: IAuth) { }
 
   signIn(request: ISignInRequest): Observable<singleResponse<string>> {
     return this.http
@@ -55,6 +55,27 @@ export class AuthService {
   GetNameUser(id: number): Observable<singleResponse<string>> {
     return this.http.get<singleResponse<string>>(
       `${environment.api}/User/get-name-${id}`
+    );
+  }
+
+  signInWithEmail(request: userByEmail): Observable<singleResponse<string>> {
+    return this.http.post<singleResponse<string>>(
+      `${environment.api}/User/signin-email`, request
+    ).pipe(
+      map((response) => {
+        this.auth.setCookie(
+          'TokenUser',
+          response.data,
+          new Date(),
+          '/',
+          '',
+          ''
+        );
+        return response;
+      }),
+      catchError((err) => {
+        throw err;
+      })
     );
   }
 }

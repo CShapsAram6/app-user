@@ -14,7 +14,7 @@ import { singleResponse } from '../model/response.model';
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getData(page: string): Observable<singleResponse<productsDtos[]>> {
     return this.http.get<singleResponse<productsDtos[]>>(
@@ -48,5 +48,23 @@ export class ProductService {
     return this.http.get<singleResponse<IRelateToProductsDto[]>>(
       `${environment.api}/Product/relate-to-${id}`
     );
+  }
+
+  getTopProducts(type: number): Observable<singleResponse<productsDtos[]>> {
+    return this.http.get<singleResponse<productsDtos[]>>(
+      `${environment.api}/Product/top-products-${type}`
+    );
+  }
+
+  searchProducts(form: FormData): Observable<singleResponse<productsDtos[]>> {
+    return this.http.post<singleResponse<productsDtos[]>>(
+      `${environment.api}/Product/search-products`, form
+    )
+  }
+
+  searchProductsShop(form: FormData): Observable<singleResponse<productsUsingShop[]>> {
+    return this.http.post<singleResponse<productsUsingShop[]>>(
+      `${environment.api}/Product/search-shop`, form
+    )
   }
 }

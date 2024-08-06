@@ -6,12 +6,18 @@ interface IUserToken {
   Email: string;
   Id: string;
 }
-interface ISignUp{
-  username:string;
-  name:string;
-  email:string;
-  phone:string;
-  password:string;
+interface ISignUp {
+  username: string;
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
 }
 
-export { ISignInRequest, IUserToken, ISignUp };
+interface userByEmail {
+  picture: string;
+  email: string;
+  name: string;
+}
+
+export { ISignInRequest, IUserToken, ISignUp, userByEmail };

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
 import {
   colorDtos,
@@ -24,8 +24,9 @@ export class SingleProductComponent implements OnInit {
     private categoryServices: CategorysService,
     @Inject('ICartRepository') private cartRepository: ICartRepository,
     private sharedService: SharedService,
-    private toastrServices: ToastrService
-  ) {}
+    private toastrServices: ToastrService,
+    private route: Router
+  ) { }
   idProducts: number = this.router.snapshot.params['id'];
   product: singleProductDto = {} as singleProductDto;
   category: string = '';
@@ -40,6 +41,12 @@ export class SingleProductComponent implements OnInit {
   arrColor: IColorCart[] = [];
   colorCart: IColorCart = {} as IColorCart;
   ngOnInit(): void {
+    this.route.events.subscribe((envent) => {
+      if (envent instanceof NavigationEnd) {
+        this.idProducts = this.router.snapshot.params['id'];
+        this.LoadPage();
+      }
+    });
     this.LoadPage();
   }
 

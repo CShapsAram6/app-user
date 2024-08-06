@@ -134,34 +134,28 @@ py-[120px]">
     <h1 class="text-[40px] text-center font-serif">Sản phẩm nổi bật</h1>
     <!-- button tab -->
     <div class="flex items-center justify-center mt-[70px] gap-[50px] flex-wrap">
-        <button class="text-[20px] py-2 uppercase px-3  rounded-sm font-[500] hover:text-main btn--active">Bán chạy
+        <button class="text-[20px] py-2 uppercase px-3  rounded-sm font-[500] hover:text-main"
+            [class.btn--active]="type == 1" (click)="type = 1; LoadTopProducts(1)">Bán chạy
             nhất</button>
-        <button class="text-[20px] py-2 uppercase px-3 rounded-sm font-[500] hover:text-main">Sản phẩm mới</button>
-        <button class="text-[20px] py-2 uppercase px-3 rounded-sm font-[500] hover:text-main">Ưu đãi</button>
+        <button class="text-[20px] py-2 uppercase px-3 rounded-sm font-[500] hover:text-main"
+            [class.btn--active]="type == 2" (click)="type = 2; LoadTopProducts(2)">Sản phẩm mới</button>
     </div>
     <!-- button tab -->
 
     <!-- products -->
-
     <div class="container max-w-[1200px] mt-[70px] grid grid-cols-4 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
-        <div class="border rounded-sm cart--item bg-white" *ngFor="let item of list">
-            <div class="w-full h-[340px] overflow-hidden relative">
-                <img src="https://chongthambmt.com/wp-content/uploads/2023/04/neomax-826-82775f44-c977-41fa-ac34-b3b75517fa31-300x300.png"
-                    alt="" class="w-full h-full object-contain ">
-                <div class="absolute z-20 bottom-[-50px] left-0 w-full px-9 btn--add transition-all">
-                    <button
-                        class="bg-main text-white w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-title hover:text-white">
-                        <i class="fa-solid fa-cart-plus mr-[5px]"></i>
-                        Thêm vào giỏ hàng
-                    </button>
-                </div>
+        <div class="rounded-sm cart--item bg-white relative" *ngFor="let item of topProducts">
+            @if(type == 1){
+            <div class="px-2 h-[20px] rounded-sm bg-error absolute top-2 left-2 flex items-center">
+                <h1 class="uppercase font-[400] text-white text-[14px]">Hot</h1>
             </div>
-            <div class="">
-                <h2 class="text-black text-[17px] font-serif text-center mt-[24px] font-[500] line-clamp-1 uppercase">
-                    <a href="">Mini Olive Tree</a>
-                </h2>
-                <p class="text-main text-[17x] text-center mb-[24px] mt-3 font-[500]"> {{item.price}} .000đ</p>
+            }
+            @else {
+            <div class="px-2 h-[20px] rounded-sm bg-main absolute top-2 left-2 flex items-center">
+                <h1 class="uppercase font-[400] text-white text-[14px]">Mới</h1>
             </div>
+            }
+            <app-card-product [product]="item"></app-card-product>
         </div>
     </div>
 
@@ -196,37 +190,6 @@ py-[120px]">
     </div>
 </section>
 <!-- products -->
-
-<!-- voucher -->
-
-<!-- <section class="w-full h-[500px] max-sm:w-full"> -->
-<!-- <div class="container max-w-[1200px] relative h-full">
-        <div class="absolute top-[50%] left-0 translate-y-[-50%] w-[410px] max-lg:left-10 max-sm:w-[300px]">
-            <h1 class="text-[40px] font-serif max-lg:text-[34px] max-sm:w-full max-sm:line-clamp-2">Chúng tôi tin vào
-                sức mạnh của thực vật.
-            </h1>
-            <p
-                class="mt-[17px] text-[#9e9e9e] font-[500] text-[24px] mb-[40px] line-clamp-1 max-sm:text-[20px] max-sm:w-full">
-                Nhận
-                tới
-                20%
-                giảm giá cho
-                hàng mới về
-            </p>
-            <button
-                style="background: url('https://assets.website-files.com/63708df071bc73798fae96ee/637350306cba12253228b101_bg.svg') no-repeat;"
-                class="h-[51px] uppercase text-main text-[15px] font-[700] 
-        px-[30px] hover:text-[black]">
-                Cửa hàng
-            </button>
-        </div>
-    </div> -->
-<!-- <div class="flex justify-center size-full">
-        <img src="https://chongthamkhangan.com/img/banner.jpg" alt="" class="h-full">
-    </div> -->
-<!-- </section> -->
-
-<!-- voucher -->
 
 <!-- blog -->
 <section class="py-[120px] container max-w-[1200px]">
@@ -271,7 +234,7 @@ py-[120px]">
         </div>
     </div>
 </section>
-<!-- blog --> 
+<!-- blog -->
 
 <!-- select item cart -->
 <app-select-product></app-select-product>

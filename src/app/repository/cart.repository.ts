@@ -26,7 +26,7 @@ export class CartRepository implements ICartRepository {
     private cartService: CartService,
     @Inject('IAuth') private auth: IAuth,
     private router: Router
-  ) {}
+  ) { }
   changeQuantity(model: IChangeQuantity): Observable<singleResponse<string>> {
     let token: string = this.auth.getCookie('TokenUser');
     let user: IUserToken = this.auth.decodeToken(token);
@@ -126,8 +126,9 @@ export class CartRepository implements ICartRepository {
     let local = localStorage.getItem('cart');
     if (local) {
       this.localExist(item, 'cart', local, item.colors);
-      return of({ data: '', success: false, message: 'not ok' });
+      return of({ data: '', success: true, message: 'not ok' });
     }
+    this.localNotExist(item, 'cart');
     return of({ data: '', success: true, message: 'ok' });
   }
 

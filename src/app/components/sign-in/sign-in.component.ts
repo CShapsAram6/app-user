@@ -1,9 +1,9 @@
 declare var google: any;
 import { Component, Inject, OnInit } from '@angular/core';
 import { clientId } from '../../environment/environment.bassic';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { ISignInRequest } from '../../model/user.model';
+import { ISignInRequest, userByEmail } from '../../model/user.model';
 import { IAuth } from '../../interface/auth.interface';
 import { CartRepository } from '../../repository/cart.repository';
 
@@ -18,11 +18,11 @@ export class SignInComponent implements OnInit {
     private authService: AuthService,
     @Inject('ICartRepository') private cart: CartRepository,
     @Inject('IAuth') private auth: IAuth
-  ) {}
+  ) { }
 
   loginForm = this.form.group({
-    userName: [''],
-    password: [''],
+    userName: ['', [Validators.required]],
+    password: ['', [Validators.required]],
   });
   isForm: boolean = false;
 
@@ -31,7 +31,7 @@ export class SignInComponent implements OnInit {
     this.LoadPage();
   }
 
-  LoadPage() {}
+  LoadPage() { }
 
   LoginByGoogle() {
     google.accounts.id.initialize({
@@ -51,8 +51,15 @@ export class SignInComponent implements OnInit {
   }
   handleLogin(response: any) {
     if (!response) return;
-    const payLoad = this.decodeToken(response.credential);
-    console.log(response);
+    const payLoad: userByEmail = this.decodeToken(response.credential) as userByEmail;
+    this.authService.signInWithEmail(payLoad).subscribe((res) => {
+      if (res.data) {
+        this.cart.addCartEnterRedis(res.data);
+        return;
+      } else {
+        alert('fail');
+      }
+    })
   }
   // hash token
   private decodeToken(token: any) {
