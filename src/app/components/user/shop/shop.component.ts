@@ -106,9 +106,7 @@ export class ShopComponent implements OnInit {
       this.arrCategorys = response.data;
     });
   }
-  StringSize(size: number): string {
-    return this.cartRepository.convertStringFile(size);
-  }
+  
   SeeMoreProdcuts(number_page: number) {
     this.isFilter = 0;
     this.page = ++number_page;
