@@ -7,4 +7,5 @@ export interface IOrderRepository {
   getOrderUser(token: string, request: IOrderUserRequest): Observable<singleResponse<IOrderUserDto[]>>;
   getOrderById(id: number): Observable<singleResponse<IOrderDetailDto>>
   cancelOrderByUser(id: number, request: ICancelOrderUserRequest): Observable<orderResponse>;
+  sendEmail(id: number): Observable<orderResponse>;
 }
