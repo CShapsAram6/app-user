@@ -16,7 +16,7 @@ export class ShopCardComponent {
   @Input() products: any[] = [];
   @Input() selectedSizeIndices: any[] = [];
   @Input() selectedColorIndices: any[] = [];
-  productForWishList: any[] = [];
+  productForWishList: ProductForWishList[] = [];
 
   @Output() onClickEvent = new EventEmitter<{
     colors: any;
@@ -27,10 +27,17 @@ export class ShopCardComponent {
   ngOnInit(): void {
     this.LoadProductForWishList();
   }
-
-  CheckIsWishList(id: number): boolean {
-    return this.productForWishList.some((item) => item.id == id);
+  checkProductIsWishList: boolean = false
+  CheckIsWishList(id : number): boolean {
+    for (let i = 0; i < this.productForWishList.length; i++) {
+      if(this.productForWishList[i].productId === id) {
+        this.checkProductIsWishList = true
+        return this.checkProductIsWishList
+      }
+    }
+    return false;
   }
+
 
   AddToCart(colors: any, id: any, variant: any) {
     this.onClickEvent.emit({ colors, id, variant });
