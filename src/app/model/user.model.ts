@@ -13,8 +13,8 @@ interface ISignUp {
   phone: string;
   password: string;
 }
-interface UserInfoDTO{
-  Id : number;
+interface UserInfoDTO {
+  Id: number;
   UserName: string;
   Email: string;
   Phone: string;
@@ -29,4 +29,4 @@ interface userByEmail {
   name: string;
 }
 
-export { ISignInRequest, IUserToken, ISignUp, userByEmail };
+export { ISignInRequest, IUserToken, ISignUp, userByEmail, UserInfoDTO };
