@@ -7,12 +7,17 @@ import { environment } from '../environment/environment.bassic';
 import { IAuth } from '../interface/auth.interface';
 import { SignUpComponent } from '../components/sign-up/sign-up.component';
 import { error } from 'console';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, @Inject('IAuth') private auth: IAuth) { }
+  getCookie(token: string) {
+    throw new Error('Method not implemented.');
+  }
+  constructor(private http: HttpClient, @Inject('IAuth') private auth: IAuth, private cookieService: CookieService ) { }
+  private tokenKey = 'TokenUser';
 
   signIn(request: ISignInRequest): Observable<singleResponse<string>> {
     return this.http
@@ -77,5 +82,9 @@ export class AuthService {
         throw err;
       })
     );
+  }
+
+  getTokenUser(): string | null {
+    return this.cookieService.get(this.tokenKey) || null;
   }
 }

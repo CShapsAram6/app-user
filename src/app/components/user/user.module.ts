@@ -28,6 +28,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { ShopCardComponent } from './shop/shop-card/shop-card.component';
 
 const routes: Routes = [
   {
@@ -117,6 +118,7 @@ const routes: Routes = [
     BlogComponent,
     CardProductComponent,
     BlogDetailComponent,
+    ShopCardComponent,
   ],
   imports: [
     CommonModule,

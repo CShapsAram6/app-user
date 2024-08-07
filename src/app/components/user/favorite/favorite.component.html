@@ -1,1 +1,29 @@
-<p>favorite works!</p>
+<section class="w-[960px] max-xl:flex-1 bg-secondColor/5 px-[30px] relative">
+    @if(products.length > 0){
+    <div class="w-full bg-white mt-3 rounded-sm px-[25px] 
+        py-[15px]">
+        <h1 class="text-[17px] font-[500]">Có {{products.length}} sản phẩm</h1>
+    </div>
+
+    @if (products.length > 0){
+    <app-shop-card [products]="products" [selectedSizeIndices]="selectedSizeIndices"
+        [selectedColorIndices]="selectedColorIndices"></app-shop-card>
+    }
+    <div class="flex justify-center my-5">
+        <button class="text-[16px] font-[500] bg-main
+            px-4 py-2 rounded-sm text-white hover:bg-title
+            ">
+            Xem thêm
+        </button>
+    </div>
+    }
+    @else {
+    <div class="w-full flex items-center justify-center mt-[10rem] rounded-sm px-[25px]">
+        <h1 class="text-[30px] text-secondColor font-[500]">
+            <i class="fa-solid fa-filter-circle-xmark"></i>
+            Không tìm thấy sản phẩm
+        </h1>
+    </div>
+    }
+
+</section>

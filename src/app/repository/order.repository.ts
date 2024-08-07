@@ -24,4 +24,8 @@ export class OrderRepository implements IOrderRepository {
   cancelOrderByUser(id: number, request: ICancelOrderUserRequest): Observable<orderResponse> {
     return this.orderService.cancelOrderByUser(id, request);
   }
+
+  sendEmail(id: number): Observable<orderResponse> {
+    return this.orderService.sendEmail(id);
+  }
 }

@@ -83,7 +83,7 @@
                 <h1 class="text-[17px] font-[500]">Có {{products.length}} sản phẩm</h1>
             </div>
             <!-- item -->
-            <div class="w-full flex mt-[30px] rounded-sm bg-white max-md:flex-col relative"
+            <!-- <div class="w-full flex mt-[30px] rounded-sm bg-white max-md:flex-col relative"
                 *ngFor="let item of products; let itemIndex = index">
                 <button class="size-[290px] p-[30px] max-lg:size-[200px] max-lg:pt-[4rem] max-md:w-full max-md:h-auto">
                     <img [src]="item.image" alt="" class="size-full object-cover">
@@ -139,8 +139,12 @@
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </div>
-            </div>
+            </div> -->
             <!--  item -->
+
+            @if (products.length > 0){
+                <app-shop-card [products]="products" [selectedSizeIndices]="selectedSizeIndices" [selectedColorIndices]="selectedColorIndices" (onClickEvent)="AddToCart($event.colors, $event.id, $event.variant)"></app-shop-card>
+            }
             <div class="flex justify-center my-5">
                 <button class="text-[16px] font-[500] bg-main
                     px-4 py-2 rounded-sm text-white hover:bg-title
