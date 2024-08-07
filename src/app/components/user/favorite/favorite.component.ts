@@ -1,6 +1,7 @@
 import { WishListService } from './../../../services/wishlist.service';
 import { Component, Input } from '@angular/core';
 import { productsUsingShop } from '../../../model/product.model';
+import { ProductForWishList } from '../../../model/wishList.model';
 
 @Component({
   selector: 'app-favorite',
@@ -11,6 +12,7 @@ export class FavoriteComponent {
   products: productsUsingShop[] = [];
   selectedColorIndices: number[] = [];
   selectedSizeIndices: number[] = [];
+  productForWishList: ProductForWishList[] = [];
 
   constructor(private wishListService: WishListService) { }
 
@@ -19,11 +21,9 @@ export class FavoriteComponent {
   }
 
   async loadData() {
-    console.log('loadData được gọi');
     this.wishListService.getData().subscribe((res) => {
-      console.log('Dữ liệu được nhận:', res);
+
       this.products = res.data;
-      console.log('Sản phẩm được gán:', this.products);
       this.processData();
     }, (error) => {
       console.log('Lỗi khi nhận dữ liệu:', error);
@@ -31,9 +31,9 @@ export class FavoriteComponent {
   }
 
   processData() {
-    console.log('processData được gọi');
     this.selectedColorIndices = Array(this.products.length).fill(0);
     this.selectedSizeIndices = Array(this.products.length).fill(0);
-    console.log('Mảng màu và kích thước được tạo:', this.selectedColorIndices, this.selectedSizeIndices);
   }
+
+  
 }
