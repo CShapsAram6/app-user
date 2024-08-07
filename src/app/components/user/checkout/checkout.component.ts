@@ -24,6 +24,7 @@ import { forkJoin, map, mergeMap, Observable, of, tap } from 'rxjs';
 import { IOrderRequest } from '../../../model/order.model';
 import { IOrderRepository } from '../../../interface/order.interface';
 import { VariantService } from '../../../services/variant.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checkout',
@@ -43,7 +44,8 @@ export class CheckoutComponent implements OnInit {
     private addressService: AddressService,
     private router: Router,
     private pramaster: ActivatedRoute,
-    private variantService: VariantService
+    private variantService: VariantService,
+    private toastr: ToastrService
   ) {}
   arrCart: ICart[] = [];
   arrPayMent: IPayMentDtos[] = [];
@@ -117,7 +119,7 @@ export class CheckoutComponent implements OnInit {
     if (data.discountType.trim() == 'percent') {
       this.disCount = Math.ceil((this.total * data.discount) / 100);
     } else {
-      this.disCount = this.total - data.discount;
+      this.disCount = data.discount;
     }
   }
 
@@ -160,6 +162,11 @@ export class CheckoutComponent implements OnInit {
       });
   }
 
+  SendEmail(id: number) {
+    this.orderRepository.sendEmail(id).subscribe((res) => {
+      console.log(res);
+    });
+  }
   token: string = this.auth.getCookie('TokenUser');
   HandleButtonOrder() {
     const orderData: IOrderRequest = {
@@ -190,15 +197,14 @@ export class CheckoutComponent implements OnInit {
     );
     this.orderRepository.createOrder(orderData, this.token).subscribe(
       (res) => {
-        console.log(res);
+        console.log(res.data.orderId);
 
         if (
           res.data ==
           'Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có'
         ) {
-          alert(
-            'Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có!'
-          );
+          this.toastr.error('Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có!', 'Thông báo');
+
         } else {
           console.log(res.data);
           //Xóa giỏ hàng
@@ -211,18 +217,27 @@ export class CheckoutComponent implements OnInit {
           });
           //Chuyển qua thanh toán vnPay
           if (this.methodPayment.id == 2) {
-            window.location.href = res.data;
+            window.location.href = res.data.url;
+            this.router.navigate(['account/purchase']);
+            this.toastr.success('Đặt hàng thành công!', 'Thông báo');
+            this.SendEmail(res.data.orderId);
           }
           if (this.methodPayment.id == 3) {
-            window.location.href = res.data.orderurl;
+            window.location.href = res.data.url.orderurl;
+            this.router.navigate(['account/purchase']);
+            this.toastr.success('Đặt hàng thành công!', 'Thông báo');
+            this.SendEmail(res.data.orderId);
           }
-          alert('Đặt hàng thành công');
-          console.log(res);
-          this.router.navigate(['account/purchase']);
+          if(this.methodPayment.id == 1){
+            this.toastr.success('Đặt hàng thành công!', 'Thông báo');
+            this.router.navigate(['account/purchase']);
+            this.SendEmail(res.data.orderId);
+          }
+
         }
       },
       (err) => {
-        alert('Đặt hàng thất bại');
+        this.toastr.error('Đặt hàng thất bại!', 'Thông báo');
         console.log(err);
       }
     );
