@@ -30,9 +30,9 @@
                     class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
                     formControlName="userName">
                 <p class="mt-2 text-[15px] font-[500] text-color_validata"
-                    *ngIf="loginForm.get('userName')?.errors?.['required']">
+                    *ngIf="loginForm.get('userName')?.errors?.['required'] && (loginForm.controls['userName'].dirty || loginForm.controls['userName'].touched)">
                     <i class="fa-solid fa-circle-exclamation mr-2"></i>
-                    Bạn chưa nhập email
+                    Bạn chưa nhập tên đăng nhập
                 </p>
             </div>
             <div class="w-full mt-3">
@@ -40,7 +40,7 @@
                     class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
                     formControlName="password">
                 <p class="mt-2 text-[15px] font-[500] text-color_validata"
-                    *ngIf="loginForm.get('password')?.errors?.['required']">
+                    *ngIf="loginForm.get('password')?.errors?.['required'] && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
                     <i class="fa-solid fa-circle-exclamation mr-2"></i>
                     Bạn chưa nhập mật khẩu
                 </p>
