@@ -13,6 +13,15 @@ interface ISignUp {
   phone: string;
   password: string;
 }
+interface UserInfoDTO{
+  Id : number;
+  UserName: string;
+  Email: string;
+  Phone: string;
+  fullName: string;
+  linkAvatar: string;
+  address: string;
+}
 
 interface userByEmail {
   picture: string;
