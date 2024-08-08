@@ -55,10 +55,10 @@
         </div>
     </div>
     <div class="absolute top-2 right-3">
-        <button class="border border-black p-2 rounded-full is-check-wishList" *ngIf="CheckIsWishList(item.id) === true">
+        <button class="border border-black p-2 rounded-full is-check-wishList" *ngIf="CheckIsWishList(item.id) === true" (click)="DeleteProductToWishList(item.id)">
             <i class="fa-regular fa-heart"></i>
         </button>
-        <button class="border border-black p-2 rounded-full"  *ngIf="CheckIsWishList(item.id) === false">
+        <button class="border border-black p-2 rounded-full"  *ngIf="CheckIsWishList(item.id) === false" (click)="AddProductToWishList(item.id)">
             <i class="fa-regular fa-heart"></i>
         </button>
     </div>

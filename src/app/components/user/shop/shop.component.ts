@@ -139,32 +139,32 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  AddToCart(colors: colorDtos, idProducts: number, variant: variantDtos) {
-    const productIndex = this.products.findIndex(
-      (product) => product.id === idProducts
-    );
+  // AddToCart(colors: colorDtos, idProducts: number, variant: variantDtos) {
+  //   const productIndex = this.products.findIndex(
+  //     (product) => product.id === idProducts
+  //   );
 
-    if (productIndex === -1) {
-      console.error('Product not found');
-      return;
-    }
+  //   if (productIndex === -1) {
+  //     console.error('Product not found');
+  //     return;
+  //   }
 
-    const colorCart: IColorCart = {
-      id: colors.id,
-      code: colors.code,
-      quantity: 1,
-    };
+  //   const colorCart: IColorCart = {
+  //     id: colors.id,
+  //     code: colors.code,
+  //     quantity: 1,
+  //   };
 
-    this.cartRepository
-      .setCartShop(variant, [colorCart], this.products[productIndex])
-      .subscribe((res) => {
-        if (res.success) {
-          this.sharedService.emitButtonClick();
-          this.toastrServices.success(
-            'Thêm vào giỏ hàng thành công',
-            'Thành công'
-          );
-        }
-      });
-  }
+  //   this.cartRepository
+  //     .setCartShop(variant, [colorCart], this.products[productIndex])
+  //     .subscribe((res) => {
+  //       if (res.success) {
+  //         this.sharedService.emitButtonClick();
+  //         this.toastrServices.success(
+  //           'Thêm vào giỏ hàng thành công',
+  //           'Thành công'
+  //         );
+  //       }
+  //     });
+  // }
 }
