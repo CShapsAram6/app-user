@@ -84,14 +84,13 @@
                         </div>
                     </div>
                     <div class="w-[170px] text-center">
-                        {{item.price | currency : ' ': 'symbol':'1.0-0' }}.000đ
-                        <span class="text-[14px]">x {{item.quantity}}</span>
+                        {{(item.price*1000).toLocaleString()}}₫
                     </div>
                     <div class="w-[170px] text-center">
                         <h1> {{item.quantity}} </h1>
                     </div>
                     <div class="w-[170px] text-center">
-                        {{item.total | currency:' ':'symbol':'1.0-0'}}.000đ
+                        {{(item.total*1000).toLocaleString()}}₫
                     </div>
                 </div>
                 <!-- === item -->
@@ -127,7 +126,7 @@
                                 }
                                 @else {
                                 <h2 class="text-[13px] text-[#00000042]">
-                                    Giảm -{{voucher.discount | currency : ' ': 'symbol':'1.0-0}} 000đ'}}
+                                    Giảm -{{(voucher.discount * 1000).toLocaleString()}}₫
                                 </h2>
                                 }
                             </div>
@@ -196,20 +195,20 @@
                 <div class="w-[30%] flex flex-col gap-4 pr-[30px] py-[24px]">
                     <div class="flex items-center justify-between">
                         <p>Tổng tiền hàng:</p>
-                        <p class="font-[500]">{{total}}.000đ</p>
+                        <p class="font-[500]">{{(total*1000).toLocaleString()}}₫</p>
                     </div>
                     <div class="flex items-center justify-between">
                         <p>Phí vận chuyển:</p>
-                        <p class="font-[500]"> {{tipDelivery | currency : ' ': 'symbol':'1.0-0' }}.000đ</p>
+                        <p class="font-[500]"> {{(tipDelivery*1000).toLocaleString()}}₫</p>
                     </div>
                     <div class="flex items-center justify-between">
                         <p>Tổng cộng voucher giảm giá:</p>
-                        <p class="font-[500]"> -{{disCount | currency : ' ': 'symbol':'1.0-0'}}.000đ</p>
+                        <p class="font-[500]"> -{{(disCount*1000).toLocaleString()}}₫</p>
                     </div>
                     <div class="flex items-center justify-between">
                         <p>Tổng thanh toán:</p>
                         <p class="text-2xl font-[500] text-title"> {{
-                            (total + tipDelivery - disCount | currency : ' ': 'symbol':'1.0-0')}}.000đ</p>
+                            ((total + tipDelivery - disCount)*1000).toLocaleString()}}₫</p>
                     </div>
                     <button class="w-full bg-main hover:bg-title text-white
                     py-[15px] rounded-sm uppercase font-[500] text-[15px] transition-colors"

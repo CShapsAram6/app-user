@@ -6,7 +6,7 @@ interface voucherDtos {
   discountType: string;
   discount: number;
   min_Order_Value: number;
-  maxDiscount: number;
+  max_Discount: number;
   stock: number;
   status: number;
 }
