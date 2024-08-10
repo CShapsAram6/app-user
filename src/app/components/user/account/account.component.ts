@@ -27,5 +27,6 @@ export class AccountComponent implements OnInit {
     this.cookieService.delete('TokenUser');
     this.router.navigate(['/']);
     this.sharedService.emitButtonClick();
+    console.log("checkout")
   }
 }
