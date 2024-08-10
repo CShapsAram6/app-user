@@ -57,9 +57,7 @@ export class ShopCardComponent {
     this.wishListService.getProductForWishList().subscribe(
       (res) => {
         if (res.data) {
-          console.log('Dữ liệu trả về:', res.data);
           this.productForWishList = res.data;
-          console.log('ProductForWishList:', this.productForWishList);
         } else {
           console.error('Không có dữ liệu trả về');
         }
@@ -73,7 +71,6 @@ export class ShopCardComponent {
   AddProductToWishList(id: number) {
     this.wishListService.postWishList(id).subscribe(
       (res) => {
-        console.log('Thêm sản phẩm vào danh sách yêu thích thành công!');
         this.LoadProductForWishList();
       },
       (error) => {
@@ -85,7 +82,6 @@ export class ShopCardComponent {
   DeleteProductToWishList(id: number) {
     this.wishListService.deleteWishList(id).subscribe(
       (res) => {
-        console.log('Xoá sản phẩm yêu thích thành công!');
         this.LoadProductForWishList();
       },
       (error) => {
