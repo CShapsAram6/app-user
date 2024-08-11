@@ -15,16 +15,20 @@ export class ForgetPasswordComponent {
     private form: FormBuilder
   ) { }
 
+  submitted = false;
+
   registerform = this.form.group({
     token : [''],
-    currentPassword: [''],
-    newPassword: [''],
-    confirmPassword: ['']   
+    currentPassword: ['', [Validators.required]],
+    newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+    confirmPassword: ['', [Validators.required]]   
   },{ validators: passwordMatchValidator });
 
 
   async ChangePassWord()  {
     console.log(this.registerform.value);
+    this.submitted = true
+    if(this.registerform.invalid) return
     this.userService.ForgetPassword(this.registerform.value).subscribe(async (res) => {
       if (res) {
         console.log(res.messsage);
