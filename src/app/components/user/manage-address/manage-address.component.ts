@@ -15,7 +15,7 @@ export class ManageAddressComponent implements OnInit {
   constructor(
     private addressService: AddressService,
     @Inject('IAuth') private auth: IAuth
-  ) {}
+  ) { }
 
   public address: addressModel[] = [];
   ngOnInit(): void {

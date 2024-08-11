@@ -29,6 +29,8 @@ import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { ShopCardComponent } from './shop/shop-card/shop-card.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { PaymentErrorComponent } from './payment-error/payment-error.component';
 
 const routes: Routes = [
   {
@@ -95,6 +97,16 @@ const routes: Routes = [
         component: BlogDetailComponent,
         title:'Bài viết chi tiết',
       },
+      {
+        path:'payment-success',
+        component: PaymentSuccessComponent,
+        title:'Thanh toán đơn hàng thành công',
+      },
+      {
+        path:'payment-error',
+        component: PaymentErrorComponent,
+        title:'Thanh toán đơn hàng thất bại',
+      },
     ],
   },
 ];
@@ -119,6 +131,8 @@ const routes: Routes = [
     CardProductComponent,
     BlogDetailComponent,
     ShopCardComponent,
+    PaymentSuccessComponent,
+    PaymentErrorComponent,
   ],
   imports: [
     CommonModule,

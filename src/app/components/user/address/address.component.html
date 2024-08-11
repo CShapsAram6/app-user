@@ -98,6 +98,10 @@
                                             {{item.NameExtension[2]}}
                                         </option>
                                     </select>
+                                    <p class="mt-2 text-sm text-error"
+                                        *ngIf="addressForm.get('city')?.errors?.['required']">
+                                        Bạn chưa chọn địa chỉ thành phố
+                                    </p>
                                 </div>
                                 <!-- === district -->
                                 <div class="w-full mt-3" *ngIf="district.length > 0">
@@ -107,20 +111,28 @@
                                             {{item.NameExtension[1]}}
                                         </option>
                                     </select>
+                                    <p class="mt-2 text-sm text-error"
+                                        *ngIf="addressForm.get('district')?.errors?.['required']">
+                                        Bạn chưa chọn địa chỉ huyện
+                                    </p>
                                 </div>
                             </div>
                             <!-- === ward -->
                             <div class="w-full mt-3">
-                                <div class="w-full mt-3">
-                                    <select class="border-1 w-full px-3 py-2 focus:border-title" *ngIf="ward.length > 0"
+                                <div class="w-full mt-3" *ngIf="ward.length > 0">
+                                    <select class="border-1 w-full px-3 py-2 focus:border-title"
                                         (change)="onSelectChange($event, 'ward')">
                                         <option [value]="item.WardCode" *ngFor="let item of ward">
                                             {{item.NameExtension[1]}}
                                         </option>
                                     </select>
+                                    <p class="mt-2 text-sm text-error"
+                                        *ngIf="addressForm.get('wrad')?.errors?.['required']">
+                                        Bạn chưa chọn địa chỉ xã
+                                    </p>
                                 </div>
                             </div>
-                            <div class="w-full mt-3">
+                            <div class=" w-full mt-3">
                                 <input type="text" class="w-full border-1 px-3 py-2 rounded-sm focus:border-main"
                                     formControlName="detail" (keyup)="ChangeDetailAddress()"
                                     placeholder="Địa chỉ cụ thể">
@@ -156,14 +168,14 @@
                                 </button>
                                 @if(titleForm == 'Thêm địa chỉ mới'){
                                 <button
-                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500] disabled:opacity-[0.7] pointer-events-none"
+                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500] disabled:opacity-[0.7] disabled:pointer-events-none"
                                     (click)="SumbitFormm()" [disabled]="addressForm.invalid">
                                     Thêm địa chỉ mới
                                 </button>
                                 }
                                 @else {
                                 <button
-                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500] disabled:opacity-[0.7] pointer-events-none"
+                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500] disabled:opacity-[0.7] disabled:pointer-events-none"
                                     (click)="Update()" [disabled]="addressForm.invalid">
                                     Cập nhật địa chỉ
                                 </button>
