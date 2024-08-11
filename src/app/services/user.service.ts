@@ -25,11 +25,16 @@ export class UserService {
     return this.http.put(`${environment.api}/User/update-user-info`, data);
   }
 
-  ForgetPassword(data: any): Observable<any> {
+  ChangePassWord(data: any): Observable<any> {
     data.token = this.wishListService.getToken();
     data.currentPassword = data.currentPassword;
     data.newPassword = data.newPassword;
     data.confirmPassword = data.confirmPassword;
     return this.http.put(`${environment.api}/User/change-password`, data);
+  }
+
+  ForgetPassWord(email: string): Observable<any> {
+    const data = { email: email }
+    return this.http.put(`${environment.api}/User/forget-password`, data);
   }
 }

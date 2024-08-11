@@ -20,19 +20,19 @@
             <h1 class="text-[21px] font-[500]">Quên mật khẩu</h1>
         </div>       
         <!-- form -->
-<form class="mt-4 w-[348px] m-auto" >
+<form class="mt-4 w-[348px] m-auto" [formGroup]="registerform" (ngSubmit)="ForgetPassWord()">
     <div class="w-full">
         <input type="email" placeholder="Nhập email"
             class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
             formControlName="email">
-        <!-- <div *ngIf="registerform.controls['email'].invalid && (registerform.controls['email'].dirty || registerform.controls['email'].touched)" class="mt-2 text-[15px] text-error">
+        <div *ngIf="registerform.controls['email'].invalid && (registerform.controls['email'].dirty || registerform.controls['email'].touched) || registerform.invalid && submitted" class="mt-2 text-[15px] text-error">
             <span *ngIf="registerform.controls['email'].errors?.['required']">
                 Bạn chưa nhập email
             </span>
             <span *ngIf="registerform.controls['email'].errors?.['email']">
                 vui lòng nhập đúng định dạng email
             </span>
-        </div> -->
+        </div>
     </div>
     <button
         class="w-full mt-4 bg-main text-white py-[10px] rounded-sm hover:bg-black transition-colors font-[500] uppercase text-[15px]">

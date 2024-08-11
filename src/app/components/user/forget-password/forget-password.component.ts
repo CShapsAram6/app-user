@@ -1,6 +1,5 @@
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
-import { WishListService } from './../../../services/wishlist.service';
 import { Component } from '@angular/core';
 import { passwordMatchValidator } from '../../sign-up/sign-up.component';
 
@@ -20,7 +19,7 @@ export class ForgetPasswordComponent {
   registerform = this.form.group({
     token : [''],
     currentPassword: ['', [Validators.required]],
-    newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+    newPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
     confirmPassword: ['', [Validators.required]]   
   },{ validators: passwordMatchValidator });
 
@@ -29,7 +28,7 @@ export class ForgetPasswordComponent {
     console.log(this.registerform.value);
     this.submitted = true
     if(this.registerform.invalid) return
-    this.userService.ForgetPassword(this.registerform.value).subscribe(async (res) => {
+    this.userService.ChangePassWord(this.registerform.value).subscribe(async (res) => {
       if (res) {
         console.log(res.messsage);
         await alert(res.messsage)
