@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './components/user/cart/cart.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RelateToProductsComponent } from './components/user/cart/relate-to-products/relate-to-products.component';
+import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RelateToProductsComponent } from './components/user/cart/relate-to-prod
     CartComponent,
     HeaderComponent,
     RelateToProductsComponent,
+    ForgetpassComponent,
   ],
   imports: [
     UserModule,
