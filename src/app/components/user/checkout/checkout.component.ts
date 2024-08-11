@@ -46,7 +46,7 @@ export class CheckoutComponent implements OnInit {
     private pramaster: ActivatedRoute,
     private variantService: VariantService,
     private toastr: ToastrService
-  ) {}
+  ) { }
   arrCart: ICart[] = [];
   arrPayMent: IPayMentDtos[] = [];
   methodPayment: IPayMentDtos = {} as IPayMentDtos;
@@ -116,18 +116,19 @@ export class CheckoutComponent implements OnInit {
     this.calculationVoucher(data);
   }
   calculationVoucher(data: voucherDtos) {
-    if(this.total >= data.min_Order_Value){
+    if (this.total >= data.min_Order_Value) {
       if (data.discountType.trim() == 'percent') {
         this.disCount = Math.ceil((this.total * data.discount) / 100);
-        if(this.disCount > data.max_Discount){
+        if (this.disCount > data.max_Discount) {
           this.disCount = data.max_Discount;
         }
       } else {
         this.disCount = data.discount;
       }
     }
-    else{
-      this.toastr.error('Tổng tiền hàng phải tối thiểu ' +  (data.min_Order_Value * 1000).toLocaleString() + '₫ mới được sử dụng voucher ' + data.name , 'Thông báo');
+    else {
+      this.toastr.error('Tổng tiền hàng phải tối thiểu ' + (data.min_Order_Value * 1000).toLocaleString() + '₫ mới được sử dụng voucher ' + data.name, 'Thông báo');
+      this.RemoveVoucher();
     }
   }
 
@@ -206,7 +207,7 @@ export class CheckoutComponent implements OnInit {
     this.orderRepository.createOrder(orderData, this.token).subscribe(
       (res) => {
         console.log(res.data.orderId);
-
+        localStorage.setItem('orderId', res.data.orderId);
         if (
           res.data ==
           'Số lượng sản phẩm đã đặt nhiều hơn số lượng sản phẩm đang có'
@@ -226,17 +227,12 @@ export class CheckoutComponent implements OnInit {
           //Chuyển qua thanh toán vnPay
           if (this.methodPayment.id == 2) {
             window.location.href = res.data.url;
-            this.router.navigate(['account/purchase']);
-            this.toastr.success('Đặt hàng thành công!', 'Thông báo');
-            this.SendEmail(res.data.orderId);
           }
           if (this.methodPayment.id == 3) {
             window.location.href = res.data.url.orderurl;
-            this.router.navigate(['account/purchase']);
-            this.toastr.success('Đặt hàng thành công!', 'Thông báo');
             this.SendEmail(res.data.orderId);
           }
-          if(this.methodPayment.id == 1){
+          if (this.methodPayment.id == 1) {
             this.toastr.success('Đặt hàng thành công!', 'Thông báo');
             this.router.navigate(['account/purchase']);
             this.SendEmail(res.data.orderId);
