@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { AddressService } from '../../../services/address.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { IAddressRepository } from '../../../interface/address.interfaces';
 import {
   addressGetById,
@@ -26,21 +26,21 @@ export class AddressComponent implements OnInit {
     @Inject('IAddressRepository')
     private iaddressRepository: IAddressRepository,
     @Inject('IAuth') private auth: IAuth
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.Getprovince();
     this.LoadAddress();
   }
   addressForm = this.form.group({
-    address: [''],
-    fullName: [''],
-    phone: [''],
-    city: [''],
-    district: [''],
-    wrad: [''],
-    detail: [''],
-    idDistrict: [''],
-    idWard: [''],
+    address: ['', [Validators.required]],
+    fullName: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    city: ['', [Validators.required]],
+    district: ['', [Validators.required]],
+    wrad: ['', [Validators.required]],
+    detail: ['', [Validators.required]],
+    idDistrict: ['', [Validators.required]],
+    idWard: ['', [Validators.required]],
     id: [`${this.iaddressRepository.generateRandomString(5)}`],
   });
   // get values City form assets/.json
@@ -153,9 +153,8 @@ export class AddressComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     this.addressForm.patchValue({
       district: selectElement.options[selectElement.selectedIndex].text,
-      address: `${selectElement.options[selectElement.selectedIndex].text}, ${
-        this.addressForm.value.city
-      }`,
+      address: `${selectElement.options[selectElement.selectedIndex].text}, ${this.addressForm.value.city
+        }`,
       idDistrict: selectElement.value,
     });
     this.GetWard(Number(selectElement.value));
@@ -165,9 +164,8 @@ export class AddressComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     this.addressForm.patchValue({
       wrad: selectElement.options[selectElement.selectedIndex].text,
-      address: `${selectElement.options[selectElement.selectedIndex].text}, ${
-        this.addressForm.value.district
-      }, ${this.addressForm.value.city}`,
+      address: `${selectElement.options[selectElement.selectedIndex].text}, ${this.addressForm.value.district
+        }, ${this.addressForm.value.city}`,
       idWard: selectElement.value,
     });
   }
@@ -226,6 +224,7 @@ export class AddressComponent implements OnInit {
     this.addressService.changeIsPrimary(model).subscribe((res) => {
       if (res.success) {
         this.dataEvent.emit(item);
+        this.LoadAddress();
         this.closePopup();
       }
     });

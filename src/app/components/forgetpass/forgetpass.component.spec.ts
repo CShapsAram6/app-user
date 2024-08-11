@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FavoriteComponent } from './favorite.component';
+import { ForgetpassComponent } from './forgetpass.component';
 
-describe('FavoriteComponent', () => {
-  let component: FavoriteComponent;
-  let fixture: ComponentFixture<FavoriteComponent>;
+describe('ForgetpassComponent', () => {
+  let component: ForgetpassComponent;
+  let fixture: ComponentFixture<ForgetpassComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FavoriteComponent]
+      declarations: [ForgetpassComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FavoriteComponent);
+    fixture = TestBed.createComponent(ForgetpassComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

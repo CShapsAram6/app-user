@@ -38,11 +38,11 @@
 
   <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
     <div class="w-full mb-4 mt-6">
-      <label for="" class="mb-2 dark:text-gray-300  font-semibold text-xl" >Tên Tài Khoản</label>
+      <label for="" class="mb-2 dark:text-gray-300  font-semibold text-xl">Tên Tài Khoản</label>
       <input type="text"
-      class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-      placeholder="Tên tài khoản" formControlName="userName" readonly>
-    
+        class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+        placeholder="Tên tài khoản" formControlName="userName" readonly>
+
     </div>
   </div>
   <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
@@ -50,10 +50,10 @@
       <label for="" class="dark:text-gray-300 font-semibold text-xl">Họ và tên</label>
       <input type="text"
         class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-        placeholder="Họ và tên" formControlName="fullName" >
-        <div *ngIf="profileForm.get('fullName')?.invalid && profileForm.get('fullName')?.touched" class="text-danger">
-          Nhập lại họ tên
-        </div>
+        placeholder="Họ và tên" formControlName="fullName">
+      <div *ngIf="profileForm.get('fullName')?.invalid && profileForm.get('fullName')?.touched" class="text-danger">
+        Nhập lại họ tên
+      </div>
     </div>
   </div>
   <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
@@ -75,9 +75,9 @@
         class="text-grey p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
         formControlName="phone" placeholder="Số điện thoại">
 
-        <div *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched" class="text-danger py-4">
-          Sai định dạng số điện thoại
-          </div>
+      <div *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched" class="text-danger py-4">
+        Sai định dạng số điện thoại
+      </div>
     </div>
   </div>
 

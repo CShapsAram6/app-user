@@ -1,0 +1,65 @@
+<div class="w-full flex mt-[30px] rounded-sm bg-white max-md:flex-col relative"
+    *ngFor="let item of products; let itemIndex = index">
+    <button class="size-[290px] p-[30px] max-lg:size-[200px] max-lg:pt-[4rem] max-md:w-full max-md:h-auto">
+        <img [src]="item.image" alt="" class="size-full object-cover" />
+    </button>
+    <div class="py-[4rem] grid grid-cols-2 flex-1 max-md:grid-cols-1 max-md:py-[2rem]">
+        <div class="px-[35px] border-x">
+            <button [routerLink]="['/single-product/' + item.id]" class="text-[20px] text-title font-[500]">
+                {{ item.name }}
+            </button>
+            <div class="text-justify mt-4 leading-6 line-clamp-4" [innerHTML]="item.description"></div>
+        </div>
+
+        <div class="px-[35px] max-md:mt-3">
+            <button class="text-[20px] font-[500] text-main">
+                {{
+                item.variant[selectedSizeIndices[itemIndex]].price
+                | currency : " " : "symbol" : "1.0-0"
+                }},000đ
+            </button>
+            <div class="mt-3 flex items-center gap-x-3">
+                <button class="size-[20px] border border-black rounded-full font-[500]"
+                    [ngStyle]="{ background: colors.code }" *ngFor="let colors of item.colors; let colorIndex = index"
+                    [class.is-color-active]="
+            selectedColorIndices[itemIndex] === colorIndex
+          " (click)="selectedColorIndices[itemIndex] = colorIndex">
+                    @if(selectedColorIndices[itemIndex] === colorIndex){
+                    <i class="fa-solid fa-check text-[12px]"></i>
+                    }
+                </button>
+            </div>
+            <div class="flex items-center mt-3 gap-x-3 flex-wrap">
+                <div class="flex items-center gap-x-1" *ngFor="let variant of item.variant; let variantIndex = index">
+                    <button class="rounded-full size-[18px] font-[500] border"
+                        [class.is-active]="selectedSizeIndices[itemIndex] === variantIndex"
+                        (click)="selectedSizeIndices[itemIndex] = variantIndex"></button>
+                    <p class="">
+                        {{ StringSize(variant.size) }}
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <button
+                    class="w-full bg-main rounded-sm py-[10px] uppercase text-white font-[500] text-[14px] hover:bg-title"
+                    (click)="
+            AddToCart(
+              item.colors[selectedColorIndices[itemIndex]],
+              item.id,
+              item.variant[selectedSizeIndices[itemIndex]]
+            )
+          ">
+                    Thêm vào giỏ hàng
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="absolute top-2 right-3">
+        <button class="border border-black p-2 rounded-full is-check-wishList" *ngIf="CheckIsWishList(item.id) === true" (click)="DeleteProductToWishList(item.id)">
+            <i class="fa-regular fa-heart"></i>
+        </button>
+        <button class="border border-black p-2 rounded-full"  *ngIf="CheckIsWishList(item.id) === false" (click)="AddProductToWishList(item.id)">
+            <i class="fa-regular fa-heart"></i>
+        </button>
+    </div>
+</div>

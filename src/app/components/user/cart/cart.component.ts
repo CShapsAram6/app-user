@@ -5,6 +5,8 @@ import { IAuth } from '../../../interface/auth.interface';
 import { VariantService } from '../../../services/variant.service';
 import { Router } from '@angular/router';
 import { RelateToProductsComponent } from './relate-to-products/relate-to-products.component';
+import { SharedService } from '../../../services/shared.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +20,9 @@ export class CartComponent implements OnInit {
     @Inject('ICartRepository') private cartRepository: ICartRepository,
     @Inject('IAuth') private auth: IAuth,
     private variantService: VariantService,
-    private router: Router
+    private router: Router,
+    private sharedServices: SharedService,
+    private toastrServices: ToastrService
   ) {}
   arrCartItem: ICart[] = [];
   total: number = 0;
@@ -56,6 +60,8 @@ export class CartComponent implements OnInit {
     this.cartRepository.deleteCart(id).subscribe((res) => {
       if (res.success) {
         this.LoadCart();
+        this.sharedServices.emitButtonClick();
+        this.toastrServices.success('Xoá sản phẩm thành công', 'Thành công');
       }
     });
   }
@@ -71,6 +77,7 @@ export class CartComponent implements OnInit {
     this.cartRepository.changeQuantity(request).subscribe((res) => {
       if (res.success) {
         this.LoadPage();
+        this.sharedServices.emitButtonClick();
       }
     });
   }

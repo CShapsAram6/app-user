@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
 import {
   colorDtos,
@@ -9,6 +9,8 @@ import {
 import { CategorysService } from '../../../services/categorys.service';
 import { ICartRepository } from '../../../interface/cart.interface';
 import { IColorCart } from '../../../model/cart.model';
+import { SharedService } from '../../../services/shared.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-single-product',
@@ -20,8 +22,11 @@ export class SingleProductComponent implements OnInit {
     private router: ActivatedRoute,
     private productServices: ProductService,
     private categoryServices: CategorysService,
-    @Inject('ICartRepository') private cartRepository: ICartRepository
-  ) {}
+    @Inject('ICartRepository') private cartRepository: ICartRepository,
+    private sharedService: SharedService,
+    private toastrServices: ToastrService,
+    private route: Router
+  ) { }
   idProducts: number = this.router.snapshot.params['id'];
   product: singleProductDto = {} as singleProductDto;
   category: string = '';
@@ -36,6 +41,12 @@ export class SingleProductComponent implements OnInit {
   arrColor: IColorCart[] = [];
   colorCart: IColorCart = {} as IColorCart;
   ngOnInit(): void {
+    this.route.events.subscribe((envent) => {
+      if (envent instanceof NavigationEnd) {
+        this.idProducts = this.router.snapshot.params['id'];
+        this.LoadPage();
+      }
+    });
     this.LoadPage();
   }
 
@@ -122,7 +133,16 @@ export class SingleProductComponent implements OnInit {
     return this.cartRepository.convertStringFile(size);
   }
   AddToCart() {
-    this.cartRepository.setData(this.variant, this.product, this.arrColor);
-    alert('add ok');
+    this.cartRepository
+      .setData(this.variant, this.product, this.arrColor)
+      .subscribe((res) => {
+        if (res.success) {
+          this.toastrServices.success(
+            'Thêm vào giỏ hàng thành công',
+            'Thông báo'
+          );
+          this.sharedService.emitButtonClick();
+        }
+      });
   }
 }

@@ -51,7 +51,17 @@ export class ManageAddressComponent implements OnInit {
     this.addressComponent.Getprovince();
   }
 
-  UpdateAddress(id: string) {
-    this.addressComponent.generateForm(id);
+  async UpdateAddress(id: string) {
+    this.addressComponent.isPopup = true;
+    document.body.style.overflow = 'hidden';
+
+    await this.addressComponent.Getprovince();
+
+    this.addressComponent.ChangeForm('create', id);
+  }
+  LoadAddress(data: addressModel) {
+    if (data.address) {
+      this.LoadPage();
+    }
   }
 }

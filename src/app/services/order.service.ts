@@ -64,4 +64,8 @@ export class OrderService {
       request
     );
   }
+
+  sendEmail(id: number): Observable<orderResponse> {
+    return this.http.post<orderResponse>(`${environment.api}/Order/send-email-${id}`, {});
+  }
 }

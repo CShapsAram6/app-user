@@ -66,7 +66,6 @@
                 </div>
                 <!-- update address -->
                 <div class="">
-
                     <h1 class="text-xl pt-[25px] px-[25px]" *ngIf="1 > 0">
                         {{titleForm}}
                     </h1>
@@ -74,15 +73,20 @@
                         <form [formGroup]="addressForm">
                             <div class="flex items-center gap-3">
                                 <div class="">
-                                    <input type="text"
-                                        class="border-1 px-3 py-2 rounded-sm border-error focus:border-main w-full"
+                                    <input type="text" class="border-1 px-3 py-2 rounded-sm focus:border-main w-full"
                                         placeholder="Họ tên" formControlName="fullName">
-                                    <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
+                                    <p class="mt-2 text-sm text-error"
+                                        *ngIf="addressForm.get('fullName')?.errors?.['required'] && (addressForm.controls['fullName'].dirty || addressForm.controls['fullName'].touched)">
+                                        Bạn chưa nhập họ tên
+                                    </p>
                                 </div>
                                 <div class="">
                                     <input type="text" class="border-1 px-3 py-2 rounded-sm focus:border-main w-full"
                                         placeholder="Số điện thoại" formControlName="phone">
-                                    <p class="mt-2 text-sm text-error">Bạn chưa nhập họ tên</p>
+                                    <p class="mt-2 text-sm text-error"
+                                        *ngIf="addressForm.get('phone')?.errors?.['required'] && (addressForm.controls['phone'].dirty || addressForm.controls['phone'].touched)">
+                                        Bạn chưa nhập số điện thoại
+                                    </p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3">
@@ -117,12 +121,12 @@
                                 </div>
                             </div>
                             <div class="w-full mt-3">
-                                <input type="text"
-                                    class="w-full border-1 px-3 py-2 rounded-sm border-error focus:border-main"
+                                <input type="text" class="w-full border-1 px-3 py-2 rounded-sm focus:border-main"
                                     formControlName="detail" (keyup)="ChangeDetailAddress()"
                                     placeholder="Địa chỉ cụ thể">
-                                <p class="mt-2 text-sm text-error">
-                                    Bạn chưa nhập họ tên
+                                <p class="mt-2 text-sm text-error"
+                                    *ngIf="addressForm.get('detail')?.errors?.['required'] && (addressForm.controls['detail'].dirty || addressForm.controls['detail'].touched)">
+                                    Bạn chưa nhập địa chỉ cụ thể
                                 </p>
                             </div>
 
@@ -152,15 +156,15 @@
                                 </button>
                                 @if(titleForm == 'Thêm địa chỉ mới'){
                                 <button
-                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500]"
-                                    (click)="SumbitFormm()">
+                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500] disabled:opacity-[0.7] pointer-events-none"
+                                    (click)="SumbitFormm()" [disabled]="addressForm.invalid">
                                     Thêm địa chỉ mới
                                 </button>
                                 }
                                 @else {
                                 <button
-                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500]"
-                                    (click)="Update()">
+                                    class="bg-main text-white uppercase text-sm px-4 py-2 rounded-sm hover:bg-black transition-colors font-[500] disabled:opacity-[0.7] pointer-events-none"
+                                    (click)="Update()" [disabled]="addressForm.invalid">
                                     Cập nhật địa chỉ
                                 </button>
                                 }

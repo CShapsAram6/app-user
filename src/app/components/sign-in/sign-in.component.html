@@ -1,44 +1,3 @@
-@if(0 > 1){
-<!-- login with google -->
-<div id="google-btn"></div>
-<div class="mt-4 relative">
-    <div class="bg-white z-10 px-3 text-gray-300 absolute top-[-7px] left-[50%] translate-x-[-50%]">Or</div>
-    <hr>
-</div>
-
-<!-- login with google -->
-<!-- form -->
-<form class="mt-4" [formGroup]="loginForm">
-    <div class="w-full">
-        <input type="text" placeholder="Nhập email"
-            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
-            formControlName="userName">
-        <p class="mt-2 text-[15px] text-error">
-            Bạn chưa nhập email
-        </p>
-    </div>
-    <div class="w-full mt-3">
-        <input type="password" placeholder="Nhập mật khẩu"
-            class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
-            formControlName="password">
-        <p class="mt-2 text-[15px] text-error">
-            Bạn chưa nhập mật khẩu
-        </p>
-    </div>
-    <div class="mt-4 flex justify-end">
-        <button class="text-title font-[500] hover:text-main/65">
-            Quên mật khẩu
-        </button>
-    </div>
-    <button
-        class="w-full mt-4 bg-main text-white py-[10px] rounded-sm hover:bg-black transition-colors font-[500] uppercase text-[15px]"
-        (click)="SumbitForm()">
-        Đăng nhập
-    </button>
-</form>
-<!-- form -->
-}
-
 <main class="flex items-center">
     <section class="flex-1 relative">
         <div class="h-dvh">
@@ -48,11 +7,11 @@
     </section>
     <section class="w-[480px] py-[40px] h-dvh relative">
         <div class="flex justify-center mb-[70px] mt-[50px]">
-            <button class="">
+            <button [routerLink]="['/']">
                 <h1 class="uppercase text-[20px] font-[500]">
                     Chống thấm khang an
                 </h1>
-                <h1 class="uppercase text-[7.8px]">
+                <h1 class="uppercase text-[12px]">
                     Cung Thi công chống thấm - Cung cấp vật tư chống thấm
                 </h1>
             </button>
@@ -67,31 +26,33 @@
         <!-- form -->
         <form class="mt-4 w-[348px] m-auto" [formGroup]="loginForm">
             <div class="w-full">
-                <input type="text" placeholder="Nhập email"
+                <input type="text" placeholder="Nhập tên đăng nhập"
                     class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
                     formControlName="userName">
-                <p class="mt-2 text-[15px] font-[500] text-color_validata">
+                <p class="mt-2 text-[15px] font-[500] text-color_validata"
+                    *ngIf="loginForm.get('userName')?.errors?.['required'] && (loginForm.controls['userName'].dirty || loginForm.controls['userName'].touched)">
                     <i class="fa-solid fa-circle-exclamation mr-2"></i>
-                    Bạn chưa nhập email
+                    Bạn chưa nhập tên đăng nhập
                 </p>
             </div>
             <div class="w-full mt-3">
                 <input type="password" placeholder="Nhập mật khẩu"
                     class="w-full border-1 px-[8px] py-[7px] rounded-sm focus:border-main text-[17px]"
                     formControlName="password">
-                <p class="mt-2 text-[15px] font-[500] text-color_validata">
+                <p class="mt-2 text-[15px] font-[500] text-color_validata"
+                    *ngIf="loginForm.get('password')?.errors?.['required'] && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
                     <i class="fa-solid fa-circle-exclamation mr-2"></i>
-                    Bạn chưa nhập email
+                    Bạn chưa nhập mật khẩu
                 </p>
             </div>
             <div class="mt-4 flex justify-end">
-                <button class="text-title font-[500] hover:text-main/65">
+                <button class="text-title font-[500] hover:text-main/65" [routerLink]="['/forgetpass']">
                     Quên mật khẩu
                 </button>
             </div>
             <button
-                class="w-full mt-4 bg-main text-white py-[10px] rounded-sm hover:bg-black transition-colors font-[500] uppercase text-[15px]"
-                (click)="SumbitForm()">
+                class="w-full mt-4 bg-main text-white py-[10px] rounded-sm hover:bg-black transition-colors font-[500] uppercase text-[15px] disabled:opacity-[0.7] disabled:pointer-events-none"
+                (click)="SumbitForm()" [disabled]="loginForm.invalid">
                 Đăng nhập
             </button>
         </form>
@@ -112,7 +73,7 @@
         </div>
         <div class="w-[348px] mx-auto mt-8 text-[15px]">
             <p class="text-center mt-3 text-[15px] leading-5">
-                Bạn chưa có tài khoản? <button class="text-main">Đăng kí</button>
+                Bạn chưa có tài khoản? <button class="text-main" [routerLink]="['/sign-up']">Đăng kí</button>
             </p>
         </div>
 

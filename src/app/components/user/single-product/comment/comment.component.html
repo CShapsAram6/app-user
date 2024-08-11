@@ -9,6 +9,9 @@
         <input class="form-control d-none" type="file" id="formFileMultiple" multiple=""
             (change)="onFilesSelected($event)">
         <div class="d-flex gap-3 flex-wrap">
+            <label for="formFileMultiple" class="form-label privew-image hover:bg-secondColor/10">
+                <i class="fa-regular fa-image"></i>
+            </label>
             <div class="position-relative rounded rounded-1 privew-image" *ngFor="let item of imageUrls">
                 <img [src]="item.url" alt="" class="rounded-1">
                 <button class="position-absolute rounded-sm" (click)="RemoveItem(item.index)"
@@ -16,9 +19,6 @@
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-            <label for="formFileMultiple" class="form-label privew-image hover:bg-secondColor/10">
-                <i class="fa-regular fa-image"></i>
-            </label>
         </div>
     </div>
 </section>

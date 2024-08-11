@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@ang
 import { AuthService } from '../../services/auth.service';
 import { ISignUp } from '../../model/user.model';
 import { error } from 'console';
+import { Router } from '@angular/router';
 
 export function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
 
@@ -21,7 +22,7 @@ export function passwordMatchValidator(control: AbstractControl): ValidationErro
 export class SignUpComponent implements OnInit {
 
 
-  constructor(private form: FormBuilder,private user:AuthService ){}
+  constructor(private form: FormBuilder,private user:AuthService, private Router:Router ){}
   ngOnInit(): void {
     this.registerform;
   }
@@ -63,12 +64,13 @@ export class SignUpComponent implements OnInit {
           }else{
             console.log("qua if")
             let request:ISignUp = this.registerform.value as ISignUp;
-            // this.user.signUp(request).subscribe(
-            //   (da) =>{
-            //     console.log(da)
-            //   },
-            //   (error) => {console.log(error)}
-            // )
+            this.user.signUp(request).subscribe(
+              (da) =>{
+                this.Router.navigate(['/sign-in']);
+                console.log(da)
+              },
+              (error) => {console.log(error)}
+            )
             }
           },
           (error) => (console.log(error))

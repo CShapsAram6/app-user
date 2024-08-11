@@ -24,6 +24,11 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { BlogComponent } from './blog/blog.component';
 import { CardProductComponent } from './card-product/card-product.component';
+import { CookieService } from 'ngx-cookie-service';
+import { provideToastr, ToastrModule } from 'ngx-toastr';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { ShopCardComponent } from './shop/shop-card/shop-card.component';
 
 const routes: Routes = [
   {
@@ -85,6 +90,11 @@ const routes: Routes = [
         component: BlogComponent,
         title: 'Bài viết',
       },
+      {
+        path:'blog-detail/:id',
+        component: BlogDetailComponent,
+        title:'Bài viết chi tiết',
+      },
     ],
   },
 ];
@@ -107,6 +117,8 @@ const routes: Routes = [
     FavoriteComponent,
     BlogComponent,
     CardProductComponent,
+    BlogDetailComponent,
+    ShopCardComponent,
   ],
   imports: [
     CommonModule,
@@ -116,6 +128,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     FormsModule,
+    ToastrModule.forRoot(),
   ],
+  providers: [CookieService, provideAnimations(), provideToastr()],
 })
 export class UserModule {}

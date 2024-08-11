@@ -1,5 +1,5 @@
 <!-- header -->
-<header class="w-full bg-main py-[7px] flex items-center justify-center relative">
+<header class="w-full bg-main py-[7px] flex items-center justify-center relative max-sm:hidden">
     <h1 class="text-white">
         <i class="fa-solid fa-phone-volume mr-3"></i>
         Hotline : 0966 433 493
@@ -8,24 +8,34 @@
 <!-- header -->
 <header class="border-b">
     <div class="container max-w-[1200px]">
-        <div class="py-[36px] flex items-center gap-x-[40px]">
+        <div class="py-[36px] flex items-center gap-x-[40px] max-sm:justify-between max-sm:py-[10px]">
+            <img src="../../assets/LogoAnKhang.png"
+                class="w-[160px] h-[90px] object-cover max-lg:w-[100px] max-lg:h-[60px]" alt="">
             <!-- logo -->
-            <!-- <button class="">
-                <h1 class="uppercase text-[20px] font-[500]">
-                    Chống thấm khang an
-                </h1>
-                <h1 class="uppercase text-[7.8px]">
-                    Cung Thi công chống thấm - Cung cấp vật tư chống thấm
-                </h1>
-            </button> -->
-            <img src="../../assets/LogoAnKhang.png" class="w-[160px] h-[90px] object-cover" alt="">
-            <!-- logo -->
-            <div class="flex-1 h-[35px] flex items-center">
+            <div class="flex-1 h-[35px] flex items-center max-sm:hidden relative">
                 <input type="text" class="border px-[12px] py-[8px] h-full flex-1 rounded-s-sm text-secondColor"
-                    placeholder="Nhập tên sản phâm.....">
-                <button class="hover:bg-title rounded-e-sm text-white bg-main h-full px-[40px]">
+                    placeholder="Nhập tên sản phâm....." [formControl]="inputControl" (keydown.enter)="HandleSearch()">
+                <button class="hover:bg-title rounded-e-sm text-white bg-main h-full px-[40px] max-md:px-[20px]"
+                    (click)="HandleSearch()">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
+                <article class="absolute bg-white border w-full left-0 top-[38px] z-[9999] h-[18rem] overflow-y-auto"
+                    *ngIf="productsSearch.length > 0">
+                    <section class="" *ngFor="let item of productsSearch">
+                        <button
+                            class="flex items-center gap-x-4 p-2 border-t-2 hover:bg-secondColor/10 w-full transition-all"
+                            [routerLink]="['single-product', item.id]" (click)="ResetHeader()">
+                            <div class="size-[50px]">
+                                <img [src]="item.image" alt="{{item.name}}" class="size-full object-cover">
+                            </div>
+                            <div class="text-left">
+                                <h1 class="font-[400]">{{item.name}}</h1>
+                                <p class="text-main text-[14px] font-[500] mt-2">{{item.price | currency: ' ' : 'symbol'
+                                    : '1.0-0' }},000đ</p>
+                            </div>
+                        </button>
+                    </section>
+                </article>
             </div>
             <div class="[&_button]:flex [&_button]:items-center [&_button]:gap-2 flex items-center gap-6">
                 @if(!isGroupBtn){
@@ -40,11 +50,11 @@
                 </button>
                 }
                 @else {
-                <button class="" [routerLink]="['account']">
+                <button class="" [routerLink]="['account']" (click)="ResetHeader()">
                     <div class="">
                         <i class="fa-regular fa-user text-[20px]"></i>
                     </div>
-                    <div class="text-[14px] text-left">
+                    <div class="text-[14px] text-left max-md:hidden">
                         <p class="text-[14px]">Tài khoản</p>
                         <strong class="text-[16px]">
                             {{fullName}}
@@ -52,12 +62,11 @@
                     </div>
                 </button>
                 }
-                <button class="" [routerLink]="['/cart']">
+                <button class="" [routerLink]="['/cart']" (click)="ResetHeader()">
                     <div class="">
-                        <img src="https://assets.website-files.com/63708df071bc73798fae96ee/6371fca3352e282d8446f624_icon.svg"
-                            alt="">
+                        <i class="fa-solid fa-cart-shopping text-[20px]"></i>
                     </div>
-                    <div class="text-[14px] text-left">
+                    <div class="text-[14px] text-left max-md:hidden">
                         <p class="text-[14px]">Giỏ hàng</p>
                         <strong class="text-[16px]">{{total | currency:' ':'symbol':'1.0-0'}}.000đ</strong>
                     </div>
@@ -69,22 +78,33 @@
 <nav class="sticky top-0 bg-white z-50 shadow-sm">
     <div class="container max-w-[1200px]">
         <div class="py-[16px] flex items-center justify-between">
+            <div class="flex-1 md:hidden">
+                <button (click)="isMenu = !isMenu;">
+                    <i class="fa-solid fa-bars text-[20px]"></i>
+                </button>
+            </div>
             <div class="flex-1 flex items-center gap-x-[50px]
             font-[500] text-[16px] [&_button]:uppercase
-            ">
-                <button class="hover:text-title" [routerLink]="['']" routerLinkActive="text-main"
-                    [routerLinkActiveOptions]="{exact: true}">Trang chủ</button>
-                <button class="hover:text-title" [routerLink]="['shop']" routerLinkActive="text-main">Cửa hàng</button>
-                <button class="hover:text-title" routerLinkActive="text-main">Liên hệ</button>
-                <button class="hover:text-title" routerLinkActive="text-main" [routerLink]="['/blog/1']">Bài viết</button>
+             max-md:absolute max-md:flex-col max-md:left-0 max-md:top-[50px] max-md:bg-white max-md:z-50 
+             max-md:[&_button]:py-[25px] max-md:[&_button]:px-[20px] 
+             max-md:[&_button]:w-full max-md:[&_button]:text-left max-md:w-[50%] max-md:block max-md:border-b"
+                [ngClass]="{ 'max-md:hidden': !isMenu }">
+                <button class="hover:text-title" (click)="isMenu = false;" [routerLink]="['']"
+                    routerLinkActive="text-main" [routerLinkActiveOptions]="{exact: true}">Trang chủ</button>
+                <button class="hover:text-title" (click)="isMenu = false;" [routerLink]="['shop']"
+                    routerLinkActive="text-main">Cửa hàng</button>
+                <button class="hover:text-title" (click)="isMenu = false;" routerLinkActive="text-main">Liên hệ</button>
+                <button class="hover:text-title" (click)="isMenu = false;" routerLinkActive="text-main"
+                    [routerLink]="['/blog/1']">Bài
+                    viết</button>
             </div>
             <div class="flex items-center gap-x-8">
                 <h1>
-                    <i class="fa-solid fa-phone-volume mr-2"></i>
+                    <i class="fa-solid fa-phone-volume mr-2 max-sm:hidden"></i>
                     0966 433 493
                 </h1>
-                <h1>
-                    <i class="fa-solid fa-envelope mr-2"></i>
+                <h1 class="max-lg:hidden max-md:block">
+                    <i class="fa-solid fa-envelope mr-2 max-sm:hidden"></i>
                     {{'example@gmail.com'}}
                 </h1>
             </div>

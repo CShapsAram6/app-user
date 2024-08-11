@@ -4,6 +4,7 @@ import { UserComponent } from './components/user/user.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { NotFoundError } from 'rxjs';
+import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   { path: 'sign-in', component: SignInComponent, title: 'Đăng nhập' },
   { path: 'sign-up', component: SignUpComponent, title: 'Đăng ký' },
+  { path: 'forgetpass', component: ForgetpassComponent, title: 'Quên mật khẩu' },
 ];
 
 @NgModule({
