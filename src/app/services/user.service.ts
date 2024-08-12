@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { singleResponse } from '../model/response.model';
 import { environment } from '../environment/environment.bassic';
-import { UserInfoDTO } from '../model/user.model';
+import {  UserInfoDTO } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,10 @@ export class UserService {
       `${environment.api}/User/get-user-info?id=${Id}`
     );
   }
-  UpdateUserInfo(data: any) {
-    return this.http.put(`${environment.api}/User/update-user-info`, data);
+  UpdateUserInfo(Id: number, data: any) {
+    return this.http.put(`${environment.api}/User/update-user-info?id=${Id}`, data);
+  }
+  UpdateUser(data : any){
+    return this.http.put(`${environment.api}/User/update-user`, data);
   }
 }

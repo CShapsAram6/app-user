@@ -6,17 +6,29 @@
     class="w-full rounded-sm bg-[url('https://images.unsplash.com/photo-1449844908441-8829872d2607?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxob21lfGVufDB8MHx8fDE3MTA0MDE1NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat items-center">
     <!-- Profile Image -->
     <div class="relative w-full">
-      <img *ngIf="profileForm.get('linkAvatar')?.value; else placeholder" [src]="profileForm.get('linkAvatar')?.value"
+      <input type="file" #fileInput (change)="onFileChange($event)" hidden formControlName="Id">
+
+      <img 
+        *ngIf="imgSrc; else placeholder" 
+        [src]="imgSrc"
         alt=""
-        class="mx-auto flex justify-center w-[144px] h-[144px] bg-blue-300/20 rounded-full bg-center  hover:cursor-pointer">
+        class="mx-auto flex justify-center w-[144px] h-[144px] bg-blue-300/20 rounded-full bg-center hover:cursor-pointer"
+        (click)="fileInput.click()">
+      
       <ng-template #placeholder>
-        <div class="size-full object-cover rounded-full bg-gray-200 w-[144px] h-[144px] mx-auto flex justify-center">
-        </div>
+        <div class="size-full object-cover rounded-full bg-gray-200 w-[144px] h-[144px] mx-auto flex justify-center"></div>
       </ng-template>
-      <button *ngIf="profileForm.get('linkAvatar')?.value" type="button" (click)="fileInput.click()"
-        class="absolute inset-0 flex items-center justify-center px-[20px] py-1 rounded-sm hover:bg-secondColor/10 border opacity-0 hover:opacity-100 transition-opacity duration-300">Chọn
-        ảnh</button>
-      <input type="file" #fileInput (change)="onFileChange($event)" hidden>
+      
+      <button 
+        *ngIf="!imgSrc" 
+        type="button" 
+        (click)="fileInput.click()"
+        class="absolute inset-0 flex items-center justify-center px-[20px] py-1 rounded-sm hover:bg-secondColor/10 border opacity-0 hover:opacity-100 transition-opacity duration-300">
+        Chọn ảnh
+      </button>
+      
+      
+      
     </div>
 
     <div class="flex justify-end">
