@@ -4,7 +4,7 @@
     class="w-full h-[200px] relative">
     <div class="container max-w-[1200px] relative h-full z-10">
         <div class="absolute top-[50%] left-0 translate-y-[-50%] max-lg:left-5">
-            <h1 class="text-white text-[60px] font-bold 
+            <h1 class="text-white text-[60px] font-bold
             max-lg:text-[40px]">
                 Giỏ hàng
             </h1>
@@ -77,8 +77,7 @@
                 </div>
             </div>
             <div class="w-[170px] text-center">
-                {{item.price | currency : ' ': 'symbol':'1.0-0' }}.000đ
-                <span class="text-[14px]">x {{item.quantity}}</span>
+                {{(item.price*1000).toLocaleString()}}₫
             </div>
             <div class="w-[170px] text-center">
                 <div class="flex items-center justify-center h-[30px] [&_button]:h-full [&_button]:w-[30px]">
@@ -96,7 +95,7 @@
                 </div>
             </div>
             <div class="w-[170px] text-center">
-                {{item.total | currency:' ':'symbol':'1.0-0'}}.000đ
+                {{(item.total*1000).toLocaleString()}}₫
             </div>
             <div class="w-[170px] text-center">
                 <div class="flex flex-col items-center">
@@ -133,7 +132,7 @@
             <div class="flex items-center gap-x-4">
                 <h1>Tổng thanh toán({{arrSelectProdcuts.length}} sản phẩm):
                     <span class="text-[25px] text-title font-[500] ml-3">
-                        {{total | currency : ' ': 'symbol':'1.0-0'}}.000đ
+                        {{(total*1000).toLocaleString()}}₫
                     </span>
                 </h1>
                 <button

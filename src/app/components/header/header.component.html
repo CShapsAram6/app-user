@@ -30,8 +30,7 @@
                             </div>
                             <div class="text-left">
                                 <h1 class="font-[400]">{{item.name}}</h1>
-                                <p class="text-main text-[14px] font-[500] mt-2">{{item.price | currency: ' ' : 'symbol'
-                                    : '1.0-0' }},000đ</p>
+                                <p class="text-main text-[14px] font-[500] mt-2">{{(item.price*1000).toLocaleString()}}₫</p>
                             </div>
                         </button>
                     </section>
@@ -68,7 +67,7 @@
                     </div>
                     <div class="text-[14px] text-left max-md:hidden">
                         <p class="text-[14px]">Giỏ hàng</p>
-                        <strong class="text-[16px]">{{total | currency:' ':'symbol':'1.0-0'}}.000đ</strong>
+                        <strong class="text-[16px]">{{(total*1000).toLocaleString()}}₫</strong>
                     </div>
                 </button>
             </div>
@@ -85,8 +84,8 @@
             </div>
             <div class="flex-1 flex items-center gap-x-[50px]
             font-[500] text-[16px] [&_button]:uppercase
-             max-md:absolute max-md:flex-col max-md:left-0 max-md:top-[50px] max-md:bg-white max-md:z-50 
-             max-md:[&_button]:py-[25px] max-md:[&_button]:px-[20px] 
+             max-md:absolute max-md:flex-col max-md:left-0 max-md:top-[50px] max-md:bg-white max-md:z-50
+             max-md:[&_button]:py-[25px] max-md:[&_button]:px-[20px]
              max-md:[&_button]:w-full max-md:[&_button]:text-left max-md:w-[50%] max-md:block max-md:border-b"
                 [ngClass]="{ 'max-md:hidden': !isMenu }">
                 <button class="hover:text-title" (click)="isMenu = false;" [routerLink]="['']"

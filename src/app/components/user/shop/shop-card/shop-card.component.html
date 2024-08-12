@@ -13,10 +13,7 @@
 
         <div class="px-[35px] max-md:mt-3">
             <button class="text-[20px] font-[500] text-main">
-                {{
-                item.variant[selectedSizeIndices[itemIndex]].price
-                | currency : " " : "symbol" : "1.0-0"
-                }},000đ
+                {{(item.variant[selectedSizeIndices[itemIndex]].price*1000).toLocaleString()}}₫
             </button>
             <div class="mt-3 flex items-center gap-x-3">
                 <button class="size-[20px] border border-black rounded-full font-[500]"
