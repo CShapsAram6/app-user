@@ -155,9 +155,9 @@
         <button class="hover:bg-secondColor/10" [class.active]="isComment == 1" (click)="isComment = 1">
             Chi tiết sản phẩm
         </button>
-        <button class="hover:bg-secondColor/10" [class.active]="isComment == 2" (click)="isComment = 2">
+        <!-- <button class="hover:bg-secondColor/10" [class.active]="isComment == 2" (click)="isComment = 2">
             Đánh giá bình luận sản phẩm
-        </button>
+        </button> -->
     </div>
     @if(isComment == 1){
     <div class="text-justify mt-[20px] text-[18px] leading-6" [innerHTML]="product.description">

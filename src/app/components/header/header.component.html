@@ -10,7 +10,8 @@
     <div class="container max-w-[1200px]">
         <div class="py-[36px] flex items-center gap-x-[40px] max-sm:justify-between max-sm:py-[10px]">
             <img src="../../assets/LogoAnKhang.png"
-                class="w-[160px] h-[90px] object-cover max-lg:w-[100px] max-lg:h-[60px]" alt="">
+                class="w-[160px] h-[90px] object-cover max-lg:w-[100px] max-lg:h-[60px] cursor-pointer" alt=""
+                (click)="isMenu = false;" [routerLink]="['']">
             <!-- logo -->
             <div class="flex-1 h-[35px] flex items-center max-sm:hidden relative">
                 <input type="text" class="border px-[12px] py-[8px] h-full flex-1 rounded-s-sm text-secondColor"
@@ -30,7 +31,8 @@
                             </div>
                             <div class="text-left">
                                 <h1 class="font-[400]">{{item.name}}</h1>
-                                <p class="text-main text-[14px] font-[500] mt-2">{{(item.price*1000).toLocaleString()}}₫</p>
+                                <p class="text-main text-[14px] font-[500] mt-2">{{(item.price*1000).toLocaleString()}}₫
+                                </p>
                             </div>
                         </button>
                     </section>
@@ -92,7 +94,6 @@
                     routerLinkActive="text-main" [routerLinkActiveOptions]="{exact: true}">Trang chủ</button>
                 <button class="hover:text-title" (click)="isMenu = false;" [routerLink]="['shop']"
                     routerLinkActive="text-main">Cửa hàng</button>
-                <button class="hover:text-title" (click)="isMenu = false;" routerLinkActive="text-main">Liên hệ</button>
                 <button class="hover:text-title" (click)="isMenu = false;" routerLinkActive="text-main"
                     [routerLink]="['/blog/1']">Bài
                     viết</button>

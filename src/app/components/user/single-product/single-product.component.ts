@@ -34,7 +34,7 @@ export class SingleProductComponent implements OnInit {
   isColor: number = 0;
   price: number = 0;
   link: string = '';
-  isComment: number = 2;
+  isComment: number = 1;
   quantity: string = '1';
   variant: variantDtos = {} as variantDtos;
   color: colorDtos = {} as colorDtos;
