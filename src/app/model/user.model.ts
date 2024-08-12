@@ -23,6 +23,7 @@ interface UserInfoDTO {
   address: string;
 }
 
+
 interface userByEmail {
   picture: string;
   email: string;

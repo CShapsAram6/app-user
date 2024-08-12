@@ -14,13 +14,18 @@ import { IAuth } from '../../../interface/auth.interface';
 export class ProfileComponent implements OnInit {
   Id: number = 0;
   profileForm: FormGroup;
+  imgSrc: string | ArrayBuffer | null = null;
 
+
+  
   constructor(
-    private service: UserService, 
-    private fb: FormBuilder, 
-    @Inject('IAuth') private auth: IAuth
+    private service: UserService,
+    private fb: FormBuilder,
+    @Inject('IAuth') private auth: IAuth,
+    
   ) {
     this.profileForm = this.fb.group({
+    
       userName: ['', [Validators.required]],
       fullName: ['', [Validators.required, CustomValidators.fullNameValidator()]],
       email: ['', [Validators.required, Validators.email]],
@@ -34,8 +39,7 @@ export class ProfileComponent implements OnInit {
     const token = this.auth.getCookie('TokenUser');
     const user: IUserToken = this.auth.decodeToken(token);
     this.Id = Number(user.Id);
-    console.log(this.Id);
-    
+
     this.LoadUserInfo(this.Id);
   }
 
@@ -51,7 +55,10 @@ export class ProfileComponent implements OnInit {
           this.profileForm.patchValue(user);
           if (user.linkAvatar) {
             this.profileForm.get('linkAvatar')?.setValue(user.linkAvatar);
+            this.imgSrc= res.data.linkAvatar;
           }
+          console.log(res.data);
+          
         } else {
           console.warn('No user data received');
         }
@@ -63,31 +70,69 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onSave(): void {
-    if (this.profileForm.valid) {
-      this.service.UpdateUserInfo(this.profileForm.value).subscribe(
-        (res) => {
-          this.showToast('Cập nhật thành công', 'green');
-        },
-        (error) => {
-          this.showToast('Cảnh báo', 'orange');
-        }
-      );
-    } else {
-      this.profileForm.markAllAsTouched();
-      console.warn('Profile form is invalid');
-    }
-  }
 
+  
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
+      this.profileForm.patchValue({
+        linkAvatar: file
+      });
+
       const reader = new FileReader();
       reader.onload = () => {
-        this.profileForm.get('linkAvatar')?.setValue(reader.result as string);
+        this.imgSrc = reader.result;
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); 
+    }
+  }
+
+  onSave(): void {
+    if (this.profileForm.valid) {
+      const formData = new FormData();
+
+      for (const key in this.profileForm.value) {
+        if (this.profileForm.value.hasOwnProperty(key)) {
+          const value = this.profileForm.value[key];
+          if (key === 'linkAvatar' && value instanceof File) {
+            formData.append(key, value, value.name);
+          } else if (value !== null && value !== undefined) {
+            formData.append(key, value);
+          }
+        }
+      }
+      const flag = this.profileForm.get('linkAvatar')?.value;
+      if (flag instanceof File) {
+        this.service.UpdateUserInfo(this.Id, formData).subscribe(
+          (res) => {
+            console.log(res)
+            this.showToast('Cập nhật thành công', 'green');
+          },
+          (error) => {
+            this.showToast('Cảnh báo', 'orange');
+            console.log(error);
+          }
+        );} 
+        else {
+          formData.append('id', this.Id.toString());
+
+          this.service.UpdateUser(formData).subscribe(
+            (res) => {
+              console.log(res)
+              this.showToast('Cập nhật thành công', 'green');
+            },
+            (error) => {
+              this.showToast('Cảnh báo', 'orange');
+              console.log(error);
+            }
+          );
+      }
+      
+   
+    } else {
+      this.profileForm.markAllAsTouched();
+      console.warn('Profile form is invalid');
     }
   }
 
