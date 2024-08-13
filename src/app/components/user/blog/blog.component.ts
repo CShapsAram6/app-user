@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../../services/blog.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { singleResponse } from '../../../model/response.model';
 import { tap } from 'rxjs';
 import { blogDto } from '../../../model/blog.model';
@@ -21,6 +21,17 @@ export class BlogComponent implements OnInit {
     this.route.params.subscribe(params => {
       const page = +params['page'] || 1;
       this.LoadBlog(page);
+    });
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        setTimeout(() => {
+          const element = document.getElementById('news-blog');
+          console.log('Element found:', element); // Kiểm tra xem element có tồn tại không
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 0); // Trì hoãn cuộn một chút để đảm bảo phần tử đã được render
+      }
     });
   }
 
