@@ -31,7 +31,7 @@ export class UserService {
   ChangePassWord(data: any): Observable<any> {
     data.token = this.wishListService.getToken();
     data.currentPassword = data.currentPassword;
-    data.newPassword = data.newPassword;
+    data.password = data.password;
     data.confirmPassword = data.confirmPassword;
     return this.http.put(`${environment.api}/User/change-password`, data);
   }
