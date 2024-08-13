@@ -1,6 +1,7 @@
 import { UserService } from './../../services/user.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgetpass',
@@ -10,7 +11,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class ForgetpassComponent {
   constructor(
     private form: FormBuilder,
-    private userService : UserService
+    private userService : UserService,
+    private toastrServices: ToastrService
   ) { }
   submitted = false
   registerform = this.form.group({
@@ -21,8 +23,10 @@ export class ForgetpassComponent {
     this.submitted = true
     if(this.registerform.invalid) return
     this.userService.ForgetPassWord(this.registerform.value.email ?? '').subscribe(async (res) => {
-      if (res) {
-        await alert(res.messsage)
+      if (res.code == 1) {
+        await this.toastrServices.success(res.messsage)
+      } else {
+        await this.toastrServices.error(res.messsage)
       }
     })
   }
