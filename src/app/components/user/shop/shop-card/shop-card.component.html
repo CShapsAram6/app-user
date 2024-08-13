@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-    <div class="absolute top-2 right-3">
+    <div class="absolute top-2 right-3" *ngIf="token != null">
         <button class="border border-black p-2 rounded-full is-check-wishList" *ngIf="CheckIsWishList(item.id) === true" (click)="DeleteProductToWishList(item.id)">
             <i class="fa-regular fa-heart"></i>
         </button>

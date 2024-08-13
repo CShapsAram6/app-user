@@ -1,3 +1,4 @@
+import { AuthRepository } from './../repository/auth.repository';
 import { WishListService } from './wishlist.service';
 import { ForgetPasswordComponent } from './../components/user/forget-password/forget-password.component';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +14,8 @@ import {  UserInfoDTO } from '../model/user.model';
 export class UserService {
 
   constructor(private http: HttpClient,
-    private wishListService: WishListService
+    private wishListService: WishListService,
+    private authRepository: AuthRepository
   ) { }
 
   getInfoUser(Id: number): Observable<singleResponse<UserInfoDTO>> {
@@ -29,7 +31,7 @@ export class UserService {
   }
 
   ChangePassWord(data: any): Observable<any> {
-    data.token = this.wishListService.getToken();
+    data.token = this.authRepository.getCookie("TokenUser");
     data.currentPassword = data.currentPassword;
     data.password = data.password;
     data.confirmPassword = data.confirmPassword;

@@ -1,3 +1,4 @@
+import { AuthRepository } from './../repository/auth.repository';
 import { token } from './../environment/environment.bassic';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -12,16 +13,13 @@ import { ProductForWishList } from '../model/wishList.model';
   providedIn: 'root',
 })
 export class WishListService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService, authRepository: AuthRepository) {}
   
-  getToken() {
-    return this.authService.getTokenUser();
-  }
 
   getData(page: number): Observable<singleResponse<productsUsingShop[]>> {
     const request = {
       page: page,
-      token: this.getToken(),
+      token: this.authService.getTokenUser(),
     }
     return this.http.post<singleResponse<productsUsingShop[]>>(
       `${environment.api}/User/get-wishlist-product`, request
@@ -30,7 +28,7 @@ export class WishListService {
 
   getProductForWishList(): Observable<singleResponse<ProductForWishList[]>> {
     return this.http.get<singleResponse<ProductForWishList[]>>(
-      `${environment.api}/User/allproduct-for-wihsList-${this.getToken()}`,
+      `${environment.api}/User/allproduct-for-wihsList-${this.authService.getTokenUser()}`,
     );
   }
 

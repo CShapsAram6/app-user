@@ -1,3 +1,5 @@
+import { AuthRepository } from './../../../repository/auth.repository';
+import { token } from './../../../environment/environment.bassic';
 import { Component, Input, OnInit } from '@angular/core';
 import { productsDtos } from '../../../model/product.model';
 import { WishListService } from '../../../services/wishlist.service';
@@ -11,7 +13,8 @@ import { ProductForWishList } from '../../../model/wishList.model';
 export class CardProductComponent implements OnInit {
   @Input() product: productsDtos = {} as productsDtos;
   constructor(
-    private wishListService: WishListService
+    private wishListService: WishListService,
+    private authRepository: AuthRepository
   ) {}
   ngOnInit(): void {
     this.LoadProductForWishList();
@@ -27,8 +30,11 @@ export class CardProductComponent implements OnInit {
     }
     return false;
   }
+  token = this.authRepository.getCookie("TokenUser") ?? null
 
   LoadProductForWishList() {
+    console.log(this.token)
+    if(!this.token) return
     this.wishListService.getProductForWishList().subscribe(
       (res) => {
         if (res.data) {

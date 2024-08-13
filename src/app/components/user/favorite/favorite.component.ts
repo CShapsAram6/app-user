@@ -2,6 +2,7 @@ import { WishListService } from './../../../services/wishlist.service';
 import { Component, Input } from '@angular/core';
 import { productsUsingShop } from '../../../model/product.model';
 import { ProductForWishList } from '../../../model/wishList.model';
+import { AuthRepository } from '../../../repository/auth.repository';
 
 @Component({
   selector: 'app-favorite',
@@ -14,16 +15,18 @@ export class FavoriteComponent {
   selectedSizeIndices: number[] = [];
   productForWishList: ProductForWishList[] = [];
 
-  constructor(private wishListService: WishListService) { }
+  constructor(private wishListService: WishListService,
+    private authRepository: AuthRepository
+  ) { }
   page = 1;
 
   ngOnInit(): void {
     this.loadData();
   }
+  token = this.authRepository.getCookie("TokenUser") ?? null
 
   async loadData() {
-    const token = this.wishListService.getToken()
-    if(!token) return
+    if(!this.token) return
     this.wishListService.getData(this.page).subscribe((res) => {
 
       this.products = res.data;

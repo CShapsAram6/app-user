@@ -17,7 +17,7 @@
             Thêm vào giỏ hàng
         </button>
     </div>
-    <div class="absolute top-2 right-3">
+    <div class="absolute top-2 right-3" *ngIf="token != null">
         <button class=" border border-secondColor p-2 rounded-full is-check-wishList" *ngIf="CheckIsWishList(product.id) === true" (click)="DeleteProductToWishList(product.id)">
             <i class="fa-regular fa-heart"></i>
         </button>
