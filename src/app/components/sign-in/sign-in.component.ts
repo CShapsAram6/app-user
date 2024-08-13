@@ -69,11 +69,9 @@ export class SignInComponent implements OnInit {
   SumbitForm() {
     let date: ISignInRequest = this.auth.handleLogin(this.loginForm.value);
     this.authService.signIn(date).subscribe((res) => {
-      if (res.data) {
+      if (res.data != "Không có token") {
         this.cart.addCartEnterRedis(res.data);
         return;
-      } else {
-        alert('fail');
       }
     });
   }

@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
     private router: Router,
     private sharedServices: SharedService,
     private toastrServices: ToastrService
-  ) {}
+  ) { }
   arrCartItem: ICart[] = [];
   total: number = 0;
   isPopup: number = 0;
@@ -146,6 +146,13 @@ export class CartComponent implements OnInit {
   }
 
   NextPageCheckOut() {
+    let token: string = this.auth.getCookie('TokenUser');
+    if (!token) {
+      let url: string = this.router.url;
+      sessionStorage.setItem("url", url);
+      this.router.navigate(['/sign-in']);
+      return;
+    }
     let products: string = JSON.stringify(this.arrSelectProdcuts);
     sessionStorage.setItem('products', products);
     this.router.navigate(['/check-out']);

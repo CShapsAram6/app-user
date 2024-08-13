@@ -23,7 +23,7 @@ export class AuthService {
       )
       .pipe(
         map((response) => {
-          if (!response) {
+          if (response.data == "Không có token") {
             this.toastrServices.error("Kiểm trả lại tên đăng nhập và mật khẩu", "Thông báo")
             return response;
           }

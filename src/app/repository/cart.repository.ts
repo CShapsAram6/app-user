@@ -65,6 +65,12 @@ export class CartRepository implements ICartRepository {
       this.cartService.postDataAfterLogin(request).subscribe((res) => {
         if (res.success) {
           localStorage.removeItem('cart');
+          let local = sessionStorage.getItem('url');
+          if (local) {
+            this.router.navigate([local]);
+            sessionStorage.removeItem('url');
+            return;
+          }
           this.router.navigate(['/']);
           return;
         }
