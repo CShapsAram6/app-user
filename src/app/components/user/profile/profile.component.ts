@@ -76,10 +76,18 @@ export class ProfileComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
+  
+      // đoạn if này là để kiểm tra các file đc đẩy lên 
+      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        this.showToast('Chỉ cho phép tải lên file ảnh (PNG, JPEG, JPG, GIF)', 'orange');
+        return;
+      }
+  
       this.profileForm.patchValue({
         linkAvatar: file
       });
-
+  
       const reader = new FileReader();
       reader.onload = () => {
         this.imgSrc = reader.result;
@@ -87,7 +95,7 @@ export class ProfileComponent implements OnInit {
       reader.readAsDataURL(file); 
     }
   }
-
+  
   onSave(): void {
     if (this.profileForm.valid) {
       const formData = new FormData();

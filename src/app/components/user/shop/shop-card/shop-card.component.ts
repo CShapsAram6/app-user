@@ -1,3 +1,4 @@
+import { token } from './../../../../environment/environment.bassic';
 import { WishListService } from './../../../../services/wishlist.service';
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { ICartRepository } from '../../../../interface/cart.interface';
@@ -54,6 +55,8 @@ export class ShopCardComponent {
   }
 
   LoadProductForWishList() {
+    const token= this.wishListService.getToken()
+    if(!token) return
     this.wishListService.getProductForWishList().subscribe(
       (res) => {
         if (res.data) {

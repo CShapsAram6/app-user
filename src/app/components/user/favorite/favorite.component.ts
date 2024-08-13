@@ -22,6 +22,8 @@ export class FavoriteComponent {
   }
 
   async loadData() {
+    const token = this.wishListService.getToken()
+    if(!token) return
     this.wishListService.getData(this.page).subscribe((res) => {
 
       this.products = res.data;
