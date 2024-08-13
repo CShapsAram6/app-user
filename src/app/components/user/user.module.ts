@@ -132,7 +132,7 @@ const routes: Routes = [
     BlogDetailComponent,
     ShopCardComponent,
     PaymentSuccessComponent,
-    PaymentErrorComponent,
+    PaymentErrorComponent,    
   ],
   imports: [
     CommonModule,
@@ -140,6 +140,7 @@ const routes: Routes = [
     HttpClientModule,
     BrowserModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     FormsModule,
     ToastrModule.forRoot(),
