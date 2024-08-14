@@ -82,7 +82,7 @@
             <div class="bg-white text-center dark:bg-dark">
                 <div
                     class="mb-12 inline-flex justify-center rounded bg-white p-3 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.13)] dark:bg-dark-2">
-                    <ul class="inline-flex overflow-hidden rounded-lg border border-stroke dark:border-white/5" *ngFor="let item of numberPages" routerLinkActive="active">
+                    <ul class="mx-2 inline-flex overflow-hidden rounded-lg border border-stroke dark:border-white/5" *ngFor="let item of numberPages" routerLinkActive="active">
                         <li>
                             <a [routerLink]="['/blog', item]"  class="flex h-10 min-w-10 items-center justify-center border-r border-stroke px-2 text-base font-medium text-dark hover:bg-gray-2 dark:border-white/10 dark:text-white dark:hover:bg-white/5 btn--active">
                                 {{item}}
