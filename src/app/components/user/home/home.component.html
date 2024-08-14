@@ -207,28 +207,27 @@ py-[120px]">
     <div class="w-full mt-[66px] grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-sm:grid-cols-1">
         <div *ngFor="let item of blog">
             <button class="w-full h-[273px] overflow-hidden cart--item rounded-sm">
-                <img src="{{item.images}}"
-                    alt="" class="w-full h-full object-cover">
+                <img src="{{item.images}}" alt="" class="w-full h-full object-cover">
             </button>
             <div class="flex justify-between items-center mt-[20px]">
                 <div class="flex items-center gap-2">
-                    <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/6385974f39e0d684a66a812a_003-man-1.png" *ngIf="item.imageacc == null"
-                    alt="">
-                    <img src="{{item.imageacc}}" *ngIf="item.accountId != null"
-                        alt="">
+                    <img src="https://assets.website-files.com/6371f9c50ce0bd588f4fa954/6385974f39e0d684a66a812a_003-man-1.png"
+                        *ngIf="item.imageacc == null" alt="">
+                    <img src="{{item.imageacc}}" *ngIf="item.accountId != null" alt="">
                     <h4 class="text-[#8e8d8d] text-[15px] font-serif">{{item.nameacc}}</h4>
                 </div>
                 <h4 class="flex items-center gap-2 text-[15px] text-[#8e8d8d] font-serif">
                     <img src="	https://assets.website-files.com/63708df071bc73798fae96ee/6378997554cc50631be9cf63_calender.svg"
                         alt="">
-                        {{ item.datePush | date:'dd-MM-yyyy' }} 
+                    {{ item.datePush | date:'dd-MM-yyyy' }}
                 </h4>
             </div>
             <div class="mt-[18px]">
                 <a href="" class="hover:text-main">
                     <h1 class="text-[24px] line-clamp-1 font-[500]">{{item.header}}</h1>
                 </a>
-                <p class="mt-[15px] line-clamp-2 leading-7 text-[#51544f]" [innerHTML]="item.content.length > 150 ? (item.content | slice:0:150) + '...' : item.content">
+                <p class="mt-[15px] line-clamp-2 leading-7 text-[#51544f]"
+                    [innerHTML]="item.content.length > 150 ? (item.content | slice:0:150) + '...' : item.content">
                 </p>
                 <button class="mt-[20px] text-[16px] hover:text-main font-[500]">Xem thêm</button>
             </div>

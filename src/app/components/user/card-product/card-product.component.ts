@@ -4,7 +4,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { productsDtos } from '../../../model/product.model';
 import { WishListService } from '../../../services/wishlist.service';
 import { ProductForWishList } from '../../../model/wishList.model';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-card-product',
@@ -16,17 +15,16 @@ export class CardProductComponent implements OnInit {
   constructor(
     private wishListService: WishListService,
     private authRepository: AuthRepository,
-    private router: RouterLink
-  ) {}
-  ngOnInit(): void {
+  ) { }
+    ngOnInit(): void {
     this.LoadProductForWishList();
   }
 
   productForWishList: ProductForWishList[] = [];
 
-  CheckIsWishList(id : number): boolean {
+  CheckIsWishList(id: number): boolean {
     for (let i = 0; i < this.productForWishList.length; i++) {
-      if(this.productForWishList[i].productId === id) {
+      if (this.productForWishList[i].productId === id) {
         return true
       }
     }
@@ -36,7 +34,7 @@ export class CardProductComponent implements OnInit {
 
   LoadProductForWishList() {
     console.log(this.token)
-    if(!this.token) return
+    if (!this.token) return
     this.wishListService.getProductForWishList().subscribe(
       (res) => {
         if (res.data) {
