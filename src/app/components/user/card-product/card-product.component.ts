@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { productsDtos } from '../../../model/product.model';
 import { WishListService } from '../../../services/wishlist.service';
 import { ProductForWishList } from '../../../model/wishList.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-card-product',
@@ -14,7 +15,8 @@ export class CardProductComponent implements OnInit {
   @Input() product: productsDtos = {} as productsDtos;
   constructor(
     private wishListService: WishListService,
-    private authRepository: AuthRepository
+    private authRepository: AuthRepository,
+    private router: RouterLink
   ) {}
   ngOnInit(): void {
     this.LoadProductForWishList();
