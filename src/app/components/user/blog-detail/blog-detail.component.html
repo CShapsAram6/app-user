@@ -44,7 +44,8 @@
                     </div>
                 </div>
                 <!-- Blog post content -->
-                <div class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto" [innerHTML]="blog.content">
+                <div class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto leading-8 text-[18px] text-justify pb-4"
+                    [innerHTML]="blog.content">
 
                 </div>
             </div>
@@ -55,12 +56,14 @@
                 <ul class="list-none list-inside">
                     <li class="relative border border-gray-200 rounded-lg shadow-lg mt-3" *ngFor="let item of blogs">
                         <button class="flex items-center p-4" [routerLink]="['/blog-detail', item.id]">
-                            <img class="object-cover w-12 h-12 rounded-lg"
-                                src="{{item.images}}" alt="" />
+                            <img class="object-cover w-12 h-12 rounded-lg" src="{{item.images}}" alt="" />
 
                             <div class="ml-3 overflow-hidden">
-                                <p class="font-medium text-gray-900 text-left">{{item.header.length > 35 ? (item.header | slice:0:35) + '...' : item.header}}</p>
-                                <div class="max-w-xs text-sm text-gray-500 truncate text-left" [innerHTML]="item.content.length > 40 ? (item.content | slice:0:40) + '...' : item.content"></div>
+                                <p class="font-medium text-gray-900 text-left">{{item.header.length > 35 ? (item.header
+                                    | slice:0:35) + '...' : item.header}}</p>
+                                <div class="max-w-xs text-sm text-gray-500 truncate text-left"
+                                    [innerHTML]="item.content.length > 40 ? (item.content | slice:0:40) + '...' : item.content">
+                                </div>
                             </div>
                         </button>
                     </li>
