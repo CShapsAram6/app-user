@@ -39,8 +39,12 @@ export class ShopComponent implements OnInit {
   isFilter: number = 0;
 
   ngOnInit(): void {
+    this.isCategory = this.route.snapshot.paramMap.get('id') as unknown as number;
+    this.GetProductsByIdCategory(this.isCategory);
     this.router.events.subscribe((envent) => {
       if (envent instanceof NavigationEnd) {
+        this.isCategory = this.route.snapshot.paramMap.get('id') as unknown as number;
+        this.GetProductsByIdCategory(this.isCategory);
         this.LoadSearch()
         if (!this.nameSearch) {
           this.loadData();
@@ -70,8 +74,6 @@ export class ShopComponent implements OnInit {
     this.productService.searchProductsShop(form).subscribe((res) => {
       this.isButton = false;
       this.products = res.data;
-      console.log(res.data);
-
       this.selectedColorIndices = this.products.map(() => 0);
       this.selectedSizeIndices = this.products.map(() => 0);
     })

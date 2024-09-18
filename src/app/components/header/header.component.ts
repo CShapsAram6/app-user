@@ -11,6 +11,8 @@ import { ProductService } from '../../services/product.service';
 import { productsDtos } from '../../model/product.model';
 import { Router } from '@angular/router';
 import { query } from 'express';
+import { CategorysService } from '../../services/categorys.service';
+import { categoryDtos } from '../../model/categorys.model';
 
 @Component({
   selector: 'app-header',
@@ -25,13 +27,16 @@ export class HeaderComponent implements OnInit {
   inputControl = new FormControl();
   productsSearch: productsDtos[] = []
   name: string = '';
+  category: categoryDtos[] = [];
+  isDropDown: boolean = false;
   constructor(
     @Inject('IAuth') private auth: IAuth,
     @Inject('ICartRepository') private cartRepository: ICartRepository,
     private userSevices: AuthService,
     private sharedService: SharedService,
     private productsServices: ProductService,
-    private router: Router
+    private router: Router,
+    private categoryServices: CategorysService
   ) { }
   ngOnInit(): void {
     this.sharedService.buttonClicked$.subscribe(() => {
@@ -43,6 +48,7 @@ export class HeaderComponent implements OnInit {
     this.LoadCart();
 
     this.ChangeSearch();
+    this.LoadCategorys()
   }
 
   ChangeSearch() {
@@ -52,6 +58,14 @@ export class HeaderComponent implements OnInit {
         this.LoadSearch(value)
         this.name = value;
       });
+  }
+
+  LoadCategorys() {
+    this.categoryServices.getData().subscribe((res) => {
+      if (res.success) {
+        this.category = res.data;
+      }
+    })
   }
 
   LoadSearch(value: string) {

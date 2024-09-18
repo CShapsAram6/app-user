@@ -36,7 +36,7 @@
                     </p>
                 </div>
             </div>
-            <div class="mt-4">
+            <!-- <div class="mt-4">
                 <button
                     class="w-full bg-main rounded-sm py-[10px] uppercase text-white font-[500] text-[14px] hover:bg-title"
                     (click)="
@@ -48,14 +48,16 @@
           ">
                     Thêm vào giỏ hàng
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="absolute top-2 right-3" *ngIf="token != null">
-        <button class="border border-black p-2 rounded-full is-check-wishList" *ngIf="CheckIsWishList(item.id) === true" (click)="DeleteProductToWishList(item.id)">
+        <button class="border border-black p-2 rounded-full is-check-wishList" *ngIf="CheckIsWishList(item.id) === true"
+            (click)="DeleteProductToWishList(item.id)">
             <i class="fa-regular fa-heart"></i>
         </button>
-        <button class="border border-black p-2 rounded-full"  *ngIf="CheckIsWishList(item.id) === false" (click)="AddProductToWishList(item.id)">
+        <button class="border border-black p-2 rounded-full" *ngIf="CheckIsWishList(item.id) === false"
+            (click)="AddProductToWishList(item.id)">
             <i class="fa-regular fa-heart"></i>
         </button>
     </div>

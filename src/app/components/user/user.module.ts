@@ -49,6 +49,7 @@ const routes: Routes = [
         title: 'Giỏ hàng',
       },
       { path: 'shop', component: ShopComponent, title: 'Cửa hàng' },
+      { path: 'shop-cate/:id', component: ShopComponent, title: 'Cửa hàng' },
       { path: 'check-out', component: CheckoutComponent, title: 'Thanh toán' },
       {
         path: 'account',
@@ -93,19 +94,19 @@ const routes: Routes = [
         title: 'Bài viết',
       },
       {
-        path:'blog-detail/:id',
+        path: 'blog-detail/:id',
         component: BlogDetailComponent,
-        title:'Bài viết chi tiết',
+        title: 'Bài viết chi tiết',
       },
       {
-        path:'payment-success',
+        path: 'payment-success',
         component: PaymentSuccessComponent,
-        title:'Thanh toán đơn hàng thành công',
+        title: 'Thanh toán đơn hàng thành công',
       },
       {
-        path:'payment-error',
+        path: 'payment-error',
         component: PaymentErrorComponent,
-        title:'Thanh toán đơn hàng thất bại',
+        title: 'Thanh toán đơn hàng thất bại',
       },
     ],
   },
@@ -132,7 +133,7 @@ const routes: Routes = [
     BlogDetailComponent,
     ShopCardComponent,
     PaymentSuccessComponent,
-    PaymentErrorComponent,    
+    PaymentErrorComponent,
   ],
   imports: [
     CommonModule,
@@ -147,4 +148,4 @@ const routes: Routes = [
   ],
   providers: [CookieService, provideAnimations(), provideToastr()],
 })
-export class UserModule {}
+export class UserModule { }

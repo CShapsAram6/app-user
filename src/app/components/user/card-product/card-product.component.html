@@ -1,5 +1,5 @@
 <section class="border rounded-sm relative">
-    <div class="w-full h-[340px] overflow-hidden relative">
+    <div class="w-full h-[340px] overflow-hidden relative max-md:h-[200px] max-md:w-full">
         <img [src]="product.image" alt="" class="w-full h-full object-contain scale-[0.7]">
     </div>
     <div class="">
@@ -11,12 +11,12 @@
         </p>
     </div>
     <div class="px-[20px] pb-4">
-        <button
+        <!-- <button
             class=" transition-all text-title w-full py-[10px] text-[14px] rounded-sm uppercase font-[500] hover:bg-main hover:text-white"
             [routerLink]="['/single-product/' + product.id]">
             <i class="fa-solid fa-cart-plus mr-[5px]"></i>
             Thêm vào giỏ hàng
-        </button>
+        </button> -->
     </div>
     <div class="absolute top-2 right-3" *ngIf="token != null">
         <button class=" border border-secondColor p-2 rounded-full is-check-wishList"

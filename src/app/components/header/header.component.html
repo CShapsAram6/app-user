@@ -9,7 +9,7 @@
 <header class="border-b">
     <div class="container max-w-[1200px]">
         <div class="py-[36px] flex items-center gap-x-[40px] max-sm:justify-between max-sm:py-[10px]">
-            <img src="../../assets/LogoAnKhang.png"
+            <img src="../../assets/z5842830757555_d746942ebdc9bc040efc8eacb0979cc1.jpg"
                 class="w-[160px] h-[90px] object-cover max-lg:w-[100px] max-lg:h-[60px] cursor-pointer" alt=""
                 (click)="isMenu = false;" [routerLink]="['']">
             <!-- logo -->
@@ -38,7 +38,7 @@
                     </section>
                 </article>
             </div>
-            <div class="[&_button]:flex [&_button]:items-center [&_button]:gap-2 flex items-center gap-6">
+            <!-- <div class="[&_button]:flex [&_button]:items-center [&_button]:gap-2 flex items-center gap-6">
                 @if(!isGroupBtn){
                 <button class="" [routerLink]="['sign-in']">
                     <div class="">
@@ -72,7 +72,7 @@
                         <strong class="text-[16px]">{{(total*1000).toLocaleString()}}₫</strong>
                     </div>
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 </header>
@@ -94,14 +94,27 @@
                     routerLinkActive="text-main" [routerLinkActiveOptions]="{exact: true}">Trang chủ</button>
                 <button class="hover:text-title" (click)="isMenu = false;" [routerLink]="['shop']"
                     routerLinkActive="text-main">Cửa hàng</button>
+                <div class="relative">
+                    <button class="hover:text-title" (click)="isDropDown = !isDropDown" [routerLink]="['shop-cate']"
+                        routerLinkActive="text-main">Sản phẩm</button>
+                    <div class="absolute z-[999] bg-white w-[250px] mt-3 border max-md:mt-1" *ngIf="isDropDown">
+                        <button class="p-3 hover:bg-gray-3 w-full text-left text-[14px]"
+                            [routerLink]="['shop-cate/', item.id]" routerLinkActive="text-main"
+                            *ngFor="let item of category" (click)="isDropDown = false;isMenu = false; ">
+                            {{item.name}}
+                        </button>
+                    </div>
+                </div>
                 <button class="hover:text-title" (click)="isMenu = false;" routerLinkActive="text-main"
                     [routerLink]="['/blog/1']">Bài
                     viết</button>
             </div>
             <div class="flex items-center gap-x-8">
                 <h1>
-                    <i class="fa-solid fa-phone-volume mr-2 max-sm:hidden"></i>
-                    0966 433 493
+                    <a href="">
+                        <i class="fa-solid fa-phone-volume mr-2 max-sm:hidden"></i>
+                        0966 433 493
+                    </a>
                 </h1>
                 <h1 class="max-lg:hidden max-md:block">
                     <i class="fa-solid fa-envelope mr-2 max-sm:hidden"></i>
@@ -111,3 +124,12 @@
         </div>
     </div>
 </nav>
+
+<div class="fixed z-[999] bottom-8 right-8 flex flex-col gap-3 max-md:right-3">
+    <a class="bg-white shadow-2xl p-2 border rounded-full flex items-center justify-center" href="">
+        <i class="fa-brands fa-facebook-f text-[24px] text-main max-md:text-[16px]"></i>
+    </a>
+    <a class="bg-white shadow-2xl p-2 border rounded-full flex items-center justify-center" href="">
+        <i class="fa-solid fa-phone text-[24px] max-md:text-[16px]"></i>
+    </a>
+</div>
