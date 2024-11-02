@@ -25,55 +25,53 @@
     <article class="flex justify-between">
         <section class="flex-1 max-xl:hidden pr-3">
             <div class="flex flex-col sticky top-[5rem]">
-                @if(nameSearch == null){
-                <h1 class="mb-2 border-b pb-3">Loại sản phẩm:</h1>
-                <button class="text-left
-                    px-1 py-3 flex items-center gap-x-4 capitalize font-[500] hover:text-title"
-                    (click)="isCategory = 0; GetProductsByIdCategory(0)">
-                    <div class="p-1 size-[17px] flex items-center justify-center rounded-sm text-white border"
-                        [class.bg-main]="isCategory == 0">
+                <div class="border-b pb-3">
+                    <button class="w-full text-xl font-medium flex items-center justify-between"
+                        (click)="isShowCategory = !isShowCategory">
+                        <span>Danh mục sản phẩm</span>
+                    </button>
+                </div>
+                <div class="mt-4" [class.hidden]="!isShowCategory">
+                    <button class="w-full text-left py-2 px-3 hover:bg-gray-100 rounded-sm flex items-center justify-between"
+                        [class.text-main]="isCategory == 0"
+                        (click)="isCategory = 0; GetProductsByIdCategory(0)">
+                        <span>Tất cả sản phẩm</span>
                         @if (isCategory == 0) {
-                        <i class="fa-solid fa-check text-[12px]"></i>
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
                         }
-                    </div>
-                    Tất cả
-                </button>
-                <button class="text-left
-                    px-1 py-3 flex items-center gap-x-4 capitalize font-[500] hover:text-title"
-                    (click)="isCategory = item.id; GetProductsByIdCategory(item.id)" *ngFor="let item of arrCategorys">
-                    <div class="p-1 size-[17px] flex items-center justify-center rounded-sm border text-white"
-                        [class.bg-main]="isCategory == item.id">
+                    </button>
+                    <button class="w-full text-left py-2 px-3 hover:bg-gray-100 rounded-sm flex items-center justify-between"
+                        [class.text-main]="isCategory == item.id"
+                        (click)="isCategory = item.id; GetProductsByIdCategory(item.id)" 
+                        *ngFor="let item of arrCategorys">
+                        <span>{{item.name}}</span>
                         @if (item.id == isCategory) {
-                        <i class="fa-solid fa-check text-[12px]"></i>
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
                         }
-                    </div>
-                    {{item.name}}
-                </button>
-                }
+                    </button>
+                </div>
 
-                <h1 class="mb-2 border-b pb-3 mt-6">Lọc theo giá:</h1>
-                <button class="text-left
-                px-1 py-3 flex items-center gap-x-4 capitalize font-[500] hover:text-title"
-                    (click)="isFilter = 1; FilterProducts(isFilter)">
-                    <div class="p-1 size-[17px] flex items-center justify-center rounded-sm text-white border"
-                        [class.bg-main]="isFilter == 1">
+                <div class="border-b pb-3 mt-8">
+                    <h1 class="text-xl font-medium">Sắp xếp theo giá</h1>
+                </div>
+                <div class="mt-4">
+                    <button class="w-full text-left py-2 px-3 hover:bg-gray-100 rounded-sm flex items-center justify-between"
+                        [class.text-main]="isFilter == 1"
+                        (click)="isFilter = 1; FilterProducts(isFilter)">
+                        <span>Giá cao đến thấp</span>
                         @if (isFilter == 1) {
-                        <i class="fa-solid fa-check text-[12px]"></i>
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
                         }
-                    </div>
-                    Từ cao đến thấp
-                </button>
-                <button class="text-left
-                px-1 py-3 flex items-center gap-x-4 capitalize font-[500] hover:text-title"
-                    (click)="isFilter = 2; FilterProducts(isFilter)">
-                    <div class="p-1 size-[17px] flex items-center justify-center rounded-sm text-white border"
-                        [class.bg-main]="isFilter == 2">
+                    </button>
+                    <button class="w-full text-left py-2 px-3 hover:bg-gray-100 rounded-sm flex items-center justify-between"
+                        [class.text-main]="isFilter == 2"
+                        (click)="isFilter = 2; FilterProducts(isFilter)">
+                        <span>Giá thấp đến cao</span>
                         @if (isFilter == 2) {
-                        <i class="fa-solid fa-check text-[12px]"></i>
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
                         }
-                    </div>
-                    Từ thấp đến cao
-                </button>
+                    </button>
+                </div>
             </div>
         </section>
         <section class="w-[960px] max-xl:flex-1 bg-secondColor/5 px-[30px] relative">

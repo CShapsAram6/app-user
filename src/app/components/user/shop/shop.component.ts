@@ -37,6 +37,7 @@ export class ShopComponent implements OnInit {
   selectedSizeIndices: number[] = [];
   nameSearch: string = '';
   isFilter: number = 0;
+  isShowCategory: boolean = true;
 
   ngOnInit(): void {
     this.isCategory = this.route.snapshot.paramMap.get('id') as unknown as number;
